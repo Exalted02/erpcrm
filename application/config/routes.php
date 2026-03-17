@@ -58,8 +58,17 @@ $route['login'] = 'auth/login';
 $route['dashboard'] = 'dashboard/dashboard';
 $route['logout'] = 'auth/login/logout';
 
-// Subscription module start
 $route['subscription'] = 'subscription/subscription/index';
 $route['subscription/create'] = 'subscription/subscription/create';
 $route['subscription/edit/(:num)'] = 'subscription/subscription/edit/$1';
 $route['subscription/delete/(:num)'] = 'subscription/subscription/delete/$1';
+
+// Settings module start
+$route['settings'] = 'settings/settings/index';
+
+// Domains
+$route['api-domain'] = 'domain/domain/index';
+$route['api-domain/create'] = 'domain/domain/create';
+$route['api-domain/edit/(:num)'] = 'domain/domain/edit/$1';
+$route['api-domain/delete'] = 'domain/domain/delete/$1';
+

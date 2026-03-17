@@ -16,6 +16,9 @@
 		<script src="<?php echo base_url(); ?>assets/js/chart.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/greedynav.js"></script>
 
+		<!-- Select2 JS -->
+		<script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
+		
 		 <!-- Theme Settings JS -->
 		<script src="<?php echo base_url(); ?>assets/js/layout.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/theme-settings.js"></script>

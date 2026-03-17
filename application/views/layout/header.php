@@ -25,6 +25,9 @@
 		<!-- Chart CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/morris/morris.css">
 		
+		<!-- Select2 CSS -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/select2.min.css">
+		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 	

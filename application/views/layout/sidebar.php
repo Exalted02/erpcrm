@@ -9,12 +9,14 @@
 				<li class="active"> 
 					<a href="<?= base_url('dashboard') ?>"><i class="la la-dashcube"></i> <span>Dashboard</span></a>
 				</li>
-				<li class="submenu">
-					<a href="#"><i class="la la-cubes"></i> <span> Manage Subscription</span> <span class="menu-arrow"></span></a>
-					<ul>
-						<li><a href="<?= base_url('subscription/create') ?>" class="active">Add</a></li>
-						<li><a  href="<?= base_url('subscription') ?>">List</a></li>
-					</ul>
+				<li class="active"> 
+					<a href="<?= base_url('api-domain') ?>"><i class="la la-key"></i> <span>Domain Key</span></a>
+				</li>
+				<li class="active"> 
+					<a href="<?= base_url('settings') ?>"><i class="la la-cog"></i> <span>General Setting</span></a>
+				</li>
+				<li class="active"> 
+					<a href="<?= base_url('subscription') ?>"><i class="la la-cubes"></i> <span>Manage Subscription</span></a>
 				</li>
 			</ul>
 			
