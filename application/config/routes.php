@@ -55,6 +55,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['default_controller'] = 'auth/login';
 $route['login'] = 'auth/login';
+$route['forgot-password'] = 'auth/forgotpassword';
+$route['resetpassword/(:any)'] = 'auth/resetpassword/index/$1';
+$route['resetpassword/update'] = 'auth/resetpassword/update';
 $route['dashboard'] = 'dashboard/dashboard';
 $route['logout'] = 'auth/login/logout';
 

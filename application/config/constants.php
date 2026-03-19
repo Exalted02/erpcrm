@@ -93,3 +93,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('USERS', 'users');
 define('SUBSCRIPTIONS', 'subscriptions');
 define('API_DOMAINS', 'api_domains');
+define('EMAIL_TEMPLATE', 'email_template');

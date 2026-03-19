@@ -6,7 +6,7 @@
         <meta name="description" content="Smarthr - Bootstrap Admin Template">
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
         <meta name="author" content="Dreamstechnologies - Bootstrap Admin Template">
-        <title>Login - HRMS admin template</title>
+        <title>Reset Password</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
@@ -43,45 +43,38 @@
 					
 					<div class="account-box">
 						<div class="account-wrapper">
-							<h3 class="account-title">Login</h3>
-							<p class="account-subtitle">Access to our dashboard</p>
+							<h3 class="account-title">Reset Password</h3>
 							<?php if(!empty($error)){ ?>
 								<div class="alert alert-danger">
 									<?= $error ?>
 								</div>
 							<?php } ?>
-							<?php if($this->session->flashdata('success')){ ?>
-								<div class="alert alert-success">
-									<?php echo $this->session->flashdata('success'); ?>
+							<?php if($this->session->flashdata('error')){ ?>
+								<div class="alert alert-danger">
+									<?php echo $this->session->flashdata('error'); ?>
 								</div>
 							<?php } ?>
 							<!-- Account Form -->
 							<form method="post" action="">
+								<input type="hidden" name="token" value="<?= $token ?>">
 								<div class="input-block mb-4">
-									<label class="col-form-label">Email Address</label>
-									<input class="form-control" type="email" name="email" placeholder="Email" value="<?= set_value('email') ?>" required>
-									<span class="text-danger"><?php echo form_error('email'); ?></span>
+									<label class="col-form-label">New Password</label>
+									<input class="form-control" type="password" name="password" placeholder="Password" required>
+									<span class="text-danger"><?php echo form_error('password'); ?></span>
 								</div>
 								<div class="input-block mb-4">
-									<div class="row align-items-center">
-										<div class="col">
-											<label class="col-form-label">Password</label>
-										</div>
-									</div>
-									<div class="position-relative">
-										<input class="form-control" type="password" name="password" id="password" placeholder="Password" required>
-										<span class="fa-solid fa-eye-slash" id="toggle-password"></span>
-										<span class="text-danger"><?php echo form_error('password'); ?></span>
-									</div>
+									<label class="col-form-label">Confirm Password</label>
+									<input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password" required>
 								</div>
 								<div class="input-block mb-4 text-center">
-									<button class="btn btn-primary account-btn" type="submit">Login</button>
+									<button class="btn btn-primary account-btn" type="submit">Reset Password</button>
 								</div>
 								<div class="account-footer">
-									<p><a href="<?= base_url('forgot-password') ?>">Forgot password?</a></p>
+									<p><a href="<?= base_url('login') ?>">Login</a></p>
 								</div>
 							</form>
 							<!-- /Account Form -->
+							
 						</div>
 					</div>
 				</div>
