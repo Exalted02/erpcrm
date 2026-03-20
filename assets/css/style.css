@@ -204,14 +204,14 @@ img {
 a {
   text-decoration: none;
   outline: none;
-  color: #FF902F;
+  color: #00c5fb;
   cursor: pointer;
   -webkit-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 a:hover {
-  color: #fb7500;
+  color: #00c5fb;
   -webkit-transition: all 0.2s ease;
   -ms-transition: all 0.2s ease;
   transition: all 0.2s ease;
@@ -17929,7 +17929,8 @@ textarea.form-control {
 }
 .account-page .main-wrapper .account-content .account-box .account-btn {
   background: #FF902F;
-  background: linear-gradient(to right, #FF902F 0%, #FC6075 100%);
+  /* background: linear-gradient(to right, #FF902F 0%, #FC6075 100%); */
+  background: linear-gradient(to right, #00c5fb 0%, #0253cc 100%) !important;
   border: 0;
   display: block;
   font-size: 22px;
