@@ -19,7 +19,10 @@
 					<a href="<?php echo base_url('api-domain') ?>"><i class="la la-key"></i> <span>Domain Key</span></a>
 				</li>
 				<li class="<?php echo is_active(['settings'],['index']) ?>"> 
-					<a href="<?php echo base_url('settings') ?>"><i class="la la-cog"></i> <span>General Setting</span></a>
+					<a href="<?php echo base_url('settings') ?>"><i class="la la-cog"></i> <span>School Setting</span></a>
+				</li>
+				<li class="<?php echo is_active(['company_settings'],['index']) ?>"> 
+					<a href="<?php echo base_url('company_settings') ?>"><i class="la la-cog"></i> <span>Setting</span></a>
 				</li>
 				<li class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('subscription') ?>"><i class="la la-cubes"></i> <span>Manage Subscription</span></a>

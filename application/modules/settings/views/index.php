@@ -8,10 +8,10 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">General Setting</h3>
+					<h3 class="page-title">School Setting</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">General Setting</li>
+						<li class="breadcrumb-item active">School Setting</li>
 					</ul>
 				</div>
 			</div>

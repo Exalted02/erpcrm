@@ -94,3 +94,4 @@ define('USERS', 'users');
 define('SUBSCRIPTIONS', 'subscriptions');
 define('API_DOMAINS', 'api_domains');
 define('EMAIL_TEMPLATE', 'email_template');
+define('COMPANY_SETTINGS', 'company_settings');
