@@ -1,6 +1,22 @@
 <script>
 
-$("#domain").change(function(){
+$('#logoInput').on('change', function () {
+
+    let input = this;
+    if (input.files && input.files[0]) {
+
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#logoPreview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+
+});
+
+/*$("#domain").change(function(){
 
     let selected = $(this).find(':selected');
     let domain_id = selected.val();
@@ -21,6 +37,6 @@ $("#domain").change(function(){
         }
     });
 
-});
+});*/
 
 </script>

@@ -43,7 +43,13 @@ class Company_settings extends MY_Controller {
 	public function store()
     {	
 		//echo "<pre>";print_r($_FILES);die;
-		//$this->form_validation->set_rules('logo', '	layout/mainogo', 'required|trim');
+		if(empty($this->input->post('id')))
+		{
+			if (empty($_FILES['logo']['name'])) {
+				$this->form_validation->set_rules('logo', 'Logo', 'required');
+			}
+		}
+		
 		$this->form_validation->set_rules('school_name', 'School name', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
@@ -56,14 +62,22 @@ class Company_settings extends MY_Controller {
 			$logo = null;
 			if(!empty($_FILES['logo']['name']))
 			{
+				 $_FILES['file'] = $_FILES['logo'];
+				 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+				
+				
 				$_FILES['file']['name']     = $_FILES['logo']['name'];
 				$_FILES['file']['type']     = $_FILES['logo']['type'];
 				$_FILES['file']['tmp_name'] = $_FILES['logo']['tmp_name'];
 				$_FILES['file']['error']    = $_FILES['logo']['error'];
 				$_FILES['file']['size']     = $_FILES['logo']['size'];
 				
+				// easyschool
+				
 				$config['upload_path']   = './uploads/company_settings/';
 				$config['allowed_types'] = 'jpg|jpeg|png|gif';
+				
+				$config['file_name']     = 'easyschool.' . $ext;
 				
 				$this->load->library('upload', $config);
 				$this->upload->initialize($config);
@@ -106,13 +120,15 @@ class Company_settings extends MY_Controller {
 			{
 				
 				$this->company_settings_model->update($this->input->post('id'), $data);
+				$this->session->set_flashdata('success','Company Updated Successfully');
 			}
 			else{
 				
 				$this->company_settings_model->insert($data);
+				$this->session->set_flashdata('success','Company Added Successfully');
 			}
 
-			$this->session->set_flashdata('success','Company Added Successfully');
+			
 			redirect('company_settings');
 		}
 		//redirect('company_settings');
