@@ -1,10 +1,14 @@
 <script>
+$(document).ready(function(){
+	$('.admin-small-logo').hide();
+	$('.admin-logo').hide();
+});
 
 $("#domain").change(function(){
 
     let selected = $(this).find(':selected');
     let domain_id = selected.val();
-
+	//alert(domain_id);
     if(!domain_id) return;
 
     $.ajax({
@@ -22,5 +26,41 @@ $("#domain").change(function(){
     });
 
 });
+
+//$('#smalllogoInput').on('change', function () {
+$(document).on('change', '#smalllogoInput', function(){
+	$('.admin-small-logo').show();
+    let input = this;
+    if (input.files && input.files[0]) {
+
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#smalllogoPreview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+
+});
+
+$(document).on('change', '#logoinput', function(){
+	$('.admin-logo').show();
+    let input = this;
+    if (input.files && input.files[0]) {
+
+        let reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#logoPreview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+
+});
+
+
+
 
 </script>

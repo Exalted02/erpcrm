@@ -19,7 +19,7 @@
 		<!-- /Page Header -->
 		
 		<div class="row">
-			<form method="post" action="<?= base_url('settings/store') ?>">
+			<form method="post" action="<?= base_url('settings/store') ?>" enctype="multipart/form-data">
 				<div class="col-md-12">
 					<div class="row">
 						<div class="col-md-3">
