@@ -51,10 +51,12 @@ class Company_settings extends MY_Controller {
 		}
 		
 		$this->form_validation->set_rules('school_name', 'School name', 'required|trim');
+		$this->form_validation->set_rules('website_url', 'Website url', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['page'] = 'company_settings/index';
+			$data['script'] = 'company_settings/index_script';
 			$this->load->view('layout/main',$data);
 		}
 		else
@@ -99,6 +101,7 @@ class Company_settings extends MY_Controller {
 				$data = [
 					'id' => $this->input->post('id', true),
 					'school_name' => $this->input->post('school_name', true),
+					'website_url' => $this->input->post('website_url', true),
 					'logo' => $logo,
 					'created_at' => date('Y-m-d h:i:s')
 				];
@@ -108,6 +111,7 @@ class Company_settings extends MY_Controller {
 				$data = [
 					'id' => $this->input->post('id', true),
 					'school_name' => $this->input->post('school_name', true),
+					'website_url' => $this->input->post('website_url', true),
 					'created_at' => date('Y-m-d h:i:s')
 				];
 				

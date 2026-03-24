@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Company_settings extends MX_Controller  {
+class School_newly_update extends MX_Controller  {
  
     public function __construct() {
         parent::__construct();
@@ -12,10 +12,8 @@ class Company_settings extends MX_Controller  {
         header('Access-Control-Allow-Methods: GET');
     }
  
-    public function get_company_settings() {
-		$data = $this->Api_model->get_all();
-		$data['logo'] = isset($data['logo']) ? $data['logo'] : 'default-logo.png';
-		//$data['default-logo'] = 'default-logo.png';
+    public function get_school_newly_settings() {
+		$data = $this->Api_model->get_school_newly_all();
 		echo json_encode($data);
     }
 }

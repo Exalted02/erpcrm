@@ -19,4 +19,7 @@ CREATE TABLE `school_newly_update` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
 
+======== 24-03-2026========
+ALTER TABLE `company_settings` ADD `website_url` VARCHAR(225) NULL DEFAULT NULL AFTER `school_name`;
+
 

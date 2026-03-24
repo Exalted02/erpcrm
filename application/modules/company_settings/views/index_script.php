@@ -1,6 +1,6 @@
 <script>
 
-$('#logoInput').on('change', function () {
+$(document).on('change', '#logoInput' , function () {
 
     let input = this;
     if (input.files && input.files[0]) {
