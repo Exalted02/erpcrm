@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function(){
-	$('.admin-small-logo').hide();
-	$('.admin-logo').hide();
+	//$('.admin-small-logo').hide();
+	//$('.admin-logo').hide();
 });
 
 $("#domain").change(function(){
@@ -27,7 +27,6 @@ $("#domain").change(function(){
 
 });
 
-//$('#smalllogoInput').on('change', function () {
 $(document).on('change', '#smalllogoInput', function(){
 	$('.admin-small-logo').show();
     let input = this;
@@ -59,8 +58,5 @@ $(document).on('change', '#logoinput', function(){
     }
 
 });
-
-
-
 
 </script>

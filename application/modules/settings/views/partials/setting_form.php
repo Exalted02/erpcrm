@@ -62,12 +62,12 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3 admin-small-logo">
-			<img id="smalllogoPreview" src="<?= $domain_name .'/uploads/school_content/admin_small_logo/' . $school['admin_small_logo']; ?>" height="150" width="150" style="object-fit:cover; border:1px solid #ddd; border-radius:6px;">
+		<div class="col-md-3 admin-small-logo" style="<?php echo isset($school['admin_small_logo']) ? 'display:block' :'display:none' ?>">
+			<img id="smalllogoPreview" src="<?php echo isset($school['admin_small_logo'])  ? $domain_name .'/uploads/school_content/admin_small_logo/' . $school['admin_small_logo'] : ''; ?>" height="150" width="150" style="object-fit:cover; border:1px solid #ddd; border-radius:6px;">
 		</div>
 		
-		<div class="col-md-3 admin-logo">
-			<img id="logoPreview" src="<?= $domain_name . '/uploads/school_content/admin_logo/' . $school['admin_logo']; ?>" height="150" width="150" style="object-fit:cover; border:1px solid #ddd; border-radius:6px;">
+		<div class="col-md-3 admin-logo" style="<?php echo isset($school['admin_logo']) ? 'display:block' :'display:none' ?>">
+			<img id="logoPreview" src="<?php echo isset($school['admin_logo'])  ? $domain_name . '/uploads/school_content/admin_logo/' . $school['admin_logo'] : ''; ?>" height="150" width="150" style="object-fit:cover; border:1px solid #ddd; border-radius:6px;">
 		</div>
 	</div>
 	
