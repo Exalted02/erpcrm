@@ -25,10 +25,10 @@
 						<div class="col-md-3">
 							<div class="input-block mb-3">
 								<label class="col-form-label">Select Domain <span class="text-danger">*</span></label>
-								<select class="select" name="domain" id="domain">
+								<select class="select setting_domain_id" name="domain" id="domain">
 									<option>Select</option>
 									<?php foreach($domains as $row){ ?>
-									<option value="<?= $row->id ?>" <?= $this->session->flashdata('domain_id') == $row->id ? 'selected' : '' ?>><?= $row->domain_name ?></option>
+									<option value="<?= $row->id ?>"><?= $row->domain_name ?></option>
 									<?php } ?>
 								</select>
 							</div>

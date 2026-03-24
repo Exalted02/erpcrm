@@ -48,6 +48,10 @@
 			<?php if($this->session->flashdata('warning')){ ?>
 				toastr_msg("<?php echo $this->session->flashdata('warning'); ?>", "warning");
 			<?php } ?>
+			
+			<?php if($this->session->flashdata('domain_id')){ ?>
+				selecteddomain("<?php echo  $this->session->flashdata('domain_id'); ?>");
+			<?php } ?>
 
 			function toastr_msg(msg, type){
 				toastr.options = {
@@ -63,6 +67,13 @@
 					allowedContent: true
 				});
 			});
+			
+			function selecteddomain(id)
+			{
+				setTimeout(function(){
+					$('.setting_domain_id').val(id).trigger('change');
+				}, 500);
+			}
 		</script>
 		
 		<?php if(isset($script)){$this->load->view($script);} ?>

@@ -1,10 +1,6 @@
 <script>
-var domain_id = <?= $this->session->flashdata('domain_id'); ?>
-//alert(domain_id);
+
 $(document).ready(function(){
-	//alert('ok');
-	//$('.admin-small-logo').hide();
-	//$('.admin-logo').hide();
 	
 });
 
