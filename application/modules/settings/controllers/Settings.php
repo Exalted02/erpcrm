@@ -88,7 +88,8 @@ class Settings extends MY_Controller {
 		
 		if($response['status']){
 			$this->session->set_flashdata('success', $response['message']);
-			$data['domain_id'] = $domain_id;
+			$this->session->set_flashdata('domain_id', $domain_id);
+			//$data['domain_id'] = $domain_id;
 		}else{
 			$this->session->set_flashdata('error', $response['message']);
 		}

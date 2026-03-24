@@ -28,7 +28,7 @@
 								<select class="select" name="domain" id="domain">
 									<option>Select</option>
 									<?php foreach($domains as $row){ ?>
-									<option value="<?= $row->id ?>" <?= set_value('domain') == $row->id ? 'selected' : '' ?>><?= $row->domain_name ?></option>
+									<option value="<?= $row->id ?>" <?= $this->session->flashdata('domain_id') == $row->id ? 'selected' : '' ?>><?= $row->domain_name ?></option>
 									<?php } ?>
 								</select>
 							</div>
