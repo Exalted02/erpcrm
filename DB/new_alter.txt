@@ -1,4 +1,3 @@
-
 ==============  23-03-2026===========
 CREATE TABLE `company_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -6,8 +5,7 @@ CREATE TABLE `company_settings` (
   `school_name` varchar(225) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
----
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `school_newly_update` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -17,7 +15,7 @@ CREATE TABLE `school_newly_update` (
   `status` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ======== 24-03-2026========
 ALTER TABLE `company_settings` ADD `website_url` VARCHAR(225) NULL DEFAULT NULL AFTER `school_name`;

@@ -58,5 +58,13 @@ $(document).on('change', '#logoinput', function(){
     }
 
 });
-
+<?php if($this->session->flashdata('domain_id')){ ?>
+	selecteddomain("<?php echo  $this->session->flashdata('domain_id'); ?>");
+<?php } ?>
+function selecteddomain(id)
+{
+	setTimeout(function(){
+		$('.setting_domain_id').val(id).trigger('change');
+	}, 500);
+}
 </script>

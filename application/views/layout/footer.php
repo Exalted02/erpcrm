@@ -10,12 +10,6 @@
 		<!-- Slimscroll JS -->
 		<script src="<?php echo base_url(); ?>assets/js/jquery.slimscroll.min.js"></script>
 		
-		<!-- Chart JS -->
-		<script src="<?php echo base_url(); ?>assets/plugins/morris/morris.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/plugins/raphael/raphael.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/chart.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/greedynav.js"></script>
-
 		<!-- Select2 JS -->
 		<script src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
 		
@@ -53,10 +47,6 @@
 				toastr_msg("<?php echo $this->session->flashdata('warning'); ?>", "warning");
 			<?php } ?>
 			
-			<?php if($this->session->flashdata('domain_id')){ ?>
-				selecteddomain("<?php echo  $this->session->flashdata('domain_id'); ?>");
-			<?php } ?>
-
 			function toastr_msg(msg, type){
 				toastr.options = {
 					"closeButton": true,
@@ -66,18 +56,12 @@
 			}
 			
 			$(document).ready(function () {
-				CKEDITOR.replace('editor1',
-				{
-					allowedContent: true
-				});
+				if (typeof CKEDITOR !== "undefined" && $('#editor1').length > 0) {
+					CKEDITOR.replace('editor1', {
+						allowedContent: true
+					});
+				}
 			});
-			
-			function selecteddomain(id)
-			{
-				setTimeout(function(){
-					$('.setting_domain_id').val(id).trigger('change');
-				}, 500);
-			}
 		</script>
 		
 		<?php if(isset($script)){$this->load->view($script);} ?>
