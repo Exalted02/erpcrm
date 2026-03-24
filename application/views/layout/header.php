@@ -30,6 +30,9 @@
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+		
+		<!-- Datatable CSS -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap4.min.css">
 	
     </head>
     <body>
