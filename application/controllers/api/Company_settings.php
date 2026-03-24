@@ -16,6 +16,7 @@ class Company_settings extends MX_Controller  {
 		$data = $this->Api_model->get_all();
 		$data['logo'] = isset($data['logo']) ? $data['logo'] : 'default-logo.png';
 		$data['website_url'] = isset($data['website_url']) ? $data['website_url'] : 'https://easyskool.in/';
+		$data['school_name'] = isset($data['school_name']) ? $data['school_name'] : 'Easy Skool ERP';
 		echo json_encode($data);
     }
 }
