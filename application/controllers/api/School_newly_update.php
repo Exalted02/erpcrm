@@ -13,7 +13,12 @@ class School_newly_update extends MX_Controller  {
     }
  
     public function get_school_newly_settings() {
-		$data = $this->Api_model->get_school_newly_all();
+		$data['data'] = $this->Api_model->get_school_newly_all();
+		if(empty($data['data']))
+		{
+			$data['msg'] = 'No updates found';
+		}
+
 		echo json_encode($data);
     }
 }

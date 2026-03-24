@@ -13,10 +13,11 @@ class Company_settings extends MX_Controller  {
     }
  
     public function get_company_settings() {
-		$data = $this->Api_model->get_all();
-		$data['logo'] = isset($data['logo']) ? $data['logo'] : 'default-logo.png';
-		$data['website_url'] = isset($data['website_url']) ? $data['website_url'] : 'https://easyskool.in/';
-		$data['school_name'] = isset($data['school_name']) ? $data['school_name'] : 'Easy Skool ERP';
+		$arr = $this->Api_model->get_all();
+		$arr['logo'] = isset($arr['logo']) ? $arr['logo'] : 'default-logo.png';
+		$arr['website_url'] = isset($arr['website_url']) ? $arr['website_url'] : 'https://easyskool.in/';
+		$arr['school_name'] = isset($arr['school_name']) ? $arr['school_name'] : 'Easy Skool ERP';
+		$data['data'] = $arr;
 		echo json_encode($data);
     }
 }

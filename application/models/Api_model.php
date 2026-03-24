@@ -12,6 +12,6 @@ class Api_model extends CI_Model {
     }
 	
 	public function get_school_newly_all() {
-        return $this->db->get(SCHOOL_NEWLY_UPDATES)->result_array();
+        return $this->db->where('status', 1)->get(SCHOOL_NEWLY_UPDATES)->result_array();
     }
 }
