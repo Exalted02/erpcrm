@@ -66,6 +66,11 @@ $route['subscription/create'] = 'subscription/subscription/create';
 $route['subscription/edit/(:num)'] = 'subscription/subscription/edit/$1';
 $route['subscription/delete/(:num)'] = 'subscription/subscription/delete/$1';
 
+$route['seller'] = 'seller/seller/index';
+$route['seller/create'] = 'seller/seller/create';
+$route['seller/edit/(:num)'] = 'seller/seller/edit/$1';
+$route['seller/delete/(:num)'] = 'seller/seller/delete/$1';
+
 // Settings module start
 $route['settings'] = 'settings/settings/index';
 

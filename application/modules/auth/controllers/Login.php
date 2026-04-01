@@ -37,7 +37,8 @@ class Login extends MX_Controller {
 					if($user->status == 1){
 						$session = [
 							'user_id'   => $user->id,
-							'name'      => $user->name,
+							'username'  => $user->name,
+							'useremail' => $user->email,
 							'user_role' => $user->user_role,
 							'logged_in' => true
 						];

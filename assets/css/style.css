@@ -19922,7 +19922,7 @@ th.width-64 {
 }
 
 .modal button.btn-close {
-  background: transparent;
+  /* background: transparent; */
   border: 0;
 }
 

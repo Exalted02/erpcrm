@@ -31,6 +31,9 @@
 		<!-- Main CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
 		
+		<!-- Custom CSS -->
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
+		
 		<!-- Datatable CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap4.min.css">
 	
@@ -79,7 +82,7 @@
 						<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
 							<span class="user-img"><img src="<?php echo base_url(); ?>assets/img/avatar/avatar-27.jpg" alt="User Image">
 							<span class="status online"></span></span>
-							<span>Admin</span>
+							<span><?php echo $this->customlib->getSessionUserName(); ?></span>
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>

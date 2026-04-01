@@ -20,4 +20,18 @@ CREATE TABLE `school_newly_update` (
 ======== 24-03-2026========
 ALTER TABLE `company_settings` ADD `website_url` VARCHAR(225) NULL DEFAULT NULL AFTER `school_name`;
 
+======== 30-03-2026========
+CREATE TABLE `leads` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_name` varchar(100) DEFAULT NULL,
+  `school_email` varchar(100) DEFAULT NULL,
+  `school_phone` varchar(50) DEFAULT NULL,
+  `school_address` text DEFAULT NULL,
+  `school_code` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `users` CHANGE `user_role` `user_role` TINYINT(4) NULL DEFAULT '1' COMMENT '0=Superadmin, 1=Seller';
+
 
