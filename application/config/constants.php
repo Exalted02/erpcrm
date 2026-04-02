@@ -99,3 +99,4 @@ define('SCHOOL_NEWLY_UPDATES', 'school_newly_update');
 define('LEADS', 'leads');
 define('FOLLOWUP_REMARKS', 'followup_remarks');
 define('LEAD_FOLLOWUPS', 'lead_followups');
+define('CONVERT_SCHOOL', 'convert_school');

@@ -31,6 +31,7 @@
 								<th>ID</th>
 								<th>Title</th>
 								<th>Price</th>
+								<th>Max Students</th>
 								<th>Duration</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
@@ -42,6 +43,7 @@
 								<td><?= $row->id ?></td>
 								<td><?= $row->title ?></td>
 								<td><?= $row->price ?></td>
+								<td><?= $row->max_students ?></td>
 								<td><?= $row->duration ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">

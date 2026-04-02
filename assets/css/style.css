@@ -9242,7 +9242,7 @@ input[type=file].form-control {
   text-decoration: none;
 }
 .sidebar .sidebar-menu ul ul li a.active::before {
-  background: #FF902F;
+  background: #00c5fb;
 }
 .sidebar .sidebar-menu ul ul li.submenu ul li a {
   padding-left: 40px;
@@ -9608,7 +9608,7 @@ input[type=file].form-control {
 }
 [data-layout-mode=blue] .sidebar .sidebar-menu ul ul a.active {
   color: #00c5fb;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 [data-layout-mode=blue] .sidebar ul li.submenu .noti-dot:before {
   border: 5px solid #00c5fb;

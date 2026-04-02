@@ -3,7 +3,7 @@ class Leads_model extends CI_Model {
 
     function get_all()
     {
-        return $this->db->get(LEADS)->result();
+        return $this->db->where('status',1)->get(LEADS)->result();
     }
 
     function get($id)
@@ -49,5 +49,15 @@ class Leads_model extends CI_Model {
 	function lead_followup_delete($id)
     {
         return $this->db->where('id',$id)->delete(LEAD_FOLLOWUPS);
+    }
+	
+	function convert_school($id,$data)
+    {
+		$this->db->where('id',$id)->update(LEADS, ['status'=>2]);
+        return $this->db->insert(CONVERT_SCHOOL,$data);
+    }
+    function get_converted_leads()
+    {
+        return $this->db->get(CONVERT_SCHOOL)->result();
     }
 }

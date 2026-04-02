@@ -82,7 +82,7 @@
 						<a href="#" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
 							<span class="user-img"><img src="<?php echo base_url(); ?>assets/img/avatar/avatar-27.jpg" alt="User Image">
 							<span class="status online"></span></span>
-							<span><?php echo $this->customlib->getSessionUserName(); ?></span>
+							<span><?php echo $this->customlib->getLoginSessionData('username'); ?></span>
 						</a>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="profile.html">My Profile</a>

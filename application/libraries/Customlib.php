@@ -13,6 +13,7 @@ class Customlib
     {
         $this->CI = &get_instance();
         $this->CI->load->library('session');
+        $this->CI->load->model('user/User_model', '', true);
     }
 
     public function getCSRF()
@@ -24,17 +25,16 @@ class Customlib
         return $csrf_input;
     }
 
-    public function getSessionUserRole()
+    public function getLoginSessionData($type)
     {
         $student_session = $this->CI->session->userdata();
-        $user_role        = $student_session['user_role'];
-        return $user_role;
+        $type_data        = $student_session[$type];
+        return $type_data;
     }
-    public function getSessionUserName()
+    public function getUserDetailsById($id)
     {
-        $student_session = $this->CI->session->userdata();
-        $username        = $student_session['username'];
-        return $username;
+        $result = $this->CI->User_model->getById($id);
+        return $result;
     }
 
 }

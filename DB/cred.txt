@@ -2,5 +2,5 @@ SMTP credential - application\config\email.php
 Send email function is in - application\helpers\email_helper.php
 
 
-menu acrive :- application\helpers\menu_helper.php
+menu active :- application\helpers\menu_helper.php
 

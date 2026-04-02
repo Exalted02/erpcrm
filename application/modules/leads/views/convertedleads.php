@@ -8,14 +8,11 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">Leads</h3>
+					<h3 class="page-title">Converted Leads</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
 						<li class="breadcrumb-item active">Leads</li>
 					</ul>
-				</div>
-				<div class="col-auto float-end ms-auto">
-					<a href="<?= base_url('leads/create') ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add</a>
 				</div>
 			</div>
 		</div>
@@ -29,11 +26,15 @@
 						<thead>
 							<tr>
 								<th>ID</th>
+								<th>Seller Name</th>
 								<th>School Name</th>
 								<th style="width:200px;">Code</th>
 								<th>Email</th>
 								<th>Phone</th>
-								<!--<th class="text-end">Status</th>-->
+								<th>Total Student</th>
+								<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
+								<th>Subscription</th>
+								<?php } ?>
 								<th class="text-end">Action</th>
 							</tr>
 						</thead>
@@ -43,16 +44,15 @@
 							?>
 							<tr>
 								<td><?= $row->id ?></td>
-								<td><?= $row->school_name ?></td>
-								<td><?= $row->school_code ?></td>
-								<td><?= $row->school_email ?></td>
-								<td><?= $row->school_phone ?></td>
-								<!--<td class="text-end">
-									<div class="status-toggle">
-										<input type="checkbox" class="check status-toggle-btn" data-id="<?= $row->id ?>" id="status_<?= $row->id ?>" <?= $row->status ? 'checked' : '' ?>>
-										<label for="status_<?= $row->id ?>" class="checktoggle"></label>
-									</div>
-								</td>-->
+								<td><?= $this->customlib->getUserDetailsById($row->seller_id)->name ?></td>
+								<td><?= $row->school_name ?? '' ?></td>
+								<td><?= $row->school_code ?? '' ?></td>
+								<td><?= $row->school_email ?? '' ?></td>
+								<td><?= $row->school_phone  ?? ''?></td>
+								<td><?= $row->total_student ?? '' ?></td>
+								<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
+								<td><button type="button" class="btn btn-primary btn-sm manage_subscription" data-id="<?= $row->id ?>">Manage</button></td>
+								<?php } ?>
 								<td class="text-end">
 									<div class="dropdown dropdown-action">
 										<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
@@ -101,5 +101,38 @@
 		</div>
 	</div>
 	<!-- /Delete Modal -->
+	
+	<div class="modal custom-modal1 fade" id="manage_subscription" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<form id="followupForm">
+					<div class="modal-header">
+						<h5 class="modal-title">Manage Subscription</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="lead_id" name="lead_id" value="">
+						<div class="form-group">
+							<label>Subscription</label>
+							<select name="subscription_id" id="subscription_id" class="form-control" required>
+								<option value="">Select Subscription</option>
+								<?php foreach($subscriptions as $s_val){ ?>
+									<option value="<?= $s_val->id ?>"><?= $s_val->title ?></option>
+								<?php } ?>
+							</select>
+						</div>
+						<div class="form-group mt-2">
+							<label>Discount in percent (*)</label>
+							<input type="number" name="discount_percent" id="discount_percent" class="form-control" placeholder="Discount in percent (*)">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+						<button type="submit" class="btn btn-primary">Save</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- /Page Wrapper -->

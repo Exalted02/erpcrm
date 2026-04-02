@@ -8,6 +8,13 @@ class User_model extends CI_Model {
 			->get(USERS)
 			->row();
     }
+	public function getById($id)
+    {
+        return $this->db
+			->where('id',$id)
+			->get(USERS)
+			->row();
+    }
 	public function checkToken($token)
     {
         return $this->db

@@ -5,7 +5,7 @@ class Dashboard extends MY_Controller {
 
     public function index()
 	{		
-		if($this->customlib->getSessionUserRole() == 1){
+		if($this->customlib->getLoginSessionData('user_role') == 1){
 			redirect('leads');
 		}
 		

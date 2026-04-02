@@ -74,7 +74,7 @@
 		</div>
 	</div>
 	<!-- /Page Content -->
-	<!-- Delete Modal -->
+	<!-- Followup Modal -->
 	<div class="modal custom-modal1 fade" id="followupModal" role="dialog">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -108,6 +108,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- /Delete Modal -->
+	<!-- /Followup Modal -->
 </div>
 <!-- /Page Wrapper -->
