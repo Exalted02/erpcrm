@@ -41,100 +41,90 @@ class Company_settings extends MY_Controller {
 		$this->load->view('settings/partials/setting_form',$data);
 	}
 	public function store()
-    {	
-		//echo "<pre>";print_r($_FILES);die;
-		if(empty($this->input->post('id')))
-		{
-			if (empty($_FILES['logo']['name'])) {
-				$this->form_validation->set_rules('logo', 'Logo', 'required');
-			}
-		}
-		
-		$this->form_validation->set_rules('school_name', 'School name', 'required|trim');
-		$this->form_validation->set_rules('website_url', 'Website url', 'required|trim');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$data['page'] = 'company_settings/index';
-			$data['script'] = 'company_settings/index_script';
-			$this->load->view('layout/main',$data);
-		}
-		else
-		{
-			$logo = null;
-			if(!empty($_FILES['logo']['name']))
-			{
-				 $_FILES['file'] = $_FILES['logo'];
-				 $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-				
-				
-				$_FILES['file']['name']     = $_FILES['logo']['name'];
-				$_FILES['file']['type']     = $_FILES['logo']['type'];
-				$_FILES['file']['tmp_name'] = $_FILES['logo']['tmp_name'];
-				$_FILES['file']['error']    = $_FILES['logo']['error'];
-				$_FILES['file']['size']     = $_FILES['logo']['size'];
-				
-				// easyschool
-				
-				$config['upload_path']   = './uploads/company_settings/';
-				$config['allowed_types'] = 'jpg|jpeg|png|gif';
-				
-				$config['file_name']     = 'easyschool.' . $ext;
-				
-				$this->load->library('upload', $config);
-				$this->upload->initialize($config);
-				
-				if($this->upload->do_upload('file')){
-					$uploadData = $this->upload->data();
-					$logo = $uploadData['file_name'];
-				}
-				
-				// unlink file 
-				$fetch = $this->company_settings_model->get($this->input->post('id'));
-				$unlinklogo = $fetch->logo;
-			    $path = './uploads/company_settings/'. $unlinklogo;
-				if(file_exists($path))
-				{
-					unlink($path);
-				}
-				
-				$data = [
-					'id' => $this->input->post('id', true),
-					'school_name' => $this->input->post('school_name', true),
-					'website_url' => $this->input->post('website_url', true),
-					'logo' => $logo,
-					'created_at' => date('Y-m-d h:i:s')
-				];
-			}
-			else{
-				
-				$data = [
-					'id' => $this->input->post('id', true),
-					'school_name' => $this->input->post('school_name', true),
-					'website_url' => $this->input->post('website_url', true),
-					'created_at' => date('Y-m-d h:i:s')
-				];
-				
-			}
-			
-			
-			
-			
-			if($this->input->post('id'))
-			{
-				
-				$this->company_settings_model->update($this->input->post('id'), $data);
-				$this->session->set_flashdata('success','Company Updated Successfully');
-			}
-			else{
-				
-				$this->company_settings_model->insert($data);
-				$this->session->set_flashdata('success','Company Added Successfully');
-			}
-
-			
-			redirect('company_settings');
-		}
-		//redirect('company_settings');
+{
+    if (empty($this->input->post('id'))) {
+        if (empty($_FILES['logo']['name'])) {
+            $this->form_validation->set_rules('logo', 'Logo', 'required');
+        }
     }
+
+    $this->form_validation->set_rules('school_name', 'School name', 'required|trim');
+    $this->form_validation->set_rules('website_url', 'Website url', 'required|trim');
+
+    if ($this->form_validation->run() == FALSE) {
+        $data['page'] = 'company_settings/index';
+        $data['script'] = 'company_settings/index_script';
+        $this->load->view('layout/main', $data);
+    } else {
+
+        $logo = null;
+
+        if (!empty($_FILES['logo']['name'])) {
+
+            // ✅ Get extension safely
+            $ext = strtolower(pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION));
+
+            // ✅ Upload config
+            $config['upload_path']   = './uploads/company_settings/';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+            $config['file_name']     = 'easyskool.' . $ext;
+            $config['overwrite']     = TRUE;
+
+            // 🔥 IMPORTANT FIX FOR WEBP
+            $config['detect_mime']   = FALSE;
+            $config['mod_mime_fix']  = FALSE;
+
+            $this->load->library('upload');
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('logo')) {
+
+                $uploadData = $this->upload->data();
+                $logo = $uploadData['file_name'];
+
+                // ✅ Delete old file ONLY after successful upload
+                if ($this->input->post('id')) {
+                    $fetch = $this->company_settings_model->get($this->input->post('id'));
+
+                    if (!empty($fetch->logo)) {
+                        $oldPath = './uploads/company_settings/' . $fetch->logo;
+
+                        if (file_exists($oldPath)) {
+                            unlink($oldPath);
+                        }
+                    }
+                }
+
+            } else {
+                echo $this->upload->display_errors();
+                exit;
+            }
+        }
+
+        // ✅ Prepare data
+        $data = [
+            'school_name' => $this->input->post('school_name', true),
+            'website_url' => $this->input->post('website_url', true),
+            'created_at'  => date('Y-m-d H:i:s')
+        ];
+
+        if ($logo !== null) {
+            $data['logo'] = $logo;
+        }
+
+        // ✅ Insert or Update
+        if ($this->input->post('id')) {
+
+            $this->company_settings_model->update($this->input->post('id'), $data);
+            $this->session->set_flashdata('success', 'Company Updated Successfully');
+
+        } else {
+
+            $this->company_settings_model->insert($data);
+            $this->session->set_flashdata('success', 'Company Added Successfully');
+        }
+
+        redirect('company_settings');
+    }
+}
 }
