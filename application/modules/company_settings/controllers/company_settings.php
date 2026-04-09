@@ -71,8 +71,8 @@ class Company_settings extends MY_Controller {
             $config['overwrite']     = TRUE;
 
             // 🔥 IMPORTANT FIX FOR WEBP
-            $config['detect_mime']   = FALSE;
-            $config['mod_mime_fix']  = FALSE;
+           // $config['detect_mime']   = FALSE;
+            //$config['mod_mime_fix']  = FALSE;
 
             $this->load->library('upload');
             $this->upload->initialize($config);
