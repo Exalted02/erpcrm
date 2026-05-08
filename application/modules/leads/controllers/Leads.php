@@ -12,14 +12,64 @@ class Leads extends MY_Controller {
         $this->load->model('Country_state_district');
     }
 
-    public function index()
+    /*public function index()
     {
+		$data['getAllDistrict'] = $this->Country_state_district->get_all_district();
+		$data['sellers'] = $this->seller_model->get_all();
         $data['datas'] = $this->leads_model->get_all();
         $data['page'] = 'leads/index';
         $data['script'] = 'leads/index_script';
 
         $this->load->view('layout/main',$data);
-    }
+    }*/
+	public function index()
+	{
+		$data['getAllDistrict'] = $this->Country_state_district->get_all_district();
+		$data['sellers'] = $this->seller_model->get_all();
+
+		$school_name = $this->input->post('school_name');
+		$email       = $this->input->post('email');
+		$district    = $this->input->post('district');
+		$seller      = $this->input->post('seller');
+		$from_date   = $this->input->post('from_date');
+		$to_date     = $this->input->post('to_date');
+
+		$this->db->select('*');
+		$this->db->from('leads');
+
+		if (!empty($school_name)) {
+			$this->db->like('school_name', $school_name);
+		}
+
+		if (!empty($email)) {
+			$this->db->like('school_email', $email);
+		}
+
+		if (!empty($district)) {
+			$this->db->where('school_district', $district);
+		}
+
+		if (!empty($seller)) {
+			$this->db->where('seller_id', $seller);
+		}
+
+		// From date
+		if (!empty($from_date)) {
+			$this->db->where('DATE(created_at) >=', $from_date);
+		}
+
+		// To date
+		if (!empty($to_date)) {
+			$this->db->where('DATE(created_at) <=', $to_date);
+		}
+		
+		$data['datas'] = $this->db->get()->result();
+
+		$data['page'] = 'leads/index';
+		$data['script'] = 'leads/index_script';
+
+		$this->load->view('layout/main', $data);
+	}
 
     public function create()
 	{
@@ -63,7 +113,8 @@ class Leads extends MY_Controller {
 				'alternate_no' => $this->input->post('alternate_no'),
 				'school_website' => $this->input->post('school_website'),
 				'coming_form' => 0,
-				'status' => 1
+				'status' => 1,
+				'created_at' => date('Y-m-d H:i:s')
 			];
 
 			$this->leads_model->insert($data);

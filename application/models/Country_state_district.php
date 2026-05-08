@@ -5,9 +5,12 @@ class Country_state_district extends CI_Model {
     {
         return $this->db->get(STATES)->result();
     }
-    public function get_all_district($state_id)
+    public function get_all_district($state_id = '')
     {
-        return $this->db->where('state_id', $state_id)->order_by('district_name', 'ASC')->get(DISTRICTS)->result();
+		if (!empty($state_id)) {
+			$this->db->where('state_id', $state_id);
+		}
+        return $this->db->order_by('district_name', 'ASC')->get(DISTRICTS)->result();
     }
     public function get_district_name($district_id)
     {

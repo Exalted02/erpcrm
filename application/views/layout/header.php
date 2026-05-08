@@ -34,6 +34,9 @@
 		<!-- Custom CSS -->
         <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
 		
+		<!-- Datetimepicker CSS -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-datetimepicker.min.css">
+		
 		<!-- Datatable CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dataTables.bootstrap4.min.css">
 	

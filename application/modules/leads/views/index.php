@@ -25,15 +25,91 @@ $CI->load->model('seller/Seller_model');
 			</div>
 		</div>
 		<!-- /Page Header -->
+		<!-- Search Filter -->
+		<form method="POST" action="">
+			<div class="row filter-row1 mb-2">
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<div class="input-block mb-3">
+						<input type="text" name="school_name" placeholder="School Name" class="form-control form-control-sm" value="<?= set_value('school_name') ?>">
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<div class="input-block mb-3">
+						<input type="text" name="email" placeholder="Email" class="form-control form-control-sm" value="<?= set_value('email') ?>">
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+					<div class="input-block selectnew mb-3">
+						<select class="select form-control form-control-sm" name="district"> 
+							<option value="">Select District</option>
+							<?php foreach($getAllDistrict as $districtVal){ ?>
+							<option value="<?= $districtVal->id ?>"
+								<?= set_value('district') == $districtVal->id ? 'selected' : '' ?>>
+								<?= $districtVal->district_name ?>
+							</option>
+							<?php } ?>
+
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+					<div class="input-block mb-3">
+						<select class="select form-control form-control-sm" name="seller"> 
+							<option value="">Select Seller</option>
+							<?php foreach($sellers as $sellerVal){ ?>
+							<option value="<?= $sellerVal->id ?>"
+								<?= set_value('seller') == $sellerVal->id ? 'selected' : '' ?>>
+								<?= $sellerVal->name ?>
+							</option>
+							<?php } ?>
+
+						</select>
+					</div>
+				</div>
+				
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<div class="input-block mb-3">
+						<div class="cal-icon">
+							<input class="form-control form-control-sm datetimepicker" type="text"
+								   name="from_date"
+								   placeholder="From"
+								   value="<?= set_value('from_date') ?>">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<div class="input-block mb-3">
+						<div class="cal-icon">
+							<input class="form-control form-control-sm datetimepicker" type="text"
+								   name="to_date"
+								    placeholder="To"
+								   value="<?= set_value('to_date') ?>">
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<button type="submit" class="btn btn-success w-100">Search</button>
+				</div>
+
+			</div>
+		</form>
+		<!-- /Search Filter -->
 		
 		<div class="row">
 			<div class="col-md-12">
 				<div class="table-responsive">				
 					<!-- Table -->
-					<table class="table table-striped custom-table mb-0 datatable">
+					<table class="table table-striped custom-table mb-0 datatable" id="example2">
 						<thead>
 							<tr>
 								<th>ID</th>
+								<th>Created Date</th>
 								<th>School Name</th>
 								<th>Principal Name</th>
 								<th>Email ID</th>
@@ -53,6 +129,7 @@ $CI->load->model('seller/Seller_model');
 							?>
 							<tr>
 								<td><?= $row->id ?></td>
+								<td><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
 								<td><?= $row->school_name ?></td>
 								<td><?= $row->school_principal_name ?></td>
 								<td><?= $row->school_email ?></td>
