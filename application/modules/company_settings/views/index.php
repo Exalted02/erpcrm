@@ -28,14 +28,14 @@
 							<div class="col-md-4">
 								<div class="input-block mb-3">
 									<label class="col-form-label">Logo <span class="text-danger">*</span></label>
-									<input type="file" name="logo"  id="logoInput" class="form-control">
+									<input type="file" name="logo"  id="logoInput" class="form-control form-control-sm">
 									<span class="text-danger"><?= form_error('logo') ?></span>
 								</div>
 							</div>
 							<div class="col-md-4">
 								<div class="input-block mb-3">
 									<label class="col-form-label">School name <span class="text-danger">*</span></label>
-									<input type="text" name="school_name" class="form-control" value="<?php echo isset($company[0]->school_name) ? $company[0]->school_name : '' ?>">
+									<input type="text" name="school_name" class="form-control form-control-sm" value="<?php echo isset($company[0]->school_name) ? $company[0]->school_name : '' ?>">
 									<span class="text-danger"><?= form_error('school_name') ?></span>
 								</div>
 							</div>
@@ -43,7 +43,7 @@
 							<div class="col-md-4">
 								<div class="input-block mb-3">
 									<label class="col-form-label">Website url <span class="text-danger">*</span></label>
-									<input type="text" name="website_url" class="form-control" value="<?php echo isset($company[0]->website_url) ? $company[0]->website_url : '' ?>">
+									<input type="text" name="website_url" class="form-control form-control-sm" value="<?php echo isset($company[0]->website_url) ? $company[0]->website_url : '' ?>">
 									<span class="text-danger"><?= form_error('website_url') ?></span>
 								</div>
 							</div>
@@ -56,7 +56,7 @@
 						</div>
 					</div>
 					<div class="mt-2 text-end">
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary btn-sm">Submit</button>
 					</div>
 				</form>
 			</div>

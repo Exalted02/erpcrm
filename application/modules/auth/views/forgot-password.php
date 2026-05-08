@@ -58,11 +58,11 @@
 							<form method="post" action="">
 								<div class="input-block mb-4">
 									<label class="col-form-label">Email Address</label>
-									<input class="form-control" type="email" name="email" placeholder="Email" value="<?= set_value('email') ?>" required>
+									<input class="form-control form-control-sm" type="email" name="email" placeholder="Email" value="<?= set_value('email') ?>" required>
 									<span class="text-danger"><?php echo form_error('email'); ?></span>
 								</div>
 								<div class="input-block mb-4 text-center">
-									<button class="btn btn-primary account-btn" type="submit">Submit</button>
+									<button class="btn btn-primary btn-sm account-btn" type="submit">Submit</button>
 								</div>
 								<div class="account-footer">
 									<p><a href="<?= base_url('login') ?>">Login</a></p>

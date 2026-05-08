@@ -6714,7 +6714,7 @@ ul.bullets li {
   white-space: nowrap;
   vertical-align: middle;
   padding: 0.5rem;
-  font-size: 14px;
+  font-size: 12px;
 }
 .table td a {
   color: #373B3E;
@@ -6825,7 +6825,19 @@ ul.bullets li {
   color: #A6A8A9;
 }
 .custom-table td {
-  padding: 10px 20px;
+  padding: 5px;
+}
+.custom-table th {
+  padding: 5px;
+}
+table.dataTable thead th:before, table.dataTable thead th:after {
+	bottom: 0.3em !important;
+}
+table.dataTable tbody tr {
+	line-height: 1;
+}
+table.dataTable thead tr th {
+	font-size: 13px;
 }
 
 .leave-table .l-name {
@@ -7661,11 +7673,12 @@ li.previous {
 
 .select2-container .select2-selection.select2-selection--single {
   border: 1px solid #D5D8DA;
-  height: 44px;
+  height: 30px;
 }
 .select2-container .select2-selection.select2-selection--single .select2-selection__rendered {
   padding-right: 30px;
   padding-left: 15px;
+  line-height: 30px;
 }
 
 .select2-dropdown {
@@ -7673,7 +7686,7 @@ li.previous {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-  height: 44px;
+  height: 30px;
   right: 7px;
   top: -4px !important;
 }
@@ -7749,11 +7762,11 @@ li.previous {
   }
 }
 .page-wrapper .content .page-header {
-  margin-bottom: 1.875rem;
+  margin-bottom: 1rem;
 }
 .page-wrapper .content .page-header .page-title {
   color: #212529;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
   margin-bottom: 5px;
 }
@@ -7846,7 +7859,8 @@ li.previous {
 }
 
 input[type=file].form-control {
-  height: 44px;
+  /* height: 44px; */
+  height: 30px;
 }
 
 .form-text {
@@ -8714,7 +8728,7 @@ input[type=file].form-control {
 .sidebar .sidebar-menu ul li a,
 .two-col-bar .sidebar-menu ul li a {
   position: relative;
-  font-size: 15px;
+  font-size: 13px;
   color: #909294;
   height: auto;
   -webkit-transition: all 0.2s ease;
@@ -8756,11 +8770,11 @@ input[type=file].form-control {
   font-family: "FontAwesome";
   text-rendering: auto;
   line-height: 40px;
-  font-size: 16px;
+  font-size: 12px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 16px;
-  top: 11px;
+  top: 7px;
   transform: translate(0, 0);
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -8777,8 +8791,8 @@ input[type=file].form-control {
 .sidebar .sidebar-menu ul li a i,
 .two-col-bar .sidebar-menu ul li a i {
   display: inline-block;
-  font-size: 24px;
-  line-height: 24px;
+  font-size: 20px;
+  line-height: 20px;
   text-align: left;
   vertical-align: middle;
   width: 20px;
@@ -8839,6 +8853,9 @@ input[type=file].form-control {
   margin-left: 15px;
   white-space: nowrap;
 }
+.sidebar .sidebar-menu ul li a {
+	padding: 6px 12px;
+}
 .sidebar .sidebar-menu ul li a span.badge,
 .two-col-bar .sidebar-menu ul li a span.badge {
   margin-left: auto;
@@ -8851,11 +8868,12 @@ input[type=file].form-control {
 .sidebar .sidebar-menu ul ul,
 .two-col-bar .sidebar-menu ul ul {
   display: none;
+  padding: 0 !important;
 }
 .sidebar .sidebar-menu ul ul a,
 .two-col-bar .sidebar-menu ul ul a {
   display: block;
-  font-size: 14px;
+  font-size: 13px;
   position: relative;
   padding: 9px 10px 9px 50px;
 }
@@ -9216,23 +9234,28 @@ input[type=file].form-control {
   }
 }
 .sidebar .sidebar-menu ul ul {
-  background: #4D5154;
+  background: #d4d6d7;
   max-width: 220px;
   margin: 0 auto;
   border-radius: 5px;
   padding: 10px 0;
 }
 .sidebar .sidebar-menu ul ul li a {
-  color: #A6A8A9;
+  color: #000;
   position: relative;
   padding: 5px 10px 5px 25px;
+  background: #dfdfdf;
+}
+.sidebar .sidebar-menu ul li a.active.subdrop {
+  color: #000;
+  font-weight: bold;
 }
 .sidebar .sidebar-menu ul ul li a::before {
   content: "";
   width: 5px;
   height: 5px;
   border-radius: 10px;
-  background: #A6A8A9;
+  background: #000;
   position: absolute;
   left: 10px;
   top: 50%;
@@ -9242,7 +9265,7 @@ input[type=file].form-control {
   text-decoration: none;
 }
 .sidebar .sidebar-menu ul ul li a.active::before {
-  background: #00c5fb;
+  background: #000;
 }
 .sidebar .sidebar-menu ul ul li.submenu ul li a {
   padding-left: 40px;
@@ -9268,7 +9291,7 @@ input[type=file].form-control {
 }
 
 [data-sidebar=light] .sidebar .sidebar-menu ul ul li a:hover {
-  color: #FFF;
+  color: #000;
 }
 [data-sidebar=light] .sidebar .sidebar-menu ul ul li.submenu ul li a {
   color: #A6A8A9;
@@ -9607,7 +9630,8 @@ input[type=file].form-control {
   background-color: #00c5fb !important;
 }
 [data-layout-mode=blue] .sidebar .sidebar-menu ul ul a.active {
-  color: #00c5fb;
+  color: #000;
+  background: #d4d6d7;
   /* text-decoration: underline; */
 }
 [data-layout-mode=blue] .sidebar ul li.submenu .noti-dot:before {
@@ -11197,7 +11221,7 @@ input[type=file].form-control {
   display: inline-block !important;
 }
 [data-sidebar=light] body .sidebar .sidebar-menu {
-  padding: 10px 0;
+  padding: 0;
   background: #FFF;
 }
 [data-sidebar=light] body .sidebar .list-inline-item li a:hover i {
@@ -11235,7 +11259,7 @@ input[type=file].form-control {
 [data-sidebar=light] body .sidebar .sidebar-menu ul li.active a,
 [data-sidebar=light] body .two-col-bar .sidebar-menu ul li.active a {
   color: #373B3E;
-  background-color: transparent;
+  background-color: #d4d6d7;
 }
 
 [data-topbar=dark] .header {
@@ -11967,7 +11991,8 @@ table.table-new.dataTable > thead .sorting_desc_disabled:focus:before {
 
 .selectnew .select2-container .select2-selection--single {
   border: 1px solid #dcdcdc;
-  height: 44px;
+  height: 30px;
+  border-radius: 0;
 }
 .selectnew .select2-container--default .select2-selection--single .select2-selection__arrow b {
   border-color: #9597A9;
@@ -17917,14 +17942,15 @@ textarea.form-control {
 .account-page .main-wrapper .account-content .account-box .form-control {
   background-color: #F9F9F9;
   border: 1px solid #E2E4E6;
-  height: 46px;
+  /* height: 46px; */
   border-radius: 4px;
 }
 .account-page .main-wrapper .account-content .account-box #toggle-password {
   cursor: pointer;
   margin-right: 1px;
   position: absolute;
-  top: 15px;
+  /* top: 15px; */
+  top: 8px;
   right: 10px;
 }
 .account-page .main-wrapper .account-content .account-box .account-btn {
@@ -17933,10 +17959,10 @@ textarea.form-control {
   background: linear-gradient(to right, #00c5fb 0%, #0253cc 100%) !important;
   border: 0;
   display: block;
-  font-size: 22px;
+  /* font-size: 22px; */
   width: 100%;
   border-radius: 4px;
-  padding: 10px 26px;
+  /* padding: 10px 26px; */
 }
 .account-page .main-wrapper .account-content .account-box .account-wrapper {
   padding: 30px;
@@ -17968,7 +17994,7 @@ textarea.form-control {
 .account-page .main-wrapper .account-content .account-box .account-wrapper .account-box .input-block .form-control {
   background-color: #F9F9F9;
   border: 1px solid #E2E4E6;
-  height: 46px;
+  /* height: 46px; */
   border-radius: 4px;
 }
 .account-page .main-wrapper .account-content .account-box .otp-wrap {

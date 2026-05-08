@@ -59,15 +59,15 @@
 								<input type="hidden" name="token" value="<?= $token ?>">
 								<div class="input-block mb-4">
 									<label class="col-form-label">New Password</label>
-									<input class="form-control" type="password" name="password" placeholder="Password" required>
+									<input class="form-control form-control-sm" type="password" name="password" placeholder="Password" required>
 									<span class="text-danger"><?php echo form_error('password'); ?></span>
 								</div>
 								<div class="input-block mb-4">
 									<label class="col-form-label">Confirm Password</label>
-									<input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password" required>
+									<input class="form-control form-control-sm" type="password" name="confirm_password" placeholder="Confirm Password" required>
 								</div>
 								<div class="input-block mb-4 text-center">
-									<button class="btn btn-primary account-btn" type="submit">Reset Password</button>
+									<button class="btn btn-primary btn-sm account-btn" type="submit">Reset Password</button>
 								</div>
 								<div class="account-footer">
 									<p><a href="<?= base_url('login') ?>">Login</a></p>
