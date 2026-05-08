@@ -25,7 +25,7 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="input-block mb-3">
-										<label class="col-form-label">Package Name <span class="text-danger">*</span></label>
+										<label class="col-form-label">Plan Name <span class="text-danger">*</span></label>
 										<input type="text" name="title" class="form-control" value="<?= isset($subscription) ? $subscription->title : '' ?>" required>
 										<span class="text-danger"><?= form_error('title') ?></span>
 									</div>
@@ -44,22 +44,29 @@
 								</div>
 								<div class="col-md-3">
 									<div class="input-block mb-3">
-										<label class="col-form-label">Price <span class="text-danger">*</span></label>
+										<label class="col-form-label">Plan Cost <span class="text-danger">*</span></label>
 										<input type="number" name="price" class="form-control" value="<?= isset($subscription) ? $subscription->price : '' ?>" required>
 										<span class="text-danger"><?= form_error('price') ?></span>
 									</div>
 								</div>
 								<div class="col-md-3">
 									<div class="input-block mb-3">
-										<label class="col-form-label">Max Students <span class="text-danger">*</span></label>
+										<label class="col-form-label">No of Students <span class="text-danger">*</span></label>
 										<input type="number" name="max_students" class="form-control" value="<?= isset($subscription) ? $subscription->max_students : '' ?>" required>
 										<span class="text-danger"><?= form_error('max_students') ?></span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="input-block mb-3">
+										<label class="col-form-label">Add-On Students <span class="text-danger">*</span></label>
+										<input type="number" name="add_on_students" class="form-control" value="<?= isset($subscription) ? $subscription->add_on_students : '' ?>" required>
+										<span class="text-danger"><?= form_error('add_on_students') ?></span>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Description</label>
-										<textarea id="editor1" name="description" placeholder="" type="text" class="form-control editor1" >
+										<textarea id="description" name="description" placeholder="" type="text" class="form-control editor1" >
 											<?= isset($subscription) ? $subscription->description : '' ?>
 										</textarea>
 									</div>

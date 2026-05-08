@@ -24,12 +24,14 @@ class Subscription extends MY_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
 		$this->form_validation->set_rules('max_students', 'Max Students', 'required|numeric');
+		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'required|numeric');
 		$this->form_validation->set_rules('duration', 'Duration', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['subscriptionDuration'] = $this->customlib->subscriptionDuration();
 			$data['page'] = 'subscription/form';
+			$data['script'] = 'subscription/form_script';
 			$this->load->view('layout/main',$data);
 		}
 		else
@@ -38,6 +40,7 @@ class Subscription extends MY_Controller {
 				'title' => $this->input->post('title', true),
 				'price' => $this->input->post('price', true),
 				'max_students' => $this->input->post('max_students', true),
+				'add_on_students' => $this->input->post('add_on_students', true),
 				'duration' => $this->input->post('duration', true),
 				'description' => $this->input->post('description', false),
 				'status' => 1
@@ -61,6 +64,7 @@ class Subscription extends MY_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
 		$this->form_validation->set_rules('max_students', 'Max Students', 'required|numeric');
+		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'required|numeric');
 		$this->form_validation->set_rules('duration', 'Duration', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
@@ -76,6 +80,7 @@ class Subscription extends MY_Controller {
 				'title' => $this->input->post('title', true),
 				'price' => $this->input->post('price', true),
 				'max_students' => $this->input->post('max_students', true),
+				'add_on_students' => $this->input->post('add_on_students', true),
 				'duration' => $this->input->post('duration', true),
 				'description' => $this->input->post('description', false),
 			];

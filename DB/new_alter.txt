@@ -40,3 +40,7 @@ ALTER TABLE `convert_school` ADD `subscription_id` INT(11) NULL DEFAULT NULL AFT
 ALTER TABLE `convert_school` ADD `status` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '0=Delete, 1=Active' AFTER `school_logo`;
 ALTER TABLE `convert_school` ADD `pay_amount` DECIMAL(10,2) NULL DEFAULT NULL AFTER `school_logo`;
 
+======== 08-05-2026========
+ALTER TABLE `subscriptions` ADD `add_on_students` INT(11) NULL DEFAULT NULL AFTER `max_students`;
+
+

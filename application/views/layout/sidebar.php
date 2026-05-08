@@ -16,6 +16,12 @@
 				<li class="<?php echo is_active(['dashboard'],['index']) ?>"> 
 					<a href="<?php echo base_url('dashboard') ?>"><i class="la la-dashcube"></i> <span>Dashboard</span></a>
 				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"><i class="la la-cubes"></i> <span>Manage Subscription</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['subscription'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('subscription') ?>" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>">Add Plans</a></li>
+					</ul>
+				</li>
 				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
 				</li>
@@ -30,9 +36,6 @@
 				</li>
 				<li class="<?php echo is_active(['school_newly_update'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('school_newly_update') ?>"><i class="la la-school"></i> <span>School newly update</span></a>
-				</li>
-				<li class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"> 
-					<a href="<?php echo base_url('subscription') ?>"><i class="la la-cubes"></i> <span>Manage Subscription</span></a>
 				</li>
 				<?php } ?>
 				<li class="submenu"> 

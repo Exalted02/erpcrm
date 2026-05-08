@@ -8,14 +8,14 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">Subscription</h3>
+					<h3 class="page-title">Plans</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">Subscription</li>
+						<li class="breadcrumb-item active">Plans</li>
 					</ul>
 				</div>
 				<div class="col-auto float-end ms-auto">
-					<a href="<?= base_url('subscription/create') ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Subscription</a>
+					<a href="<?= base_url('subscription/create') ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Plans</a>
 				</div>
 			</div>
 		</div>
@@ -29,10 +29,12 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Title</th>
-								<th>Price</th>
-								<th>Max Students</th>
+								<th>Plan Name</th>
 								<th>Duration</th>
+								<th>Plan Cost</th>
+								<th>No of Students</th>
+								<th>Add-On Students</th>
+								<th>Date of Creation</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
 							</tr>
@@ -42,9 +44,11 @@
 							<tr>
 								<td><?= $row->id ?></td>
 								<td><?= $row->title ?></td>
+								<td><?= $subscriptionDuration[$row->duration] ?? $row->duration ?></td>
 								<td><?= $row->price ?></td>
 								<td><?= $row->max_students ?></td>
-								<td><?= $subscriptionDuration[$row->duration] ?? $row->duration ?></td>
+								<td><?= $row->add_on_students ?></td>
+								<td><?= date('d/m/Y', strtotime($row->created_at)) ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">
 									<div class="status-toggle">
