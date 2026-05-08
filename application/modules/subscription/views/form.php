@@ -58,8 +58,8 @@
 								</div>
 								<div class="col-md-3">
 									<div class="input-block mb-3">
-										<label class="col-form-label">Add-On Students <span class="text-danger">*</span></label>
-										<input type="number" name="add_on_students" class="form-control" value="<?= isset($subscription) ? $subscription->add_on_students : '' ?>" required>
+										<label class="col-form-label">Add-On Students </label>
+										<input type="number" name="add_on_students" class="form-control" value="<?= isset($subscription) ? $subscription->add_on_students : '' ?>">
 										<span class="text-danger"><?= form_error('add_on_students') ?></span>
 									</div>
 								</div>

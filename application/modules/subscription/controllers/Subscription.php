@@ -24,7 +24,7 @@ class Subscription extends MY_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
 		$this->form_validation->set_rules('max_students', 'Max Students', 'required|numeric');
-		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'required|numeric');
+		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'numeric');
 		$this->form_validation->set_rules('duration', 'Duration', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
@@ -64,13 +64,14 @@ class Subscription extends MY_Controller {
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
 		$this->form_validation->set_rules('price', 'Price', 'required|numeric');
 		$this->form_validation->set_rules('max_students', 'Max Students', 'required|numeric');
-		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'required|numeric');
+		$this->form_validation->set_rules('add_on_students', 'Add-On Students', 'numeric');
 		$this->form_validation->set_rules('duration', 'Duration', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['subscriptionDuration'] = $this->customlib->subscriptionDuration();
 			$data['subscription'] = $subscription;
+			$data['script'] = 'subscription/form_script';
 			$data['page'] = 'subscription/form';
 			$this->load->view('layout/main',$data);
 		}
