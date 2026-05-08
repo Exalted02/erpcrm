@@ -27,6 +27,7 @@ class Seller extends MY_Controller {
             'required|valid_email|is_unique[users.email]'
         );
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+        $this->form_validation->set_rules('discount_percent', 'Discount Ppercent', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -39,6 +40,7 @@ class Seller extends MY_Controller {
                 'name'       => $this->input->post('name', true),
                 'email'      => $this->input->post('email', true),
                 'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+                'discount_percent'   => $this->input->post('discount_percent'),
                 'user_role'  => 1,
                 'status'     => 1,
                 'created_at' => date('Y-m-d H:i:s')
@@ -78,6 +80,7 @@ class Seller extends MY_Controller {
         }
 
         $this->form_validation->set_rules('password', 'Password', 'min_length[6]');
+        $this->form_validation->set_rules('discount_percent', 'Discount Percent', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -90,6 +93,7 @@ class Seller extends MY_Controller {
             $data = [
                 'name'  => $this->input->post('name', true),
                 'email' => $this->input->post('email', true),
+                'discount_percent' => $this->input->post('discount_percent', true),
             ];
 
             // Update password only if entered

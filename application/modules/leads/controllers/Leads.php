@@ -7,6 +7,7 @@ class Leads extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('leads/Leads_model','leads_model');
+		$this->load->model('seller/Seller_model','seller_model');
         $this->load->model('subscription/Subscription_model','subscription_model');
     }
 
@@ -165,9 +166,11 @@ class Leads extends MY_Controller {
 		$this->form_validation->set_rules('school_phone', 'Phone', 'required|trim');
 		$this->form_validation->set_rules('school_address', 'Address', 'trim');
 		$this->form_validation->set_rules('total_student', 'Total Student', 'required|numeric');
+		$this->form_validation->set_rules('subscription_id', 'Subscription', 'required');
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['subscriptions'] = $this->subscription_model->get_all();
 			$data['lead'] = $lead;
 			$data['page'] = 'leads/convert-school';
 			$data['script'] = 'leads/convert_script';
@@ -198,6 +201,7 @@ class Leads extends MY_Controller {
 				'school_phone' => $this->input->post('school_phone', true),
 				'school_address' => $this->input->post('school_address'),
 				'total_student' => $this->input->post('total_student'),
+				'subscription_id' => $this->input->post('subscription_id'),
 				'school_logo' => $school_logo,
 			];
 			
@@ -213,8 +217,103 @@ class Leads extends MY_Controller {
         $data['datas'] = $this->leads_model->get_converted_leads();
         $data['subscriptions'] = $this->subscription_model->get_all();
         $data['page'] = 'leads/convertedleads';
-        $data['script'] = 'leads/convert_list_script';
+        $data['script'] = 'leads/convert_lead_script';
 
         $this->load->view('layout/main',$data);
     }
+    public function convert_school_edit($id)
+	{
+		$lead = $this->leads_model->get_converted_lead($id);
+
+		if(!$lead){
+			show_404();
+		}
+
+		$this->form_validation->set_rules('school_name', 'School Name', 'required|trim');
+		$this->form_validation->set_rules('school_code', 'Code', 'required|trim');
+		$this->form_validation->set_rules('school_email', 'Email', 'required|trim');
+		$this->form_validation->set_rules('school_phone', 'Phone', 'required|trim');
+		$this->form_validation->set_rules('school_address', 'Address', 'trim');
+		$this->form_validation->set_rules('total_student', 'Total Student', 'required|numeric');
+		$this->form_validation->set_rules('subscription_id', 'Subscription', 'required');
+
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['subscriptions'] = $this->subscription_model->get_all();
+			$data['lead'] = $lead;
+			$data['page'] = 'leads/convert-school';
+			$data['script'] = 'leads/convert_script';
+			$this->load->view('layout/main',$data);
+		}
+		else
+		{
+			$school_logo = $lead->school_logo;
+			if (isset($_FILES["school_logo"]) && !empty($_FILES['school_logo']['name'])) {
+				$fileInfo = pathinfo($_FILES["school_logo"]["name"]);
+				// echo '<pre>';print_r($fileInfo);echo'</pre>';exit;
+                $school_logo = $this->input->post('school_name', true).time().'.' . $fileInfo['extension'];
+				
+				$path1 = "uploads/convert_school/" . $lead->school_logo;
+				$url = FCPATH . $path1;
+
+				if (file_exists($url)) {
+					unlink($url);
+				}
+				move_uploaded_file($_FILES["school_logo"]["tmp_name"], "./uploads/convert_school/" . $school_logo);
+			}
+			$data = [
+				'school_name' => $this->input->post('school_name', true),
+				'school_code' => $this->input->post('school_code', true),
+				'school_email' => $this->input->post('school_email', true),
+				'school_phone' => $this->input->post('school_phone', true),
+				'school_address' => $this->input->post('school_address'),
+				'total_student' => $this->input->post('total_student'),
+				'subscription_id' => $this->input->post('subscription_id'),
+				'school_logo' => $school_logo,
+			];
+			
+			$this->leads_model->update_converted_lead($id,$data);
+
+			$this->session->set_flashdata('success','Converted Leads Updated Successfully');
+			redirect('leads/convertedleads');
+		}
+	}
+    public function convert_school_delete()
+	{
+		$id = $this->input->post('id');
+
+		$this->leads_model->delete_converted_school($id);
+
+		echo json_encode([
+			'status' => 'success'
+		]);
+	}
+    public function convert_school_data()
+	{
+		$id = $this->input->post('id');
+
+		$lead = $this->leads_model->get_converted_lead($id);
+		$seller = $this->seller_model->get($lead->seller_id);
+		$seller_percent = 0;
+		if(isset($seller) && $seller->discount_percent != null){
+			$seller_percent = $seller->discount_percent;
+		}
+		echo json_encode([
+			'total_student' => $lead->total_student,
+			'seller_percent' => $seller_percent,
+			'payment_amount' => $lead->total_student - ($lead->total_student * $seller_percent/100),
+			'status' => 'success'
+		]);
+	}
+    public function send_payment_request()
+	{
+		$id = $this->input->post('id');
+		$amount = $this->input->post('amount');
+
+		$this->leads_model->send_payment_request($id, $amount);
+		
+		echo json_encode([
+			'status' => 'success'
+		]);
+	}
 }

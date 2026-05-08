@@ -11,6 +11,7 @@ class Subscription extends MY_Controller {
 
     public function index()
     {
+		$data['subscriptionDuration'] = $this->customlib->subscriptionDuration();
         $data['subscriptions'] = $this->subscription_model->get_all();
         $data['page'] = 'subscription/index';
         $data['script'] = 'subscription/index_script';
@@ -27,6 +28,7 @@ class Subscription extends MY_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['subscriptionDuration'] = $this->customlib->subscriptionDuration();
 			$data['page'] = 'subscription/form';
 			$this->load->view('layout/main',$data);
 		}
@@ -63,6 +65,7 @@ class Subscription extends MY_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['subscriptionDuration'] = $this->customlib->subscriptionDuration();
 			$data['subscription'] = $subscription;
 			$data['page'] = 'subscription/form';
 			$this->load->view('layout/main',$data);

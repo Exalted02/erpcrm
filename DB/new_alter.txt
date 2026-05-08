@@ -34,4 +34,9 @@ CREATE TABLE `leads` (
 
 ALTER TABLE `users` CHANGE `user_role` `user_role` TINYINT(4) NULL DEFAULT '1' COMMENT '0=Superadmin, 1=Seller';
 
+======== 07-05-2026========
+ALTER TABLE `users` ADD `discount_percent` INT(10) NULL DEFAULT NULL AFTER `verification_code`;
+ALTER TABLE `convert_school` ADD `subscription_id` INT(11) NULL DEFAULT NULL AFTER `total_student`;
+ALTER TABLE `convert_school` ADD `status` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '0=Delete, 1=Active' AFTER `school_logo`;
+ALTER TABLE `convert_school` ADD `pay_amount` DECIMAL(10,2) NULL DEFAULT NULL AFTER `school_logo`;
 

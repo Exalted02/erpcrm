@@ -25,9 +25,21 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="input-block mb-3">
-										<label class="col-form-label">Title <span class="text-danger">*</span></label>
+										<label class="col-form-label">Package Name <span class="text-danger">*</span></label>
 										<input type="text" name="title" class="form-control" value="<?= isset($subscription) ? $subscription->title : '' ?>" required>
 										<span class="text-danger"><?= form_error('title') ?></span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="input-block mb-3">
+										<label class="col-form-label">Duration <span class="text-danger">*</span></label>
+										<select class="select" name="duration">
+											<option>Select</option>
+											<?php foreach($subscriptionDuration as $i=>$durationVal){ ?>
+											<option value="<?= $i ?>" <?= isset($subscription) && ($subscription->duration == $i)  ? 'selected' : '' ?>><?= $durationVal ?></option>
+											<?php } ?>
+										</select>
+										<span class="text-danger"><?= form_error('duration') ?></span>
 									</div>
 								</div>
 								<div class="col-md-3">
@@ -35,13 +47,6 @@
 										<label class="col-form-label">Price <span class="text-danger">*</span></label>
 										<input type="number" name="price" class="form-control" value="<?= isset($subscription) ? $subscription->price : '' ?>" required>
 										<span class="text-danger"><?= form_error('price') ?></span>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="input-block mb-3">
-										<label class="col-form-label">Duration <span class="text-danger">*</span></label>
-										<input type="text" name="duration" class="form-control" value="<?= isset($subscription) ? $subscription->duration : '' ?>" required>
-										<span class="text-danger"><?= form_error('duration') ?></span>
 									</div>
 								</div>
 								<div class="col-md-3">

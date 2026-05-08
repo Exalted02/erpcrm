@@ -31,6 +31,7 @@
 								<th>Sl. No</th>
 								<th>Name</th>
 								<th>Email</th>
+								<th>Discount(%)</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
 							</tr>
@@ -41,6 +42,7 @@
 								<td><?= $i ?></td>
 								<td><?= $row->name ?></td>
 								<td><?= $row->email ?></td>
+								<td><?= $row->discount_percent ?></td>
 								<td class="text-end">
 									<div class="status-toggle">
 										<input type="checkbox" class="check status-toggle-btn" data-id="<?= $row->id ?>" id="status_<?= $row->id ?>" <?= $row->status ? 'checked' : '' ?>>

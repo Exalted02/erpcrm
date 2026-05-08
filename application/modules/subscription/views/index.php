@@ -44,7 +44,7 @@
 								<td><?= $row->title ?></td>
 								<td><?= $row->price ?></td>
 								<td><?= $row->max_students ?></td>
-								<td><?= $row->duration ?></td>
+								<td><?= $subscriptionDuration[$row->duration] ?? $row->duration ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">
 									<div class="status-toggle">

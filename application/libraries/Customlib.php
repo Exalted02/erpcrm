@@ -36,5 +36,10 @@ class Customlib
         $result = $this->CI->User_model->getById($id);
         return $result;
     }
+    public function subscriptionDuration()
+    {
+        $result = array(1=>'Monthly', 3=>'Quarterly', 6=>'Half Yearly', 12=>'Yearly');
+        return $result;
+    }
 
 }

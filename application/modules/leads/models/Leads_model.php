@@ -56,8 +56,24 @@ class Leads_model extends CI_Model {
 		$this->db->where('id',$id)->update(LEADS, ['status'=>2]);
         return $this->db->insert(CONVERT_SCHOOL,$data);
     }
+    function get_converted_lead($id)
+    {
+        return $this->db->where('id',$id)->get(CONVERT_SCHOOL)->row();
+    }
     function get_converted_leads()
     {
-        return $this->db->get(CONVERT_SCHOOL)->result();
+        return $this->db->where('status', 1)->get(CONVERT_SCHOOL)->result();
+    }
+    function update_converted_lead($id,$data)
+    {
+        return $this->db->where('id',$id)->update(CONVERT_SCHOOL,$data);
+    }
+    function delete_converted_school($id)
+    {
+        return $this->db->where('id',$id)->update(CONVERT_SCHOOL, ['status'=>0]);
+    }
+    function send_payment_request($id,$amount)
+    {
+        return $this->db->where('id',$id)->update(CONVERT_SCHOOL,['pay_amount'=>$amount]);
     }
 }

@@ -33,7 +33,7 @@
 								<th>Phone</th>
 								<th>Total Student</th>
 								<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
-								<th>Subscription</th>
+								<th>Payment</th>
 								<?php } ?>
 								<th class="text-end">Action</th>
 							</tr>
@@ -51,19 +51,41 @@
 								<td><?= $row->school_phone  ?? ''?></td>
 								<td><?= $row->total_student ?? '' ?></td>
 								<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
-								<td><button type="button" class="btn btn-primary btn-sm manage_subscription" data-id="<?= $row->id ?>">Manage</button></td>
+								<td>
+									<?php if($row->pay_amount == null){ ?>
+									<button type="button" class="btn btn-primary btn-sm send_payment_request" data-id="<?= $row->id ?>">Send</button>
+									<?php }else{ ?>
+									<button type="button" class="btn btn-primary btn-sm" disabled>Sent</button>
+									<?php } ?>
+								</td>
 								<?php } ?>
 								<td class="text-end">
-									<div class="dropdown dropdown-action">
-										<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a class="dropdown-item" href="<?= base_url('leads/edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
-											<a class="dropdown-item" href="<?= base_url('leads/followup/'.$row->id) ?>"><i class="fa-solid fa-phone m-r-5"></i> Followup</a>
-											<a class="dropdown-item" href="<?= base_url('leads/convert_school/'.$row->id) ?>"><i class="fa-solid fa-home m-r-5"></i> Convert School</a>
-											<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_promotion"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
-											<!--<a href="<?= base_url('subscription/delete/'.$row->id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this record?')">Delete</a>-->
+									<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
+										<div class="dropdown dropdown-action">
+											<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+											<div class="dropdown-menu dropdown-menu-right">
+												<a class="dropdown-item" href="<?= base_url('leads/convert_school_edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
+												<a class="dropdown-item" href="<?= base_url('leads/followup/'.$row->lead_id) ?>"><i class="fa-solid fa-phone m-r-5"></i> Followup</a>
+												<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_promotion"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
+											</div>
 										</div>
-									</div>
+									<?php }else{ ?>
+										<?php if($row->pay_amount == null){ ?>
+										<div class="dropdown dropdown-action">
+											<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+											<div class="dropdown-menu dropdown-menu-right">
+													<a class="dropdown-item" href="<?= base_url('leads/convert_school_edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
+													<a class="dropdown-item" href="<?= base_url('leads/followup/'.$row->lead_id) ?>"><i class="fa-solid fa-phone m-r-5"></i> Followup</a>
+													<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_promotion"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
+													<a class="dropdown-item" href="<?= base_url('leads/convert_school_edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
+													<a class="dropdown-item" href="<?= base_url('leads/followup/'.$row->lead_id) ?>"><i class="fa-solid fa-phone m-r-5"></i> Followup</a>
+													<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_promotion"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
+											</div>
+										</div>
+										<?php }else{ ?>
+											<button type="button" class="btn btn-primary btn-sm">Pay Now</button>
+										<?php } ?>
+									<?php } ?>
 								</td>
 							</tr>
 							<?php } ?>
@@ -102,33 +124,38 @@
 	</div>
 	<!-- /Delete Modal -->
 	
-	<div class="modal custom-modal1 fade" id="manage_subscription" role="dialog">
+	<div class="modal custom-modal1 fade" id="send_payment_request" role="dialog">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form id="followupForm">
+				<form id="">
 					<div class="modal-header">
-						<h5 class="modal-title">Manage Subscription</h5>
+						<h5 class="modal-title">Send Payment Request</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
 					<div class="modal-body">
-						<input type="hidden" id="lead_id" name="lead_id" value="">
-						<div class="form-group">
-							<label>Subscription</label>
-							<select name="subscription_id" id="subscription_id" class="form-control" required>
-								<option value="">Select Subscription</option>
-								<?php foreach($subscriptions as $s_val){ ?>
-									<option value="<?= $s_val->id ?>"><?= $s_val->title ?></option>
-								<?php } ?>
-							</select>
-						</div>
-						<div class="form-group mt-2">
-							<label>Discount in percent (*)</label>
-							<input type="number" name="discount_percent" id="discount_percent" class="form-control" placeholder="Discount in percent (*)">
+						<div class="row">
+							<input type="hidden" id="send_payment_amount" value="0">
+							<input type="hidden" id="converted_lead_id" value="">
+							<div class="col-md-12">
+								<div class="input-block mb-3">
+									<label class="">Total Student : <span id="total_student">0</span></label>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="input-block mb-3">
+									<label class="">Seller Percentage : <span id="seller_percent">0</span></label>
+								</div>
+							</div>
+							<div class="col-md-12">
+								<div class="input-block mb-3">
+									<h5 class="">Payment Amount : <span id="payment_amount">0</span></h5>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-						<button type="submit" class="btn btn-primary">Save</button>
+						<button type="button" id="sonfirm_send" class="btn btn-primary">Send</button>
 					</div>
 				</form>
 			</div>
