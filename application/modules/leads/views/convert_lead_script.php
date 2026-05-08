@@ -54,7 +54,7 @@ $("#confirm_delete").click(function(){
     });
 
 });
-$("#sonfirm_send").click(function(){
+$("#confirm_send").click(function(){
 
     let id = $("#converted_lead_id").val();
     let amount = $("#send_payment_amount").val();

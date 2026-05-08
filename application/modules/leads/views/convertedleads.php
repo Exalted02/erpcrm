@@ -155,7 +155,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-						<button type="button" id="sonfirm_send" class="btn btn-primary">Send</button>
+						<button type="button" id="confirm_send" class="btn btn-primary">Send</button>
 					</div>
 				</form>
 			</div>

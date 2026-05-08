@@ -43,4 +43,9 @@ ALTER TABLE `convert_school` ADD `pay_amount` DECIMAL(10,2) NULL DEFAULT NULL AF
 ======== 08-05-2026========
 ALTER TABLE `subscriptions` ADD `add_on_students` INT(11) NULL DEFAULT NULL AFTER `max_students`;
 
+ALTER TABLE `leads` DROP `school_code`;
+ALTER TABLE `leads` ADD `affiliated_with` INT(11) NULL DEFAULT NULL AFTER `school_address`, ADD `no_of_students` INT(11) NULL DEFAULT NULL AFTER `affiliated_with`, ADD `school_principal_name` VARCHAR(255) NULL DEFAULT NULL AFTER `no_of_students`, ADD `school_country` INT(11) NULL DEFAULT NULL AFTER `school_principal_name`, ADD `school_state` INT(11) NULL DEFAULT NULL AFTER `school_country`, ADD `school_district` INT(11) NULL DEFAULT NULL AFTER `school_state`, ADD `school_city` VARCHAR(255) NULL DEFAULT NULL AFTER `school_district`, ADD `school_pin_code` INT(11) NULL DEFAULT NULL AFTER `school_city`;
+ALTER TABLE `leads` ADD `alternate_no` VARCHAR(50) NULL DEFAULT NULL AFTER `school_principal_name`, ADD `school_website` VARCHAR(255) NULL DEFAULT NULL AFTER `alternate_no`, ADD INDEX (`alternate_no`), ADD INDEX (`school_website`);
+ALTER TABLE `leads` ADD `coming_form` TINYINT(1) NULL DEFAULT NULL COMMENT '0=Admin, 1=Reseller, 2=Enquiry Form' AFTER `status`;
+ALTER TABLE `leads` CHANGE `seller_id` `seller_id` INT(11) NULL DEFAULT NULL;
 

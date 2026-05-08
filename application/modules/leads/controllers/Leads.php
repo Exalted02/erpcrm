@@ -9,6 +9,7 @@ class Leads extends MY_Controller {
         $this->load->model('leads/Leads_model','leads_model');
 		$this->load->model('seller/Seller_model','seller_model');
         $this->load->model('subscription/Subscription_model','subscription_model');
+        $this->load->model('Country_state_district');
     }
 
     public function index()
@@ -23,25 +24,45 @@ class Leads extends MY_Controller {
     public function create()
 	{
 		$this->form_validation->set_rules('school_name', 'School Name', 'required|trim');
-		$this->form_validation->set_rules('school_code', 'Code', 'required|trim');
-		$this->form_validation->set_rules('school_email', 'Email', 'required|trim');
-		$this->form_validation->set_rules('school_phone', 'Phone', 'required|trim');
+		$this->form_validation->set_rules('affiliated_with', 'Affiliated with', 'required|trim');
+		$this->form_validation->set_rules('no_of_students', 'No of Students', 'required|numeric|trim');
+		$this->form_validation->set_rules('school_principal_name', 'School Principal Name', 'required|trim');
+		$this->form_validation->set_rules('school_phone', 'Contact No.', 'required|trim');
+		$this->form_validation->set_rules('school_email', 'Email ID', 'required|valid_email|trim');
+		$this->form_validation->set_rules('school_country', 'Country', 'required|trim');
+		$this->form_validation->set_rules('school_state', 'State', 'required|trim');
+		$this->form_validation->set_rules('school_district', 'District', 'required|trim');
+		$this->form_validation->set_rules('school_city', 'City', 'required|trim');
+		$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 		$this->form_validation->set_rules('school_address', 'Address', 'trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['getAllState'] = $this->Country_state_district->get_all_state();
+			$data['schoolAffiliated'] = $this->customlib->schoolAffiliated();
 			$data['page'] = 'leads/form';
+			$data['script'] = 'leads/form_script';
 			$this->load->view('layout/main',$data);
 		}
 		else
 		{
 			$data = [
-				'seller_id' => $this->customlib->getLoginSessionData('user_id'),
+				'seller_id' => 0,
 				'school_name' => $this->input->post('school_name', true),
-				'school_code' => $this->input->post('school_code', true),
 				'school_email' => $this->input->post('school_email', true),
 				'school_phone' => $this->input->post('school_phone', true),
+				'affiliated_with' => $this->input->post('affiliated_with'),
+				'no_of_students' => $this->input->post('no_of_students'),
+				'school_principal_name' => $this->input->post('school_principal_name'),
+				'school_country' => $this->input->post('school_country'),
+				'school_state' => $this->input->post('school_state'),
+				'school_district' => $this->input->post('school_district'),
+				'school_city' => $this->input->post('school_city'),
+				'school_pin_code' => $this->input->post('school_pin_code'),
 				'school_address' => $this->input->post('school_address'),
+				'alternate_no' => $this->input->post('alternate_no'),
+				'school_website' => $this->input->post('school_website'),
+				'coming_form' => 0,
 				'status' => 1
 			];
 
@@ -61,15 +82,25 @@ class Leads extends MY_Controller {
 		}
 
 		$this->form_validation->set_rules('school_name', 'School Name', 'required|trim');
-		$this->form_validation->set_rules('school_code', 'Code', 'required|trim');
-		$this->form_validation->set_rules('school_email', 'Email', 'required|trim');
-		$this->form_validation->set_rules('school_phone', 'Phone', 'required|trim');
+		$this->form_validation->set_rules('affiliated_with', 'Affiliated with', 'required|trim');
+		$this->form_validation->set_rules('no_of_students', 'No of Students', 'required|numeric|trim');
+		$this->form_validation->set_rules('school_principal_name', 'School Principal Name', 'required|trim');
+		$this->form_validation->set_rules('school_phone', 'Contact No.', 'required|trim');
+		$this->form_validation->set_rules('school_email', 'Email ID', 'required|valid_email|trim');
+		$this->form_validation->set_rules('school_country', 'Country', 'required|trim');
+		$this->form_validation->set_rules('school_state', 'State', 'required|trim');
+		$this->form_validation->set_rules('school_district', 'District', 'required|trim');
+		$this->form_validation->set_rules('school_city', 'City', 'required|trim');
+		$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 		$this->form_validation->set_rules('school_address', 'Address', 'trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['getAllState'] = $this->Country_state_district->get_all_state();
+			$data['schoolAffiliated'] = $this->customlib->schoolAffiliated();
 			$data['lead'] = $lead;
 			$data['page'] = 'leads/form';
+			$data['script'] = 'leads/form_script';
 			$this->load->view('layout/main',$data);
 		}
 		else
@@ -77,10 +108,19 @@ class Leads extends MY_Controller {
 			
 			$data = [
 				'school_name' => $this->input->post('school_name', true),
-				'school_code' => $this->input->post('school_code', true),
 				'school_email' => $this->input->post('school_email', true),
 				'school_phone' => $this->input->post('school_phone', true),
+				'affiliated_with' => $this->input->post('affiliated_with'),
+				'no_of_students' => $this->input->post('no_of_students'),
+				'school_principal_name' => $this->input->post('school_principal_name'),
+				'school_country' => $this->input->post('school_country'),
+				'school_state' => $this->input->post('school_state'),
+				'school_district' => $this->input->post('school_district'),
+				'school_city' => $this->input->post('school_city'),
+				'school_pin_code' => $this->input->post('school_pin_code'),
 				'school_address' => $this->input->post('school_address'),
+				'alternate_no' => $this->input->post('alternate_no'),
+				'school_website' => $this->input->post('school_website'),
 			];
 			
 			$this->leads_model->update($id,$data);
@@ -311,6 +351,52 @@ class Leads extends MY_Controller {
 		$amount = $this->input->post('amount');
 
 		$this->leads_model->send_payment_request($id, $amount);
+		
+		echo json_encode([
+			'status' => 'success'
+		]);
+	}
+	public function getDistricts()
+	{
+		$state_id = $this->input->post('state_id');
+
+		$districts = $this->Country_state_district->get_all_district($state_id);
+
+		echo '<option value="">Please select</option>';
+		foreach($districts as $district){
+
+			echo '<option value="'.$district->id.'">'
+					.$district->district_name.
+				 '</option>';
+		}
+	}
+    public function get_lead_transfer()
+	{
+		$id = $this->input->post('id');
+		
+		$sellers = $this->seller_model->get_all();
+		$lead = $this->leads_model->get($id);
+		
+		echo '<option value="">Please select</option>';
+		foreach($sellers as $seller_val){
+
+			echo '<option value="'.$seller_val->id.'" '
+				. ($seller_val->id == $lead->seller_id ? 'selected' : '')
+				. '>'
+				. $seller_val->name .
+				'</option>';
+		}
+	}
+    public function submit_transfer_lead()
+	{
+		$seller_id = $this->input->post('seller_id');
+		$lead_id = $this->input->post('lead_id');
+
+		$data = [
+			'seller_id' => $seller_id,
+		];
+		
+		$this->leads_model->update($lead_id,$data);
 		
 		echo json_encode([
 			'status' => 'success'

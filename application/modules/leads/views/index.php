@@ -1,3 +1,8 @@
+<?php
+$CI =& get_instance();
+
+$CI->load->model('seller/Seller_model');
+?>
 <!-- Page Wrapper -->
 <div class="page-wrapper">
 
@@ -30,9 +35,14 @@
 							<tr>
 								<th>ID</th>
 								<th>School Name</th>
-								<th style="width:200px;">Code</th>
-								<th>Email</th>
-								<th>Phone</th>
+								<th>Principal Name</th>
+								<th>Email ID</th>
+								<th>Contact No.</th>
+								<th>No of Students</th>
+								<th>District</th>
+								<th>Added By</th>
+								<th>Seller</th>
+								<th>Transfer</th>
 								<!--<th class="text-end">Status</th>-->
 								<th class="text-end">Action</th>
 							</tr>
@@ -44,9 +54,22 @@
 							<tr>
 								<td><?= $row->id ?></td>
 								<td><?= $row->school_name ?></td>
-								<td><?= $row->school_code ?></td>
+								<td><?= $row->school_principal_name ?></td>
 								<td><?= $row->school_email ?></td>
 								<td><?= $row->school_phone ?></td>
+								<td><?= $row->no_of_students ?></td>
+								<?php
+								$district = $this->Country_state_district->get_district_name($row->school_district);
+								?>
+								<td><?= !empty($district) ? $district->district_name : '' ?></td>
+								<td><?= $row->coming_form == 0 ? 'Admin' : ($row->coming_form == 1 ? 'Reseller' : 'Enquiry Form'); ?></td>
+								<?php
+								$seller_details = $CI->Seller_model->get($row->seller_id);
+								?>
+								<td><?= !empty($seller_details) ? $seller_details->name : '' ?></td>
+								<td>
+									<button type="button" class="btn btn-primary btn-sm transfer_lead" data-id="<?= $row->id ?>">Transfer</button>
+								</td>
 								<!--<td class="text-end">
 									<div class="status-toggle">
 										<input type="checkbox" class="check status-toggle-btn" data-id="<?= $row->id ?>" id="status_<?= $row->id ?>" <?= $row->status ? 'checked' : '' ?>>
@@ -59,7 +82,7 @@
 										<div class="dropdown-menu dropdown-menu-right">
 											<a class="dropdown-item" href="<?= base_url('leads/edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> Edit</a>
 											<a class="dropdown-item" href="<?= base_url('leads/followup/'.$row->id) ?>"><i class="fa-solid fa-phone m-r-5"></i> Followup</a>
-											<a class="dropdown-item" href="<?= base_url('leads/convert_school/'.$row->id) ?>"><i class="fa-solid fa-home m-r-5"></i> Convert School</a>
+											<!--<a class="dropdown-item" href="<?= base_url('leads/convert_school/'.$row->id) ?>"><i class="fa-solid fa-home m-r-5"></i> Convert School</a>-->
 											<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_promotion"><i class="fa-regular fa-trash-can m-r-5"></i> Delete</a>
 											<!--<a href="<?= base_url('subscription/delete/'.$row->id) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Delete this record?')">Delete</a>-->
 										</div>
@@ -101,5 +124,30 @@
 		</div>
 	</div>
 	<!-- /Delete Modal -->
+	<!-- /Transfer lead Modal -->
+	<div class="modal custom-modal1 fade" id="transfer_lead" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Transfer Lead</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<input type="hidden" id="transfer_lead_id">
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Sellers</label>
+						<select id="seller_data" class="form-control form-control-sm">
+						</select>
+						<div class="text-danger err-seller-data"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" id="confirm_transfer" class="btn btn-primary">Send</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Transfer lead Modal -->
 </div>
 <!-- /Page Wrapper -->

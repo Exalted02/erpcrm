@@ -22,6 +22,15 @@
 						<li><a href="<?php echo base_url('subscription') ?>" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>">Add Plans</a></li>
 					</ul>
 				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['leads'],['index','create','edit','followup','convert_school','convert_school_edit']) ?>"><i class="la la-cubes"></i> <span>Leads</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['leads'],['index','create','edit','followup','convert_school','convert_school_edit']) ?>;">
+						<?php //if($this->customlib->getLoginSessionData('user_role') == 1){ ?>
+						<li><a href="<?php echo base_url('leads') ?>" class="<?php echo is_active(['leads'],['index','create','edit','followup','convert_school']) ?>">Leads</a></li>
+						<?php //} ?>
+						<li><a href="<?php echo base_url('leads/convertedleads') ?>" class="<?php echo is_active(['leads'],['convertedleads','convert_school_edit']) ?>">Converted Leads</a></li> 
+					</ul>
+				</li>
 				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
 				</li>
@@ -38,15 +47,6 @@
 					<a href="<?php echo base_url('school_newly_update') ?>"><i class="la la-school"></i> <span>School newly update</span></a>
 				</li>
 				<?php } ?>
-				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['leads'],['index','create','edit','followup','convert_school','convert_school_edit']) ?>"><i class="la la-cubes"></i> <span>Leads</span><span class="menu-arrow"></span></a>
-					<ul style="<?php echo is_block(['leads'],['index','create','edit','followup','convert_school','convert_school_edit']) ?>;">
-						<?php if($this->customlib->getLoginSessionData('user_role') == 1){ ?>
-						<li><a href="<?php echo base_url('leads') ?>" class="<?php echo is_active(['leads'],['index','create','edit','followup','convert_school']) ?>">Leads</a></li>
-						<?php } ?>
-						<li><a href="<?php echo base_url('leads/convertedleads') ?>" class="<?php echo is_active(['leads'],['convertedleads','convert_school_edit']) ?>">Converted Leads</a></li> 
-					</ul>
-				</li>
 			</ul>
 			
 		</div>

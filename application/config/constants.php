@@ -100,3 +100,5 @@ define('LEADS', 'leads');
 define('FOLLOWUP_REMARKS', 'followup_remarks');
 define('LEAD_FOLLOWUPS', 'lead_followups');
 define('CONVERT_SCHOOL', 'convert_school');
+define('STATES', 'states');
+define('DISTRICTS', 'districts');

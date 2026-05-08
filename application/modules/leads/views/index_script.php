@@ -78,4 +78,48 @@ $(document).on("change",".status-toggle-btn",function(){
     });
 
 });
+
+$(document).on('click', '.transfer_lead', function(){
+	$('#transfer_lead').modal('show');
+	
+	var id = $(this).data('id');
+	$.ajax({
+		url: "<?= base_url('leads/get_lead_transfer') ?>",
+		type: "POST",
+		data: {id: id},
+		success: function (response) {
+			$('#seller_data').html(response);
+			$('#transfer_lead_id').val(id);
+		}
+	});
+});
+$("#confirm_transfer").click(function(){
+
+    let seller_id = $("#seller_data").val();
+    let lead_id = $("#transfer_lead_id").val();
+	if(seller_id == ''){
+		$('.err-seller-data').text('Please select a Seller');
+		return false;
+	}
+    $.ajax({
+        url: "<?= base_url('leads/submit_transfer_lead') ?>",
+        type: "POST",
+        data: {seller_id:seller_id, lead_id:lead_id},
+        dataType: "json",
+        success:function(response){
+
+            if(response.status == "success"){
+                $("#transfer_lead").modal("hide");
+				toastr_msg("Lead Transfered Successfully", "success");
+				
+				setTimeout(function(){
+					location.reload();
+				},5000);
+            }
+
+        }
+
+    });
+
+});
 </script>

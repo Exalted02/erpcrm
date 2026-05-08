@@ -41,5 +41,10 @@ class Customlib
         $result = array(1=>'Monthly', 3=>'Quarterly', 6=>'Half Yearly', 12=>'Yearly');
         return $result;
     }
+    public function schoolAffiliated()
+    {
+        $result = array(1=>'CBSE', 2=>'ICSE', 3=>'State Board', 4=>'Other');
+        return $result;
+    }
 
 }
