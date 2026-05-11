@@ -49,3 +49,11 @@ ALTER TABLE `leads` ADD `alternate_no` VARCHAR(50) NULL DEFAULT NULL AFTER `scho
 ALTER TABLE `leads` ADD `coming_form` TINYINT(1) NULL DEFAULT NULL COMMENT '0=Admin, 1=Reseller, 2=Enquiry Form' AFTER `status`;
 ALTER TABLE `leads` CHANGE `seller_id` `seller_id` INT(11) NULL DEFAULT NULL;
 
+======== 11-05-2026========
+ALTER TABLE `api_domains` ADD `code_year` INT(11) NULL DEFAULT NULL AFTER `id`, ADD `code_number` INT(11) NULL DEFAULT NULL AFTER `code_year`;
+ALTER TABLE `api_domains` CHANGE `code_number` `code_number` VARCHAR(50) NULL DEFAULT NULL;
+ALTER TABLE `api_domains` ADD `name` VARCHAR(255) NULL DEFAULT NULL AFTER `api_key`, ADD `address` TEXT NULL DEFAULT NULL AFTER `name`, ADD `phone` VARCHAR(50) NULL DEFAULT NULL AFTER `address`, ADD `email` VARCHAR(100) NULL DEFAULT NULL AFTER `phone`, ADD `school_country` INT(11) NULL DEFAULT NULL AFTER `email`, ADD `school_state` INT(11) NULL DEFAULT NULL AFTER `school_country`, ADD `school_district` INT(11) NULL DEFAULT NULL AFTER `school_state`, ADD `school_city` VARCHAR(255) NULL DEFAULT NULL AFTER `school_district`, ADD `school_pin_code` INT(11) NULL DEFAULT NULL AFTER `school_city`;
+
+
+
+

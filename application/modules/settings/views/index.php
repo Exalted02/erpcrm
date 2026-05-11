@@ -24,12 +24,20 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="input-block mb-3">
-								<label class="col-form-label">Select Domain <span class="text-danger">*</span></label>
+								<label class="col-form-label">Select School <span class="text-danger">*</span></label>
 								<select class="select setting_domain_id" name="domain" id="domain">
-									<option>Select</option>
+									<option value="">Select</option>
 									<?php foreach($domains as $row){ ?>
-									<option value="<?= $row->id ?>"><?= $row->domain_name ?></option>
+									<option value="<?= $row->id ?>"><?= $row->code_year.$row->code_number ?></option>
 									<?php } ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3" style="display:none;" id="session_list">
+							<div class="input-block selectnew mb-3">
+								<label class="col-form-label">Session</label>
+								<select class="select form-control-sm" name="school_session" id="school_session">
+									
 								</select>
 							</div>
 						</div>

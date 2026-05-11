@@ -26,6 +26,8 @@ class Domain extends MY_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			$data['school_code_data'] = $this->generate_school_code();
+			
 			$data['page'] = 'domain/form';
 			$data['script'] = 'domain/form_script';
 
@@ -35,10 +37,14 @@ class Domain extends MY_Controller {
 		{
 			$domain  = $this->input->post('domain_name', true);
 			$api_key = $this->input->post('api_key', true);
+			$code_year = $this->input->post('code_year', true);
+			$code_number = $this->input->post('code_number', true);
 
 			$data = [
 				'domain_name' => $domain,
 				'api_key'     => $api_key,
+				'code_year'     => $code_year,
+				'code_number'     => $code_number,
 				'status'      => 1
 			];
 
@@ -65,6 +71,23 @@ class Domain extends MY_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{
+			if(!empty($domainData->code_year) && !empty($domainData->code_number)){
+
+				$schoolCode = $domainData->code_year .
+					str_pad((string)$domainData->code_number, 4, '0', STR_PAD_LEFT);
+
+			}else{
+
+				// Generate new code for old records
+				$newCode = $this->generate_school_code();
+
+				$schoolCode = $newCode['school_code'];
+			}
+
+			$data['school_code_data'] = [
+				'school_code' => $schoolCode
+			];
+			
 			$data['domain'] = $domainData;
 			$data['page'] = 'domain/form';
 			$data['script'] = 'domain/form_script';
@@ -75,10 +98,14 @@ class Domain extends MY_Controller {
 		{
 			$domain  = $this->input->post('domain_name', true);
 			$api_key = $this->input->post('api_key', true);
+			$code_year = $this->input->post('code_year', true);
+			$code_number = $this->input->post('code_number', true);
 
 			$data = [
 				'domain_name' => $domain,
 				'api_key'     => $api_key,
+				'code_year'     => $code_year,
+				'code_number'     => $code_number,
 			];
 
 			$this->domain_model->update($id,$data);
@@ -133,4 +160,22 @@ class Domain extends MY_Controller {
         return $response;
 
     }
+	private function generate_school_code()
+	{
+		$currentYear = date('Y');
+
+		$lastCode = $this->domain_model->get_last_code($currentYear);
+		
+		if ($lastCode) {
+			$nextNumber = $lastCode->code_number + 1;
+		} else {
+			$nextNumber = 1;
+		}
+
+		return [
+			'code_year'   => $currentYear,
+			'code_number' => $nextNumber,
+			'school_code' => $currentYear . str_pad($nextNumber, 4, '0', STR_PAD_LEFT)
+		];
+	}
 }

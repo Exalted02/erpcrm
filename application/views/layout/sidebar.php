@@ -31,6 +31,13 @@
 						<li><a href="<?php echo base_url('leads/convertedleads') ?>" class="<?php echo is_active(['leads'],['convertedleads','convert_school_edit']) ?>">Converted Leads</a></li> 
 					</ul>
 				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['domain','settings'],['index','create','edit']) ?>"><i class="la la-cubes"></i> <span>Create Schools</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['domain','settings'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('api-domain') ?>" class="<?php echo is_active(['domain'],['index','create','edit']) ?>">Generate Domain Key</a></li>
+						<li><a href="<?php echo base_url('settings') ?>" class="<?php echo is_active(['settings'],['index']) ?>">School Registration</a></li> 
+					</ul>
+				</li>
 				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
 				</li>

@@ -31,5 +31,16 @@ class Domain_model extends CI_Model {
 			->where('id',$id)
 			->update(API_DOMAINS,['status'=>$status]);
 	}
+	public function get_last_code($currentYear)
+	{
+		return $this->db
+			->select('code_number')
+			->from(API_DOMAINS)
+			->where('code_year', $currentYear)
+			->order_by('code_number', 'DESC')
+			->limit(1)
+			->get()
+			->row();
+	}
 
 }
