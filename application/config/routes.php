@@ -61,6 +61,8 @@ $route['resetpassword/update'] = 'auth/resetpassword/update';
 $route['dashboard'] = 'dashboard/dashboard';
 $route['logout'] = 'auth/login/logout';
 
+$route['create-lead'] = 'auth/login/create_lead';
+
 $route['subscription'] = 'subscription/subscription/index';
 $route['subscription/create'] = 'subscription/subscription/create';
 $route['subscription/edit/(:num)'] = 'subscription/subscription/edit/$1';

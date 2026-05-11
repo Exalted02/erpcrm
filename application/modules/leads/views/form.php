@@ -22,6 +22,7 @@
 				<div class="card">
 					<div class="card-body">
 						<form method="post" action="<?= isset($lead) ? base_url('leads/edit/'.$lead->id) : base_url('leads/create') ?>">
+							<input type="hidden" name="coming_form" value="<?= $this->customlib->getLoginSessionData('user_role'); ?>">
 							<div class="row">
 								<div class="col-md-4">
 									<div class="input-block mb-3">

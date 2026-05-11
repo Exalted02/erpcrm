@@ -55,7 +55,7 @@ $CI->load->model('seller/Seller_model');
 						</select>
 					</div>
 				</div>
-
+				<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 					<div class="input-block mb-3">
 						<select class="select form-control form-control-sm" name="seller"> 
@@ -70,6 +70,7 @@ $CI->load->model('seller/Seller_model');
 						</select>
 					</div>
 				</div>
+				<?php } ?>
 				
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 					<div class="input-block mb-3">

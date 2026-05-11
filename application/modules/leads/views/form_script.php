@@ -3,11 +3,9 @@
 $(document).ready(function () {
 
     function loadDistricts(state_id, selected_district = '') {
-
         if(state_id != ''){
-
             $.ajax({
-				url: "<?= base_url('leads/getDistricts') ?>",
+				url: "<?= base_url('common/getDistricts') ?>",
                 type: "POST",
                 data: {state_id: state_id},
 
@@ -20,7 +18,6 @@ $(document).ready(function () {
                     }
                 }
             });
-
         } else {
 
             $('#school_district').html(

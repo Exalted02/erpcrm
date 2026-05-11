@@ -37,6 +37,9 @@ class Leads extends MY_Controller {
 		$this->db->select('*');
 		$this->db->from('leads');
 
+		if($this->customlib->getLoginSessionData('user_role') == 1) {
+			$this->db->where('seller_id', $this->customlib->getLoginSessionData('user_id'));
+		}
 		if (!empty($school_name)) {
 			$this->db->like('school_name', $school_name);
 		}
@@ -97,7 +100,7 @@ class Leads extends MY_Controller {
 		else
 		{
 			$data = [
-				'seller_id' => 0,
+				'seller_id' => $this->input->post('coming_form') == 0 ? 0 : $this->customlib->getLoginSessionData('user_id'),
 				'school_name' => $this->input->post('school_name', true),
 				'school_email' => $this->input->post('school_email', true),
 				'school_phone' => $this->input->post('school_phone', true),
@@ -112,7 +115,7 @@ class Leads extends MY_Controller {
 				'school_address' => $this->input->post('school_address'),
 				'alternate_no' => $this->input->post('alternate_no'),
 				'school_website' => $this->input->post('school_website'),
-				'coming_form' => 0,
+				'coming_form' => $this->input->post('coming_form'),
 				'status' => 1,
 				'created_at' => date('Y-m-d H:i:s')
 			];
@@ -406,20 +409,6 @@ class Leads extends MY_Controller {
 		echo json_encode([
 			'status' => 'success'
 		]);
-	}
-	public function getDistricts()
-	{
-		$state_id = $this->input->post('state_id');
-
-		$districts = $this->Country_state_district->get_all_district($state_id);
-
-		echo '<option value="">Please select</option>';
-		foreach($districts as $district){
-
-			echo '<option value="'.$district->id.'">'
-					.$district->district_name.
-				 '</option>';
-		}
 	}
     public function get_lead_transfer()
 	{
