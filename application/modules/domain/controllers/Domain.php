@@ -7,6 +7,7 @@ class Domain extends MY_Controller {
     {
         parent::__construct();
         $this->load->model('domain/Domain_model','domain_model');
+        $this->load->model('Country_state_district');
     }
 
     public function index()
@@ -23,11 +24,23 @@ class Domain extends MY_Controller {
 		// validation rules
 		$this->form_validation->set_rules('domain_name', 'Domain Name', 'required|trim|valid_url');
 		$this->form_validation->set_rules('api_key', 'API Key', 'required|trim');
+		$this->form_validation->set_rules('name', 'School Name', 'required|trim');
+		$this->form_validation->set_rules('dise_code', 'School Code', 'required|trim');
+		$this->form_validation->set_rules('aff_no', 'Affiliate No.', 'required|trim');
+		$this->form_validation->set_rules('address', 'Address', 'required|trim');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|trim');
+		$this->form_validation->set_rules('email', 'Email', 'required|trim');
+		$this->form_validation->set_rules('school_country', 'Country', 'required|trim');
+		$this->form_validation->set_rules('school_state', 'State', 'required|trim');
+		$this->form_validation->set_rules('school_district', 'District', 'required|trim');
+		$this->form_validation->set_rules('school_city', 'City', 'required|trim');
+		$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
 			$data['school_code_data'] = $this->generate_school_code();
 			
+			$data['getAllState'] = $this->Country_state_district->get_all_state();
 			$data['page'] = 'domain/form';
 			$data['script'] = 'domain/form_script';
 
@@ -45,6 +58,17 @@ class Domain extends MY_Controller {
 				'api_key'     => $api_key,
 				'code_year'     => $code_year,
 				'code_number'     => $code_number,
+				'name' => $this->input->post('name', true),
+				'dise_code' => $this->input->post('dise_code', true),
+				'aff_no' => $this->input->post('aff_no', true),
+				'address'     => $this->input->post('address', true),
+				'phone'     => $this->input->post('phone', true),
+				'email'     => $this->input->post('email', true),
+				'school_country'     => $this->input->post('school_country', true),
+				'school_state'     => $this->input->post('school_state', true),
+				'school_district'     => $this->input->post('school_district', true),
+				'school_city'     => $this->input->post('school_city', true),
+				'school_pin_code'     => $this->input->post('school_pin_code', true),
 				'status'      => 1
 			];
 
@@ -68,6 +92,17 @@ class Domain extends MY_Controller {
 
 		$this->form_validation->set_rules('domain_name', 'Domain Name', 'required|trim|valid_url');
 		$this->form_validation->set_rules('api_key', 'API Key', 'required|trim');
+		$this->form_validation->set_rules('name', 'School Name', 'required|trim');
+		$this->form_validation->set_rules('dise_code', 'School Code', 'required|trim');
+		$this->form_validation->set_rules('aff_no', 'Affiliate No.', 'required|trim');
+		$this->form_validation->set_rules('address', 'Address', 'required|trim');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|trim');
+		$this->form_validation->set_rules('email', 'Email', 'required|trim');
+		$this->form_validation->set_rules('school_country', 'Country', 'required|trim');
+		$this->form_validation->set_rules('school_state', 'State', 'required|trim');
+		$this->form_validation->set_rules('school_district', 'District', 'required|trim');
+		$this->form_validation->set_rules('school_city', 'City', 'required|trim');
+		$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
 		{
@@ -88,6 +123,7 @@ class Domain extends MY_Controller {
 				'school_code' => $schoolCode
 			];
 			
+			$data['getAllState'] = $this->Country_state_district->get_all_state();
 			$data['domain'] = $domainData;
 			$data['page'] = 'domain/form';
 			$data['script'] = 'domain/form_script';
@@ -106,6 +142,17 @@ class Domain extends MY_Controller {
 				'api_key'     => $api_key,
 				'code_year'     => $code_year,
 				'code_number'     => $code_number,
+				'name' => $this->input->post('name', true),
+				'dise_code' => $this->input->post('dise_code', true),
+				'aff_no' => $this->input->post('aff_no', true),
+				'address'     => $this->input->post('address', true),
+				'phone'     => $this->input->post('phone', true),
+				'email'     => $this->input->post('email', true),
+				'school_country'     => $this->input->post('school_country', true),
+				'school_state'     => $this->input->post('school_state', true),
+				'school_district'     => $this->input->post('school_district', true),
+				'school_city'     => $this->input->post('school_city', true),
+				'school_pin_code'     => $this->input->post('school_pin_code', true),
 			];
 
 			$this->domain_model->update($id,$data);

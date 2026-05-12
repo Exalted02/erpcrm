@@ -29,6 +29,7 @@
 						<thead>
 							<tr>
 								<th>ID</th>
+								<th>School ID</th>
 								<th>Domain Name</th>
 								<th>API Key</th>
 								<th class="text-end">Status</th>
@@ -39,6 +40,7 @@
 							<?php foreach($domains as $row){ ?>
 							<tr>
 								<td><?= $row->id ?></td>
+								<td><?= $row->code_year.$row->code_number ?></td>
 								<td><?= $row->domain_name ?></td>
 								<td><?= $row->api_key ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->

@@ -9631,7 +9631,7 @@ input[type=file].form-control {
 }
 [data-layout-mode=blue] .sidebar .sidebar-menu ul ul a.active {
   color: #000;
-  background: #d4d6d7;
+  background: #bcbebf;
   /* text-decoration: underline; */
 }
 [data-layout-mode=blue] .sidebar ul li.submenu .noti-dot:before {

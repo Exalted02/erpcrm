@@ -8,45 +8,71 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">School Setting</h3>
-					<ul class="breadcrumb">
-						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">School Setting</li>
-					</ul>
+					<h3 class="page-title">School List</h3>
 				</div>
 			</div>
 		</div>
 		<!-- /Page Header -->
-		
 		<div class="row">
-			<form method="post" action="<?= base_url('settings/store') ?>" enctype="multipart/form-data">
-				<div class="col-md-12">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="input-block mb-3">
-								<label class="col-form-label">Select School <span class="text-danger">*</span></label>
-								<select class="select setting_domain_id" name="domain" id="domain">
-									<option value="">Select</option>
-									<?php foreach($domains as $row){ ?>
-									<option value="<?= $row->id ?>"><?= $row->code_year.$row->code_number ?></option>
-									<?php } ?>
-								</select>
-							</div>
-						</div>
-						<div class="col-md-3" style="display:none;" id="session_list">
-							<div class="input-block selectnew mb-3">
-								<label class="col-form-label">Session</label>
-								<select class="select form-control-sm" name="school_session" id="school_session">
-									
-								</select>
-							</div>
-						</div>
-					</div>
+			<div class="col-md-12">
+				<div class="table-responsive">				
+					<!-- Table -->
+					<table class="table table-striped custom-table mb-0 datatable">
+						<thead>
+							<tr>
+								<th>School ID</th>
+								<th>School Code</th>
+								<th>School Aff. No</th>
+								<th>School Name</th>
+								<th>Phone</th>
+								<th>Email</th>
+								<th>State</th>
+								<th>District</th>
+								<th>City</th>
+								<!--<th class="text-end">Status</th>-->
+								<th class="text-end">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($domains as $row){ ?>
+							<tr>
+								<td><?= $row->code_year.$row->code_number ?></td>
+								<td><?= $row->dise_code ?></td>
+								<td><?= $row->aff_no ?></td>
+								<td><?= $row->name ?></td>
+								<td><?= $row->phone ?></td>
+								<td><?= $row->email ?></td>
+								<?php
+								$state = $this->Country_state_district->get_state_name($row->school_state);
+								?>
+								<td><?= !empty($state) ? $state->state_name : '' ?></td>
+								<?php
+								$district = $this->Country_state_district->get_district_name($row->school_district);
+								?>
+								<td><?= !empty($district) ? $district->district_name : '' ?></td>
+								<td><?= $row->school_city ?></td>
+								<!--<td class="text-end">
+									<div class="status-toggle">
+										<input type="checkbox" class="check status-toggle-btn" data-id="<?= $row->id ?>" id="status_<?= $row->id ?>" <?= $row->status ? 'checked' : '' ?>>
+										<label for="status_<?= $row->id ?>" class="checktoggle"></label>
+									</div>
+								</td>-->
+								<td class="text-end">
+									<div class="dropdown dropdown-action">
+										<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item" href="<?= base_url('settings/edit/'.$row->id) ?>"><i class="fa-solid fa-pencil m-r-5"></i> More Details</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+					<!-- /Table -->
+					
 				</div>
-				<div class="col-md-12" id="school_form_area">
-				
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 	<!-- /Page Content -->

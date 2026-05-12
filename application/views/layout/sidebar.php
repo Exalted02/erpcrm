@@ -17,7 +17,7 @@
 					<a href="<?php echo base_url('dashboard') ?>"><i class="la la-dashcube"></i> <span>Dashboard</span></a>
 				</li>
 				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"><i class="la la-cubes"></i> <span>Manage Subscription</span><span class="menu-arrow"></span></a>
+					<a href="javascript:void(0)" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"><i class="la la-money-check"></i> <span>Manage Subscription</span><span class="menu-arrow"></span></a>
 					<ul style="<?php echo is_block(['subscription'],['index','create','edit']) ?>;">
 						<li><a href="<?php echo base_url('subscription') ?>" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>">Add Plans</a></li>
 					</ul>
@@ -32,20 +32,14 @@
 					</ul>
 				</li>
 				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['domain','settings'],['index','create','edit']) ?>"><i class="la la-cubes"></i> <span>Create Schools</span><span class="menu-arrow"></span></a>
+					<a href="javascript:void(0)" class="<?php echo is_active(['domain','settings'],['index','create','edit']) ?>"><i class="la la-school"></i> <span>Create Schools</span><span class="menu-arrow"></span></a>
 					<ul style="<?php echo is_block(['domain','settings'],['index','create','edit']) ?>;">
 						<li><a href="<?php echo base_url('api-domain') ?>" class="<?php echo is_active(['domain'],['index','create','edit']) ?>">Generate Domain Key</a></li>
-						<li><a href="<?php echo base_url('settings') ?>" class="<?php echo is_active(['settings'],['index']) ?>">School Registration</a></li> 
+						<li><a href="<?php echo base_url('settings') ?>" class="<?php echo is_active(['settings'],['index','edit']) ?>">School Registration</a></li> 
 					</ul>
 				</li>
 				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
-				</li>
-				<li class="<?php echo is_active(['domain'],['index','create','edit']) ?>"> 
-					<a href="<?php echo base_url('api-domain') ?>"><i class="la la-key"></i> <span>Domain Key</span></a>
-				</li>
-				<li class="<?php echo is_active(['settings'],['index']) ?>"> 
-					<a href="<?php echo base_url('settings') ?>"><i class="la la-cogs"></i> <span>School Setting</span></a>
 				</li>
 				<li class="<?php echo is_active(['company_settings'],['index']) ?>"> 
 					<a href="<?php echo base_url('company_settings') ?>"><i class="la la-cog"></i> <span>Setting</span></a>

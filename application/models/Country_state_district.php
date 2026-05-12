@@ -16,5 +16,9 @@ class Country_state_district extends CI_Model {
     {
         return $this->db->where('id', $district_id)->get(DISTRICTS)->row();
     }
+    public function get_state_name($state_id)
+    {
+        return $this->db->where('id', $state_id)->get(STATES)->row();
+    }
 
 }
