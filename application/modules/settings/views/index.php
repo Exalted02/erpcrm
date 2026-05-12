@@ -20,6 +20,7 @@
 					<table class="table table-striped custom-table mb-0 datatable">
 						<thead>
 							<tr>
+								<th>Domain Name</th>
 								<th>School ID</th>
 								<th>School Code</th>
 								<th>School Aff. No</th>
@@ -36,6 +37,7 @@
 						<tbody>
 							<?php foreach($domains as $row){ ?>
 							<tr>
+								<td><?= $row->domain_name ?></td>
 								<td><?= $row->code_year.$row->code_number ?></td>
 								<td><?= $row->dise_code ?></td>
 								<td><?= $row->aff_no ?></td>
