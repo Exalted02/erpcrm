@@ -55,8 +55,11 @@
 						<li><a href="#" class="">All Tickets</a></li> 
 					</ul>
 				</li>
-				<li class="<?php echo is_active(['company_settings'],['index']) ?>"> 
-					<a href="<?php echo base_url('company_settings') ?>"><i class="la la-cog"></i> <span>Setting</span></a>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['company_settings'],['index']) ?>"><i class="las la-cogs"></i> <span>Company Setting</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['company_settings'],['index']) ?>;">
+						<li><a href="<?php echo base_url('company_settings') ?>" class="<?php echo is_active(['company_settings'],['index']) ?>">Company Details</a></li> 
+					</ul>
 				</li>
 				<?php }else{ ?>
 				

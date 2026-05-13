@@ -1,5 +1,4 @@
 <script>
-
 $(document).on('change', '#logoInput' , function () {
 
     let input = this;
@@ -16,27 +15,48 @@ $(document).on('change', '#logoInput' , function () {
 
 });
 
-/*$("#domain").change(function(){
+$(document).ready(function () {
 
-    let selected = $(this).find(':selected');
-    let domain_id = selected.val();
+    function loadDistricts(state_id, selected_district = '') {
+        if(state_id != ''){
+            $.ajax({
+				url: "<?= base_url('common/getDistricts') ?>",
+                type: "POST",
+                data: {state_id: state_id},
 
-    if(!domain_id) return;
+                success: function (response) {
 
-    $.ajax({
-        url: "<?= base_url('settings/settings/get_school_data') ?>",
-        type: "POST",
-        data: {
-            domain_id: domain_id
-        },
-        success: function(res){
-            $("#school_form_area").html(res);
-        },
-        error: function(){
-            alert("Error loading data");
+                    $('#district').html(response);
+
+                    if(selected_district != ''){
+                        $('#district').val(selected_district);
+                    }
+                }
+            });
+        } else {
+
+            $('#district').html(
+                '<option value="">Please select</option>'
+            );
         }
+    }
+
+    // On state change
+    $('#state').change(function () {
+
+        let state_id = $(this).val();
+        loadDistricts(state_id);
+
     });
 
-});*/
+    // Old selected values after validation error
+    let old_state = "<?= set_value('state', isset($company[0]->state) ? $company[0]->state : '') ?>";
 
+    let old_district = "<?= set_value('district', isset($company[0]->district) ? $company[0]->district : '') ?>";
+
+    if(old_state != ''){
+        loadDistricts(old_state, old_district);
+    }
+
+});
 </script>
