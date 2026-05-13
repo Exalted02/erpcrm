@@ -61,7 +61,7 @@
 								<div class="col-md-6">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Total Student <span class="text-danger">*</span></label>
-										<input type="number" name="total_student" class="form-control" value="<?= isset($lead->total_student) ? $lead->total_student : '' ?>">
+										<input type="text" name="total_student" class="form-control" value="<?= isset($lead->total_student) ? $lead->total_student : '' ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 										<span class="text-danger"><?= form_error('total_student') ?></span>
 									</div>
 								</div>

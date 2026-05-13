@@ -47,7 +47,7 @@
 								<div class="col-md-4">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Discount in percent <span class="text-danger">*</span></label>
-										<input type="number" name="discount_percent" id="discount_percent" class="form-control" placeholder="Discount in percent" value="<?= isset($seller) ? $seller->discount_percent : '' ?>" required>
+										<input type="text" name="discount_percent" id="discount_percent" class="form-control" placeholder="Discount in percent" value="<?= isset($seller) ? $seller->discount_percent : '' ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
 										<span class="text-danger"><?= form_error('discount_percent') ?></span>
 									</div>
 								</div>					

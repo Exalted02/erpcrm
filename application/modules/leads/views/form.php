@@ -46,7 +46,7 @@
 								<div class="col-md-3">
 									<div class="input-block mb-3">
 										<label class="col-form-label">No of Students <span class="text-danger">*</span></label>
-										<input type="number" name="no_of_students" class="form-control form-control-sm" value="<?= set_value('no_of_students', isset($lead) ? $lead->no_of_students : '') ?>">
+										<input type="text" name="no_of_students" class="form-control form-control-sm" value="<?= set_value('no_of_students', isset($lead) ? $lead->no_of_students : '') ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 										<span class="text-danger"><?= form_error('no_of_students') ?></span>
 									</div>
 								</div>
@@ -60,14 +60,14 @@
 								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Contact No. <span class="text-danger">*</span></label>
-										<input type="number" name="school_phone" class="form-control form-control-sm" value="<?= set_value('school_phone', isset($lead) ? $lead->school_phone : '') ?>">
+										<input type="text" name="school_phone" class="form-control form-control-sm" value="<?= set_value('school_phone', isset($lead) ? $lead->school_phone : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
 										<span class="text-danger"><?= form_error('school_phone') ?></span>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Alternate No. </label>
-										<input type="number" name="alternate_no" class="form-control form-control-sm" value="<?= set_value('alternate_no', isset($lead) ? $lead->alternate_no : '') ?>">
+										<input type="text" name="alternate_no" class="form-control form-control-sm" value="<?= set_value('alternate_no', isset($lead) ? $lead->alternate_no : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
 										<span class="text-danger"><?= form_error('alternate_no') ?></span>
 									</div>
 								</div>

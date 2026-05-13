@@ -45,21 +45,21 @@
 								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Plan Cost <span class="text-danger">*</span></label>
-										<input type="number" name="price" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->price : '' ?>" required>
+										<input type="text" name="price" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->price : '' ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '')" required>
 										<span class="text-danger"><?= form_error('price') ?></span>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">No of Students <span class="text-danger">*</span></label>
-										<input type="number" name="max_students" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->max_students : '' ?>" required>
+										<input type="text" name="max_students" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->max_students : '' ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
 										<span class="text-danger"><?= form_error('max_students') ?></span>
 									</div>
 								</div>
 								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Add-On Students </label>
-										<input type="number" name="add_on_students" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->add_on_students : '' ?>">
+										<input type="text" name="add_on_students" class="form-control form-control-sm" value="<?= isset($subscription) ? $subscription->add_on_students : '' ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 										<span class="text-danger"><?= form_error('add_on_students') ?></span>
 									</div>
 								</div>
