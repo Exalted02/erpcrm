@@ -17,16 +17,12 @@
 			<div class="col-md-12">
 				<div class="table-responsive">				
 					<!-- Table -->
-					<table class="table table-striped custom-table mb-0 datatable">
+					<table class="table table-striped custom-table mb-0 datatable" id="example2">
 						<thead>
 							<tr>
-								<th>Domain Name</th>
 								<th>School ID</th>
-								<th>School Code</th>
-								<th>School Aff. No</th>
+								<th>Domain Name</th>
 								<th>School Name</th>
-								<th>Phone</th>
-								<th>Email</th>
 								<th>State</th>
 								<th>District</th>
 								<th>City</th>
@@ -37,13 +33,9 @@
 						<tbody>
 							<?php foreach($domains as $row){ ?>
 							<tr>
-								<td><?= $row->domain_name ?></td>
 								<td><?= $row->code_year.$row->code_number ?></td>
-								<td><?= $row->dise_code ?></td>
-								<td><?= $row->aff_no ?></td>
+								<td><?= $row->domain_name ?></td>
 								<td><?= $row->name ?></td>
-								<td><?= $row->phone ?></td>
-								<td><?= $row->email ?></td>
 								<?php
 								$state = $this->Country_state_district->get_state_name($row->school_state);
 								?>

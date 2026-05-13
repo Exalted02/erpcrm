@@ -29,17 +29,17 @@ $CI->load->model('seller/Seller_model');
 		<form method="POST" action="">
 			<div class="row filter-row1 mb-2">
 
-				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">  
 					<div class="input-block mb-3">
 						<input type="text" name="school_name" placeholder="School Name" class="form-control form-control-sm" value="<?= set_value('school_name') ?>">
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+				<!--<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 					<div class="input-block mb-3">
 						<input type="text" name="email" placeholder="Email" class="form-control form-control-sm" value="<?= set_value('email') ?>">
 					</div>
-				</div>
+				</div>-->
 
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 					<div class="input-block selectnew mb-3">

@@ -83,7 +83,7 @@ $(document).ready(function(){
 		$('#example2').DataTable().destroy();
 	}
 	$('#example2').DataTable({
-		order: [[1, 'desc']],
+		order: [[0, 'asc']],
 		columnDefs: [
         {
             targets: 0,        // 1st column

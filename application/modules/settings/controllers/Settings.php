@@ -15,7 +15,7 @@ class Settings extends MY_Controller {
         $data['domains'] = $this->domain_model->get_all();
 				
         $data['page'] = 'settings/index';
-        // $data['script'] = 'settings/index_script';
+        $data['script'] = 'settings/index_script';
 
         $this->load->view('layout/main',$data);
     }
