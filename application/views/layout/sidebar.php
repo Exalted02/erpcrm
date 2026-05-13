@@ -37,14 +37,17 @@
 						<li><a href="<?php echo base_url('settings') ?>" class="<?php echo is_active(['settings'],['index','edit']) ?>">School Registration</a></li> 
 					</ul>
 				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['school_newly_update'],['index','create','edit']) ?>"><i class="las la-chalkboard"></i> <span>School News Update</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['school_newly_update'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('school_newly_update') ?>" class="<?php echo is_active(['school_newly_update'],['index','create','edit']) ?>">ERP Updates</a></li> 
+					</ul>
+				</li>
 				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
 					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
 				</li>
 				<li class="<?php echo is_active(['company_settings'],['index']) ?>"> 
 					<a href="<?php echo base_url('company_settings') ?>"><i class="la la-cog"></i> <span>Setting</span></a>
-				</li>
-				<li class="<?php echo is_active(['school_newly_update'],['index','create','edit']) ?>"> 
-					<a href="<?php echo base_url('school_newly_update') ?>"><i class="la la-school"></i> <span>School newly update</span></a>
 				</li>
 				<?php }else{ ?>
 				

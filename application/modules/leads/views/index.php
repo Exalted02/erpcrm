@@ -130,7 +130,7 @@ $CI->load->model('seller/Seller_model');
 							?>
 							<tr>
 								<td><?= $row->id ?></td>
-								<td><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
+								<td><span style="display: none;"><?= $row->created_at ?></span><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
 								<td><?= $row->school_name ?></td>
 								<td><?= $row->school_principal_name ?></td>
 								<td><?= $row->school_email ?></td>

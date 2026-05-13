@@ -8,10 +8,10 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">School newly update</h3>
+					<h3 class="page-title">ERP Updates</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">School newly update</li>
+						<li class="breadcrumb-item active">ERP Updates</li>
 					</ul>
 				</div>
 				<div class="col-auto float-end ms-auto">
@@ -25,7 +25,7 @@
 			<div class="col-md-12">
 				<div class="table-responsive">				
 					<!-- Table -->
-					<table class="table table-striped custom-table mb-0 datatable">
+					<table class="table table-striped custom-table mb-0 datatable" id="example2">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -50,7 +50,7 @@
 								<td><?= $row->id ?></td>
 								<td><?= $row->title ?></td>
 								<td style="width:200px;"><?= substr($row->details, 0, 60). $dot ?></td>
-								<td><?= date('d/m/Y', strtotime($row->release_date)) ?></td>
+								<td><span style="display: none;"><?= $row->release_date ?></span><?= date('d/m/Y', strtotime($row->release_date)) ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">
 									<div class="status-toggle">
@@ -85,7 +85,7 @@
 			<div class="modal-content">
 				<div class="modal-body">
 					<div class="form-header">
-						<h3>Delete school update</h3>
+						<h3>Delete ERP Updates</h3>
 						<p>Are you sure want to delete?</p>
 					</div>
 					<input type="hidden" id="delete_id">

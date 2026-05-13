@@ -33,14 +33,14 @@ class School_newly_update extends MY_Controller {
 		{
 			$data = [
 				'title' => $this->input->post('title', true),
-				'release_date' => $this->input->post('release_date', true),
+				'release_date' => date('Y-m-d H:i:s', strtotime($this->input->post('release_date', true))),
 				'details' => $this->input->post('details', true),
 				'status' => 1
 			];
 
 			$this->school_newly_update_model->insert($data);
 
-			$this->session->set_flashdata('success','school_newly_update Added Successfully');
+			$this->session->set_flashdata('success','ERP Updates Added Successfully');
 			redirect('school_newly_update');
 		}
 	}
@@ -68,13 +68,13 @@ class School_newly_update extends MY_Controller {
 			
 			$data = [
 				'title' => $this->input->post('title', true),
-				'release_date' => $this->input->post('release_date', true),
+				'release_date' => date('Y-m-d H:i:s', strtotime($this->input->post('release_date', true))),
 				'details' => $this->input->post('details', true)
 			];
 			
 			$this->school_newly_update_model->update($id,$data);
 
-			$this->session->set_flashdata('success','School newly update Updated Successfully');
+			$this->session->set_flashdata('success','ERP Updates Updated Successfully');
 			redirect('school_newly_update');
 		}
 	}

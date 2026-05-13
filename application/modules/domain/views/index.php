@@ -25,7 +25,7 @@
 			<div class="col-md-12">
 				<div class="table-responsive">				
 					<!-- Table -->
-					<table class="table table-striped custom-table mb-0 datatable" id="example2">
+					<table class="table table-striped custom-table mb-0 datatable">
 						<thead>
 							<tr>
 								<th>ID</th>
