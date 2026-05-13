@@ -23,7 +23,7 @@ $("#confirm_delete").click(function(){
 
             if(response.status == "success"){
                 $("#delete_promotion").modal("hide");
-				toastr_msg("Seller Deleted Successfully", "success");
+				toastr_msg("Re-Seller Deleted Successfully", "success");
 				
 				setTimeout(function(){
 					location.reload();
