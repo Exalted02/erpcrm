@@ -43,8 +43,17 @@
 						<li><a href="<?php echo base_url('school_newly_update') ?>" class="<?php echo is_active(['school_newly_update'],['index','create','edit']) ?>">ERP Updates</a></li> 
 					</ul>
 				</li>
-				<li class="<?php echo is_active(['seller'],['index','create','edit']) ?>"> 
-					<a href="<?php echo base_url('seller') ?>"><i class="la la-cubes"></i> <span>Seller</span></a>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['seller'],['index','create','edit']) ?>"><i class="las la-user"></i> <span>Re-Seller Management</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['seller'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('seller') ?>" class="<?php echo is_active(['seller'],['index','create','edit']) ?>">Add Re-Seller</a></li> 
+					</ul>
+				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class=""><i class="las la-ticket-alt"></i> <span>Ticket Management</span><span class="menu-arrow"></span></a>
+					<ul style="">
+						<li><a href="#" class="">All Tickets</a></li> 
+					</ul>
 				</li>
 				<li class="<?php echo is_active(['company_settings'],['index']) ?>"> 
 					<a href="<?php echo base_url('company_settings') ?>"><i class="la la-cog"></i> <span>Setting</span></a>

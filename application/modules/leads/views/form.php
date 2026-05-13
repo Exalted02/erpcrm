@@ -98,7 +98,7 @@
 									<div class="input-block selectnew mb-3">
 										<label class="col-form-label">State <span class="text-danger">*</span></label>
 										<select class="select form-control-sm" name="school_state" id="school_state">
-											<option>Please select</option>
+											<option value="">Please select</option>
 											<?php foreach($getAllState as $stateVal){ ?>
 											<option value="<?= $stateVal->id ?>" <?= set_value('school_state', isset($lead) ? $lead->school_state : '' ) == $stateVal->id ? 'selected' : '' ?>><?= $stateVal->state_name ?></option>
 											<?php } ?>

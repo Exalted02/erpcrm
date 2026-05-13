@@ -54,7 +54,7 @@
 					<div class="page-header">
 						<div class="row">
 							<div class="col-sm-12">
-								<h3 class="page-title"><?= 'Add Lead' ?> </h3>
+								<h3 class="page-title"><?= 'Register Re-Seller' ?> </h3>
 							</div>
 						</div>
 					</div>
@@ -64,120 +64,142 @@
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-body">
-									<form method="post" action="<?= base_url('create-lead') ?>">
+									<form method="post" action="<?= base_url('reseller-registration') ?>">
 										<div class="row">
 											<div class="col-md-4">
 												<div class="input-block mb-3">
-													<label class="col-form-label">School Name <span class="text-danger">*</span></label>
-													<input type="text" name="school_name" class="form-control form-control-sm" value="<?= set_value('school_name', isset($lead) ? $lead->school_name : '') ?>">
-													<span class="text-danger"><?= form_error('school_name') ?></span>
+													<label class="col-form-label">Firm Name <span class="text-danger">*</span></label>
+													<input type="text" name="firm_name" class="form-control form-control-sm" value="<?= set_value('firm_name', isset($seller) ? $seller->firm_name : '') ?>">
+													<span class="text-danger"><?= form_error('firm_name') ?></span>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Re-Seller Name <span class="text-danger">*</span></label>
+													<input type="text" name="name" class="form-control form-control-sm" value="<?= set_value('name', isset($seller) ? $seller->name : '') ?>">
+													<span class="text-danger"><?= form_error('name') ?></span>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Mobile No <span class="text-danger">*</span></label>
+													<input type="text" name="mobile_no" class="form-control form-control-sm" value="<?= set_value('mobile_no', isset($seller) ? $seller->mobile_no : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
+													<span class="text-danger"><?= form_error('mobile_no') ?></span>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Alternate No</label>
+													<input type="text" name="alternate_mobile_no" class="form-control form-control-sm" value="<?= set_value('alternate_mobile_no', isset($seller) ? $seller->alternate_mobile_no : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
+													<span class="text-danger"><?= form_error('alternate_mobile_no') ?></span>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-3">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Email ID <span class="text-danger">*</span></label>
+													<input type="email" name="email" class="form-control form-control-sm" value="<?= set_value('email', isset($seller) ? $seller->email : '') ?>">
+													<span class="text-danger"><?= form_error('email') ?></span>
 												</div>
 											</div>
 											<div class="col-md-2">
 												<div class="input-block selectnew mb-3">
-													<label class="col-form-label">Affiliated with <span class="text-danger">*</span></label>
-													<select class="select form-control-sm" name="affiliated_with">
-														<option>Select</option>
-														<?php foreach($schoolAffiliated as $i=>$affiliatedVal){ ?>
-														<option value="<?= $i ?>" <?= isset($lead) && ($lead->affiliated_with == $i)  ? 'selected' : '' ?>><?= $affiliatedVal ?></option>
+													<label class="col-form-label">GST <span class="text-danger">*</span></label>
+													<select class="select form-control-sm" name="have_gst">
+														<option value="">Please Select</option>
+														<option value="1" <?= set_value('have_gst', isset($seller) ? $seller->have_gst : '' ) == 1 ? 'selected' : '' ?>>Yes</option>
+														<option value="0" <?= set_value('have_gst', isset($seller) ? $seller->have_gst : '' ) == 0 ? 'selected' : '' ?>>No</option>
+													</select>
+													<span class="text-danger"><?= form_error('have_gst') ?></span>
+												</div>
+											</div>
+											<div class="col-md-4 gst-field">
+												<div class="input-block mb-3">
+													<label class="col-form-label">GST NO <span class="text-danger">*</span></label>
+													<input type="text" name="gst_no" class="form-control form-control-sm" value="<?= set_value('gst_no', isset($seller) ? $seller->gst_no : '') ?>">
+													<span class="text-danger"><?= form_error('gst_no') ?></span>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="input-block selectnew mb-3">
+													<label class="col-form-label">Working Experience <span class="text-danger">*</span></label>
+													<select class="select form-control-sm" name="working_experience">
+														<option value="">Please Select</option>
+														<?php for($i = 0; $i <= 30; $i++){ ?>
+														<option value="<?= $i ?>" <?= set_value('working_experience', isset($seller) ? $seller->working_experience : '' ) == $i ? 'selected' : '' ?>><?= $i ?></option>
 														<?php } ?>
 													</select>
-													<span class="text-danger"><?= form_error('affiliated_with') ?></span>
+													<span class="text-danger"><?= form_error('working_experience') ?></span>
 												</div>
 											</div>
-											<div class="col-md-3">
-												<div class="input-block mb-3">
-													<label class="col-form-label">No of Students <span class="text-danger">*</span></label>
-													<input type="text" name="no_of_students" class="form-control form-control-sm" value="<?= set_value('no_of_students', isset($lead) ? $lead->no_of_students : '') ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-													<span class="text-danger"><?= form_error('no_of_students') ?></span>
-												</div>
-											</div>
-											<div class="col-md-3">
-												<div class="input-block mb-3">
-													<label class="col-form-label">School Principal Name <span class="text-danger">*</span></label>
-													<input type="text" name="school_principal_name" class="form-control form-control-sm" value="<?= set_value('school_principal_name', isset($lead) ? $lead->school_principal_name : '') ?>">
-													<span class="text-danger"><?= form_error('school_principal_name') ?></span>
-												</div>
-											</div>
-											<div class="col-md-2">
-												<div class="input-block mb-3">
-													<label class="col-form-label">Contact No. <span class="text-danger">*</span></label>
-													<input type="text" name="school_phone" class="form-control form-control-sm" value="<?= set_value('school_phone', isset($lead) ? $lead->school_phone : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
-													<span class="text-danger"><?= form_error('school_phone') ?></span>
-												</div>
-											</div>
-											<div class="col-md-2">
-												<div class="input-block mb-3">
-													<label class="col-form-label">Alternate No. </label>
-													<input type="text" name="alternate_no" class="form-control form-control-sm" value="<?= set_value('alternate_no', isset($lead) ? $lead->alternate_no : '') ?>" oninput="this.value = this.value.replace(/[^0-9,+\-\s]/g, '')">
-													<span class="text-danger"><?= form_error('alternate_no') ?></span>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="input-block mb-3">
-													<label class="col-form-label">Email ID <span class="text-danger">*</span></label>
-													<input type="text" name="school_email" class="form-control form-control-sm" value="<?= set_value('school_email', isset($lead) ? $lead->school_email : '') ?>">
-													<span class="text-danger"><?= form_error('school_email') ?></span>
-												</div>
-											</div>
-											<div class="col-md-4">
-												<div class="input-block mb-3">
-													<label class="col-form-label">School Website (If Any) </label>
-													<input type="text" name="school_website" class="form-control form-control-sm" value="<?= set_value('school_website', isset($lead) ? $lead->school_website : '') ?>">
-													<span class="text-danger"><?= form_error('school_website') ?></span>
-												</div>
-											</div>
+										</div>
+										<div class="row">
 											<div class="col-md-2">
 												<div class="input-block selectnew mb-3">
 													<label class="col-form-label">Country <span class="text-danger">*</span></label>
-													<select class="select form-control-sm" name="school_country">
+													<select class="select form-control-sm" name="seller_country">
 														<option value="1" selected>India</option>
 													</select>
-													<span class="text-danger"><?= form_error('school_country') ?></span>
+													<span class="text-danger"><?= form_error('seller_country') ?></span>
 												</div>
 											</div>
 											<div class="col-md-4">
 												<div class="input-block selectnew mb-3">
 													<label class="col-form-label">State <span class="text-danger">*</span></label>
-													<select class="select form-control-sm" name="school_state" id="school_state">
+													<select class="select form-control-sm" name="seller_state" id="seller_state">
 														<option>Please select</option>
 														<?php foreach($getAllState as $stateVal){ ?>
-														<option value="<?= $stateVal->id ?>" <?= set_value('school_state', isset($lead) ? $lead->school_state : '' ) == $stateVal->id ? 'selected' : '' ?>><?= $stateVal->state_name ?></option>
+														<option value="<?= $stateVal->id ?>" <?= set_value('seller_state', isset($seller) ? $seller->seller_state : '' ) == $stateVal->id ? 'selected' : '' ?>><?= $stateVal->state_name ?></option>
 														<?php } ?>
 													</select>
-													<span class="text-danger"><?= form_error('school_state') ?></span>
+													<span class="text-danger"><?= form_error('seller_state') ?></span>
 												</div>
 											</div>
 											<div class="col-md-3">
 												<div class="input-block selectnew mb-3">
 													<label class="col-form-label">District <span class="text-danger">*</span></label>
-													<select class="select form-control-sm" name="school_district" id="school_district">
+													<select class="select form-control-sm" name="seller_district" id="seller_district">
 														<option value="">Please select</option>
 													</select>
-													<span class="text-danger"><?= form_error('school_district') ?></span>
+													<span class="text-danger"><?= form_error('seller_district') ?></span>
 												</div>
 											</div>
 											<div class="col-md-3">
-												<div class="input-block selectnew mb-3">
+												<div class="input-block mb-3">
 													<label class="col-form-label">City <span class="text-danger">*</span></label>
-													<input type="text" name="school_city" class="form-control form-control-sm" value="<?= set_value('school_city', isset($lead) ? $lead->school_city : '') ?>">
-													<span class="text-danger"><?= form_error('school_city') ?></span>
+													<input type="text" name="seller_city" class="form-control form-control-sm" value="<?= set_value('seller_city', isset($seller) ? $seller->seller_city : '') ?>">
+													<span class="text-danger"><?= form_error('seller_city') ?></span>
 												</div>
 											</div>
 											<div class="col-md-2">
 												<div class="input-block mb-3">
 													<label class="col-form-label">Pin Code <span class="text-danger">*</span></label>
-													<input type="text" name="school_pin_code" class="form-control form-control-sm" value="<?= set_value('school_pin_code', isset($lead) ? $lead->school_pin_code : '') ?>">
-													<span class="text-danger"><?= form_error('school_pin_code') ?></span>
+													<input type="text" name="seller_pin_code" class="form-control form-control-sm" value="<?= set_value('seller_pin_code', isset($seller) ? $seller->seller_pin_code : '') ?>">
+													<span class="text-danger"><?= form_error('seller_pin_code') ?></span>
 												</div>
 											</div>
 											<div class="col-md-12">
 												<div class="input-block mb-3">
-													<label class="col-form-label">School Full Address </label>
-													<textarea  name="school_address" placeholder="School Address" class="form-control"><?= set_value('school_address', isset($lead) ? $lead->school_address : '') ?></textarea>
-													<span class="text-danger"><?= form_error('school_address') ?></span>
+													<label class="col-form-label">Seller Full Address </label>
+													<textarea  name="seller_address" placeholder="Seller Full Address" class="form-control"><?= set_value('seller_address', isset($seller) ? $seller->seller_address : '') ?></textarea>
+													<span class="text-danger"><?= form_error('seller_address') ?></span>
 												</div>
 											</div>	
+											<div class="col-md-4">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Password <span class="text-danger">*</span></label>
+													<input type="password" name="password" class="form-control form-control-sm" value="" autocomplete="new-password">
+													<span class="text-danger"><?= form_error('password') ?></span>
+												</div>
+											</div>	
+											<div class="col-md-4">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Discount in percent <span class="text-danger">*</span></label>
+													<input type="text" name="discount_percent" id="discount_percent" class="form-control form-control-sm" placeholder="Discount in percent" value="<?= isset($seller) ? $seller->discount_percent : '' ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
+													<span class="text-danger"><?= form_error('discount_percent') ?></span>
+												</div>
+											</div>					
 										</div>
 										<div class="text-end">
 											<button type="submit" class="btn btn-primary">Submit</button>
@@ -228,7 +250,6 @@
 		<script src="<?php echo base_url(); ?>assets/js/toastr.min.js"></script>
 		<script>
 		$(document).ready(function () {
-
 			function loadDistricts(state_id, selected_district = '') {
 				if(state_id != ''){
 					$.ajax({
@@ -238,23 +259,23 @@
 
 						success: function (response) {
 
-							$('#school_district').html(response);
+							$('#seller_district').html(response);
 
 							if(selected_district != ''){
-								$('#school_district').val(selected_district);
+								$('#seller_district').val(selected_district);
 							}
 						}
 					});
 				} else {
 
-					$('#school_district').html(
+					$('#seller_district').html(
 						'<option value="">Please select</option>'
 					);
 				}
 			}
 
 			// On state change
-			$('#school_state').change(function () {
+			$('#seller_state').change(function () {
 
 				let state_id = $(this).val();
 
@@ -263,13 +284,51 @@
 			});
 
 			// Old selected values after validation error
-			let old_state = "<?= set_value('school_state', isset($lead) ? $lead->school_state : '') ?>";
+			let old_state = "<?= set_value('seller_state', isset($seller) ? $seller->seller_state : '') ?>";
 
-			let old_district = "<?= set_value('school_district', isset($lead) ? $lead->school_district : '') ?>";
+			let old_district = "<?= set_value('seller_district', isset($seller) ? $seller->seller_district : '') ?>";
 
 			if(old_state != ''){
 				loadDistricts(old_state, old_district);
 			}
+
+		});
+		function toggleGSTField(){
+
+			let gstValue = $('select[name="have_gst"]').val();
+
+			if(gstValue == '1'){
+
+				$('.gst-field').slideDown();
+
+			}else{
+
+				$('.gst-field').slideUp();
+
+				$('input[name="gst_no"]').val('');
+
+			}
+		}
+
+		/*
+		|--------------------------------------------------------------------------
+		| On Change
+		|--------------------------------------------------------------------------
+		*/
+		$(document).on('change', 'select[name="have_gst"]', function(){
+
+			toggleGSTField();
+
+		});
+
+		/*
+		|--------------------------------------------------------------------------
+		| On Page Load
+		|--------------------------------------------------------------------------
+		*/
+		$(document).ready(function(){
+
+			toggleGSTField();
 
 		});
 

@@ -62,6 +62,7 @@ $route['dashboard'] = 'dashboard/dashboard';
 $route['logout'] = 'auth/login/logout';
 
 $route['create-lead'] = 'auth/login/create_lead';
+$route['reseller-registration'] = 'auth/login/reseller_registration';
 
 $route['subscription'] = 'subscription/subscription/index';
 $route['subscription/create'] = 'subscription/subscription/create';

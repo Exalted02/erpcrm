@@ -8,14 +8,14 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">Sellers</h3>
+					<h3 class="page-title">Re-Seller</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">Sellers</li>
+						<li class="breadcrumb-item active">Re-Seller</li>
 					</ul>
 				</div>
 				<div class="col-auto float-end ms-auto">
-					<a href="<?= base_url('seller/create') ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Seller</a>
+					<a href="<?= base_url('seller/create') ?>" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Re-Seller</a>
 				</div>
 			</div>
 		</div>
@@ -29,8 +29,10 @@
 						<thead>
 							<tr>
 								<th>Sl. No</th>
-								<th>Name</th>
+								<th>Firm Name</th>
+								<th>Re-Seller Name</th>
 								<th>Email</th>
+								<th>District</th>
 								<th>Discount(%)</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
@@ -40,8 +42,13 @@
 							<?php foreach($sellers as $i=>$row){ $i++; ?>
 							<tr>
 								<td><?= $i ?></td>
+								<td><?= $row->firm_name ?? '' ?></td>
 								<td><?= $row->name ?></td>
-								<td><?= $row->email ?></td>
+								<td><?= $row->email ?></td>								
+								<?php
+								$district = isset($row->seller_district) && $row->seller_district != '' ? $this->Country_state_district->get_district_name($row->seller_district) : '';
+								?>
+								<td><?= !empty($district) ? $district->district_name : '' ?></td>
 								<td><?= $row->discount_percent ?></td>
 								<td class="text-end">
 									<div class="status-toggle">

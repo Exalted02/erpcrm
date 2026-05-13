@@ -21,7 +21,7 @@ class School_newly_update extends MY_Controller {
     public function create()
 	{
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
-		$this->form_validation->set_rules('release_date', 'Release date', 'required|trim');
+		$this->form_validation->set_rules('release_date', 'Release date', 'required|date|trim');
 		$this->form_validation->set_rules('details', 'Details', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
@@ -54,7 +54,7 @@ class School_newly_update extends MY_Controller {
 		}
 
 		$this->form_validation->set_rules('title', 'Title', 'required|trim');
-		$this->form_validation->set_rules('release_date', 'Release date', 'required|trim');
+		$this->form_validation->set_rules('release_date', 'Release date', 'required|date|trim');
 		$this->form_validation->set_rules('details', 'Details', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE)
