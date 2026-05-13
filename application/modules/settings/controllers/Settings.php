@@ -90,6 +90,7 @@ class Settings extends MY_Controller {
 				// echo "<pre>";print_r($post);die;
 								
 				$response = call_api_post($url, $post, $headers);
+			// echo '<pre>';print_r($headers);die;
 				
 				$data = [
 					'name' => $this->input->post('name', true),

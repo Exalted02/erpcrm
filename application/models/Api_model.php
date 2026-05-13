@@ -14,4 +14,7 @@ class Api_model extends CI_Model {
 	public function get_school_newly_all() {
         return $this->db->where('status', 1)->get(SCHOOL_NEWLY_UPDATES)->result_array();
     }
+	public function get_domain_data($api_key) {
+        return $this->db->where('api_key',$api_key)->get(API_DOMAINS)->row();
+    }
 }

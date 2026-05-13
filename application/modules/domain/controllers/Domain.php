@@ -156,8 +156,19 @@ class Domain extends MY_Controller {
 			];
 
 			$this->domain_model->update($id,$data);
+			
+			$post = [
+				'domain_api_key'=>$api_key,
+				'name'=>$this->input->post('name'),
+				'dise_code'=>$this->input->post('dise_code'),
+				'aff_no'=>$this->input->post('aff_no'),
+				'address'=>$this->input->post('address'),
+				'phone'=>$this->input->post('phone'),
+				'email'=>$this->input->post('email')
+			];
+			$url = $domain."/api/system/update_api_key";
 
-			$response = $this->update_erp_api_key($domain,$api_key);
+			$response = $this->update_erp_api_key($url,$post);
 
 			if(isset($response['status']) && $response['status']){
 				$this->session->set_flashdata('success',$response['message']);
@@ -193,15 +204,8 @@ class Domain extends MY_Controller {
 		}
 	}
 	
-	private function update_erp_api_key($domain,$api_key)
+	private function update_erp_api_key($url,$post)
     {
-
-        $url = $domain."/api/system/update_api_key";
-
-        $post = [
-            'api_key'=>$api_key
-        ];
-		
 		$response = call_api_post($url, $post);
 		
         return $response;

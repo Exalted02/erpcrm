@@ -122,7 +122,7 @@
 										<span class="text-danger"><?= form_error('school_city') ?></span>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-2">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Pin Code <span class="text-danger">*</span></label>
 										<input type="text" name="school_pin_code" class="form-control form-control-sm" value="<?= set_value('school_pin_code', isset($lead) ? $lead->school_pin_code : '') ?>">

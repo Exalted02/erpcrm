@@ -31,7 +31,6 @@
 								<th>ID</th>
 								<th>School ID</th>
 								<th>Domain Name</th>
-								<th>API Key</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
 							</tr>
@@ -42,7 +41,6 @@
 								<td><?= $row->id ?></td>
 								<td><?= $row->code_year.$row->code_number ?></td>
 								<td><?= $row->domain_name ?></td>
-								<td><?= $row->api_key ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">
 									<div class="status-toggle">
