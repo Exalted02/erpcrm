@@ -36,7 +36,9 @@ function call_api_post($url, $data = [], $headers = []) {
 		CURLOPT_RETURNTRANSFER=>true,
 		CURLOPT_POST=>true,
 		CURLOPT_POSTFIELDS=>$data,
-		CURLOPT_HTTPHEADER=>$headers,
+		CURLOPT_HTTPHEADER => array_merge([
+			'Accept: application/json'
+		], $headers),
 		CURLOPT_SAFE_UPLOAD => true 
 	]);
 

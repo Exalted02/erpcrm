@@ -42,7 +42,7 @@ class Settings extends MY_Controller {
 			$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 		}
 		if($form_type == 'login'){
-			$this->form_validation->set_rules('login_id', 'Login ID', 'required|trim');
+			$this->form_validation->set_rules('login_id', 'Login ID', 'required|valid_email|trim');
 			$this->form_validation->set_rules('login_password', 'Password', 'trim');
 		}
 			
