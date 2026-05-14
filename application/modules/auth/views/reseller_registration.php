@@ -193,13 +193,13 @@
 													<span class="text-danger"><?= form_error('password') ?></span>
 												</div>
 											</div>	
-											<div class="col-md-4">
+											<!--<div class="col-md-4">
 												<div class="input-block mb-3">
 													<label class="col-form-label">Discount in percent <span class="text-danger">*</span></label>
 													<input type="text" name="discount_percent" id="discount_percent" class="form-control form-control-sm" placeholder="Discount in percent" value="<?= isset($seller) ? $seller->discount_percent : '' ?>" oninput="this.value = this.value.replace(/[^0-9.]/g, '')">
 													<span class="text-danger"><?= form_error('discount_percent') ?></span>
 												</div>
-											</div>					
+											</div>-->				
 										</div>
 										<div class="text-end">
 											<button type="submit" class="btn btn-primary">Submit</button>

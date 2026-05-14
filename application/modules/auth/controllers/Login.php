@@ -151,7 +151,7 @@ class Login extends MX_Controller {
             'required|valid_email|is_unique[users.email]'
         );
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
-        $this->form_validation->set_rules('discount_percent', 'Discount Percent', 'required');
+        // $this->form_validation->set_rules('discount_percent', 'Discount Percent', 'required');
 
         if ($this->form_validation->run() == FALSE)
         {
@@ -177,7 +177,7 @@ class Login extends MX_Controller {
                 'seller_pin_code'      => $this->input->post('seller_pin_code', true),
                 'seller_address'      => $this->input->post('seller_address', true),
                 'password'   => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'discount_percent'   => $this->input->post('discount_percent'),
+                // 'discount_percent'   => $this->input->post('discount_percent'),
                 'user_role'  => 1,
                 'status'     => 0,
                 'created_at' => date('Y-m-d H:i:s')
@@ -185,7 +185,7 @@ class Login extends MX_Controller {
 
             $this->seller_model->insert($data);
 
-			$this->session->set_flashdata('success','Successfully Registered');
+			$this->session->set_flashdata('success','You Registered Successfully with us, We will contact with you shortly.');
 			redirect('reseller-registration');
 		}
 
