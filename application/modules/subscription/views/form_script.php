@@ -1,7 +1,7 @@
 <script>
 if (typeof CKEDITOR !== "undefined" && $('#description').length > 0) {
 
-    CKEDITOR.replace('description', {
+    /*CKEDITOR.replace('description', {
         allowedContent: true,
 
         toolbar: [
@@ -17,7 +17,10 @@ if (typeof CKEDITOR !== "undefined" && $('#description').length > 0) {
 
         removeButtons: '',
         height: 100
-    });
-
+    });*/
+	CKEDITOR.replace('description',
+	{
+		allowedContent: true
+	});
 }
 </script>

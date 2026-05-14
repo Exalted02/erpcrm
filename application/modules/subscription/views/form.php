@@ -66,9 +66,7 @@
 								<div class="col-md-12">
 									<div class="input-block mb-3">
 										<label class="col-form-label">Description</label>
-										<textarea id="description" name="description" placeholder="" type="text" class="form-control editor1" >
-											<?= isset($subscription) ? $subscription->description : '' ?>
-										</textarea>
+										<textarea id="description" name="description" placeholder="" type="text" class="form-control editor1" ><?= isset($subscription) ? $subscription->description : '' ?></textarea>
 									</div>
 								</div>						
 							</div>
