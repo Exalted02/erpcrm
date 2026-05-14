@@ -62,7 +62,8 @@ ALTER TABLE `api_domains` ADD `aff_no` VARCHAR(50) NULL DEFAULT NULL AFTER `dise
 ALTER TABLE `users` ADD `firm_name` VARCHAR(255) NULL DEFAULT NULL AFTER `discount_percent`, ADD `mobile_no` VARCHAR(50) NULL DEFAULT NULL AFTER `firm_name`, ADD `alternate_mobile_no` VARCHAR(50) NULL DEFAULT NULL AFTER `mobile_no`, ADD `have_gst` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '1=Yes, 0=No' AFTER `alternate_mobile_no`, ADD `gst_no` CHAR(36) NULL DEFAULT NULL AFTER `have_gst`, ADD `working_experience` INT(11) NULL DEFAULT '0' AFTER `gst_no`, ADD `seller_country` INT(11) NULL DEFAULT NULL AFTER `working_experience`, ADD `seller_state` INT(11) NULL DEFAULT NULL AFTER `seller_country`, ADD `seller_district` INT(11) NULL DEFAULT NULL AFTER `seller_state`, ADD `seller_city` VARCHAR(255) NULL DEFAULT NULL AFTER `seller_district`, ADD `seller_pin_code` INT(11) NULL DEFAULT NULL AFTER `seller_city`, ADD `seller_address` TEXT NULL DEFAULT NULL AFTER `seller_pin_code`;
 ALTER TABLE `company_settings` ADD `country` INT(11) NULL DEFAULT NULL AFTER `website_url`, ADD `state` INT(11) NULL DEFAULT NULL AFTER `country`, ADD `district` INT(11) NULL DEFAULT NULL AFTER `state`, ADD `city` VARCHAR(255) NULL DEFAULT NULL AFTER `district`, ADD `pin_code` INT(11) NULL DEFAULT NULL AFTER `city`, ADD `address` TEXT NULL DEFAULT NULL AFTER `pin_code`, ADD `pan_no` CHAR(36) NULL DEFAULT NULL AFTER `address`, ADD `gst_no` CHAR(36) NULL DEFAULT NULL AFTER `pan_no`, ADD `contact_no` VARCHAR(50) NULL DEFAULT NULL AFTER `gst_no`, ADD `email` VARCHAR(100) NULL DEFAULT NULL AFTER `contact_no`, ADD `support_no` VARCHAR(50) NULL DEFAULT NULL AFTER `email`, ADD `relationship_manager_no` VARCHAR(50) NULL DEFAULT NULL AFTER `support_no`;
 
-
+======== 14-05-2026========
+ALTER TABLE `api_domains` ADD `plan_id` INT(11) NULL DEFAULT NULL AFTER `aff_no`;
 
 
 

@@ -5,6 +5,10 @@ class Subscription_model extends CI_Model {
     {
         return $this->db->get(SUBSCRIPTIONS)->result();
     }
+    function get_all_active()
+    {
+        return $this->db->where('status',1)->get(SUBSCRIPTIONS)->result();
+    }
 
     function get($id)
     {

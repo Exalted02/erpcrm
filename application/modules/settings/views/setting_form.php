@@ -21,7 +21,7 @@
 			<div class="col-md-12">
 				<div class="card bg-white">
 					<div class="card-body">
-						<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded nav-justified">
+						<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'registration' || empty($active_tab)) ? 'active' : '' ?>" href="#solid-rounded-justified-tab1" data-bs-toggle="tab">Registration Details</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">School Strengths</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab3" data-bs-toggle="tab">School Income</a></li>
@@ -119,6 +119,18 @@
 												<label class="col-form-label">Pin Code <span class="text-danger">*</span></label>
 												<input type="text" name="school_pin_code" class="form-control form-control-sm" value="<?= set_value('school_pin_code', isset($school) ? $school['school_pin_code'] : '') ?>">
 												<span class="text-danger"><?= form_error('school_pin_code') ?></span>
+											</div>
+										</div>
+										<div class="col-md-2">
+											<div class="input-block selectnew mb-3">
+												<label class="col-form-label">Choose Plan <span class="text-danger">*</span></label>
+												<select class="select form-control-sm" name="plan_id" id="plan_id">
+													<option value="">Please select</option>
+													<?php foreach($subscriptions as $subVal){ ?>
+													<option value="<?= $subVal->id ?>" <?= ($school['plan_id'] ?? '') == $subVal->id ? 'selected' : '' ?>><?= $subVal->title ?></option>
+													<?php } ?>
+												</select>
+												<span class="text-danger"><?= form_error('plan_id') ?></span>
 											</div>
 										</div>
 									</div>
