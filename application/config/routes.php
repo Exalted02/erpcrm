@@ -82,4 +82,5 @@ $route['api-domain'] = 'domain/domain/index';
 $route['api-domain/create'] = 'domain/domain/create';
 $route['api-domain/edit/(:num)'] = 'domain/domain/edit/$1';
 $route['api-domain/delete'] = 'domain/domain/delete/$1';
+$route['api-domain/change_status'] = 'domain/domain/change_status';
 
