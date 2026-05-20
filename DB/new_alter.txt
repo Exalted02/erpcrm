@@ -69,4 +69,5 @@ ALTER TABLE `api_domains` ADD `plan_id` INT(11) NULL DEFAULT NULL AFTER `aff_no`
 ALTER TABLE `api_domains` ADD `alternate_no` VARCHAR(50) NULL DEFAULT NULL AFTER `phone`;
 ALTER TABLE `api_domains` ADD `domain_login_password` VARCHAR(255) NULL DEFAULT NULL AFTER `plan_id`;
 ALTER TABLE `company_settings` ADD `bank_name` VARCHAR(100) NULL DEFAULT NULL AFTER `relationship_manager_no`, ADD `account_no` VARCHAR(50) NULL DEFAULT NULL AFTER `bank_name`, ADD `ifsc_code` VARCHAR(50) NULL DEFAULT NULL AFTER `account_no`, ADD `branch_name` VARCHAR(100) NULL DEFAULT NULL AFTER `ifsc_code`;
+ALTER TABLE `company_settings` ADD `product_name` VARCHAR(255) NULL DEFAULT NULL AFTER `school_name`;
 

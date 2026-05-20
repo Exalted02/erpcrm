@@ -20,6 +20,7 @@ class Company_settings extends MY_Controller {
 		}
 
 		$this->form_validation->set_rules('company_name', 'Company Name', 'required|trim');
+		$this->form_validation->set_rules('product_name', 'Product Name', 'required|trim');
 		$this->form_validation->set_rules('country', 'Country', 'required|trim');
 		$this->form_validation->set_rules('state', 'State', 'required|trim');
 		$this->form_validation->set_rules('district', 'District', 'required|trim');
@@ -99,6 +100,7 @@ class Company_settings extends MY_Controller {
 			// ✅ Prepare data
 			$data = [
 				'school_name' => $this->input->post('company_name', true),
+				'product_name' => $this->input->post('product_name', true),
 				'country' => $this->input->post('country', true),
                 'state'      => $this->input->post('state', true),
                 'district'      => $this->input->post('district', true),

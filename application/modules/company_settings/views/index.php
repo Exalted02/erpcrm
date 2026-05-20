@@ -32,6 +32,13 @@
 									<span class="text-danger"><?= form_error('company_name') ?></span>
 								</div>
 							</div>
+							<div class="col-md-4">
+								<div class="input-block mb-3">
+									<label class="col-form-label">Product Name <span class="text-danger">*</span></label>
+									<input type="text" name="product_name" class="form-control form-control-sm" value="<?php echo isset($company[0]->product_name) ? $company[0]->product_name : '' ?>">
+									<span class="text-danger"><?= form_error('product_name') ?></span>
+								</div>
+							</div>
 							<div class="col-md-2">
 								<div class="input-block selectnew mb-3">
 									<label class="col-form-label">Country <span class="text-danger">*</span></label>
