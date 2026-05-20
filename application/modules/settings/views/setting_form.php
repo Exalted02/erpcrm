@@ -72,6 +72,13 @@
 										</div>
 										<div class="col-md-3">
 											<div class="input-block mb-6">
+												<label class="col-form-label">Alternate No. </label>
+												<input type="text" name="alternate_no" class="form-control form-control-sm" value="<?= $school['alternate_no'] ?? '' ?>">
+												<span class="text-danger"><?= form_error('alternate_no') ?></span>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="input-block mb-6">
 												<label class="col-form-label">Email <span class="text-danger">*</span></label>
 												<input type="text" name="email" class="form-control form-control-sm" value="<?= $school['email'] ?? '' ?>">
 												<span class="text-danger"><?= form_error('email') ?></span>
@@ -206,8 +213,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="input-block mb-6">
-												<label class="col-form-label"> Password</label>
-												<input type="text" name="login_password" class="form-control form-control-sm" value="">
+												<label class="col-form-label"> Password <span class="text-danger">*</span></label>
+												<input type="text" name="login_password" class="form-control form-control-sm" value="<?= $school['domain_login_password'] ?? '' ?>">
 												<span class="text-danger"><?= form_error('login_password') ?></span>
 											</div>
 										</div>

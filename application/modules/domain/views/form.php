@@ -94,6 +94,13 @@
 								</div>
 								<div class="col-md-3">
 									<div class="input-block mb-6">
+										<label class="col-form-label">Alternate No. </label>
+										<input type="text" name="alternate_no" class="form-control form-control-sm" value="<?= set_value('alternate_no', isset($domain) ? $domain->alternate_no : '') ?>">
+										<span class="text-danger"><?= form_error('alternate_no') ?></span>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="input-block mb-6">
 										<label class="col-form-label">Email <span class="text-danger">*</span></label>
 										<input type="text" name="email" class="form-control form-control-sm" value="<?= set_value('email', isset($domain) ? $domain->email : '') ?>">
 										<span class="text-danger"><?= form_error('email') ?></span>

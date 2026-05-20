@@ -63,6 +63,7 @@ class Domain extends MY_Controller {
 				'aff_no' => $this->input->post('aff_no', true),
 				'address'     => $this->input->post('address', true),
 				'phone'     => $this->input->post('phone', true),
+				'alternate_no' => $this->input->post('alternate_no'),
 				'email'     => $this->input->post('email', true),
 				'school_country'     => $this->input->post('school_country', true),
 				'school_state'     => $this->input->post('school_state', true),
@@ -147,6 +148,7 @@ class Domain extends MY_Controller {
 				'aff_no' => $this->input->post('aff_no', true),
 				'address'     => $this->input->post('address', true),
 				'phone'     => $this->input->post('phone', true),
+				'alternate_no' => $this->input->post('alternate_no', true),
 				'email'     => $this->input->post('email', true),
 				'school_country'     => $this->input->post('school_country', true),
 				'school_state'     => $this->input->post('school_state', true),
@@ -164,6 +166,7 @@ class Domain extends MY_Controller {
 				'aff_no'=>$this->input->post('aff_no'),
 				'address'=>$this->input->post('address'),
 				'phone'=>$this->input->post('phone'),
+				'alternate_no'=>$this->input->post('alternate_no'),
 				'email'=>$this->input->post('email')
 			];
 			$url = $domain."/api/system/update_api_key";

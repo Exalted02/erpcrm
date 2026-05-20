@@ -125,6 +125,34 @@
 									<span class="text-danger"><?= form_error('relationship_manager_no') ?></span>
 								</div>
 							</div>
+							<div class="col-md-3">
+								<div class="input-block mb-3">
+									<label class="col-form-label">Bank Name <span class="text-danger">*</span></label>
+									<input type="text" name="bank_name" class="form-control form-control-sm" value="<?php echo isset($company[0]->bank_name) ? $company[0]->bank_name : '' ?>">
+									<span class="text-danger"><?= form_error('bank_name') ?></span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-block mb-3">
+									<label class="col-form-label">Account No <span class="text-danger">*</span></label>
+									<input type="text" name="account_no" class="form-control form-control-sm" value="<?php echo isset($company[0]->account_no) ? $company[0]->account_no : '' ?>">
+									<span class="text-danger"><?= form_error('account_no') ?></span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-block mb-3">
+									<label class="col-form-label">IFSC Code <span class="text-danger">*</span></label>
+									<input type="text" name="ifsc_code" class="form-control form-control-sm" value="<?php echo isset($company[0]->ifsc_code) ? $company[0]->ifsc_code : '' ?>">
+									<span class="text-danger"><?= form_error('ifsc_code') ?></span>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="input-block mb-3">
+									<label class="col-form-label">Branch Name <span class="text-danger">*</span></label>
+									<input type="text" name="branch_name" class="form-control form-control-sm" value="<?php echo isset($company[0]->branch_name) ? $company[0]->branch_name : '' ?>">
+									<span class="text-danger"><?= form_error('branch_name') ?></span>
+								</div>
+							</div>
 							<div class="col-md-4">
 								<div class="input-block mb-3">
 									<label class="col-form-label">Logo <span class="text-danger">*</span></label>

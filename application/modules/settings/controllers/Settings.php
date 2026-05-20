@@ -45,7 +45,7 @@ class Settings extends MY_Controller {
 		}
 		if($form_type == 'login'){
 			$this->form_validation->set_rules('login_id', 'Login ID', 'required|valid_email|trim');
-			$this->form_validation->set_rules('login_password', 'Password', 'trim');
+			$this->form_validation->set_rules('login_password', 'Password', 'required|trim');
 		}
 			
 		if ($this->form_validation->run() == FALSE)
@@ -82,6 +82,7 @@ class Settings extends MY_Controller {
 					'aff_no'=>$this->input->post('aff_no'),
 					'address'=>$this->input->post('address'),
 					'phone'=>$this->input->post('phone'),
+					'alternate_no' => $this->input->post('alternate_no'),
 					'email'=>$this->input->post('email')
 				];
 				// Add sch_id only if present
@@ -101,6 +102,7 @@ class Settings extends MY_Controller {
 					'aff_no' => $this->input->post('aff_no', true),
 					'address'     => $this->input->post('address', true),
 					'phone'     => $this->input->post('phone', true),
+					'alternate_no' => $this->input->post('alternate_no'),
 					'email'     => $this->input->post('email', true),
 					'school_country'     => $this->input->post('school_country', true),
 					'school_state'     => $this->input->post('school_state', true),
@@ -126,8 +128,13 @@ class Settings extends MY_Controller {
 				// Send password only if entered
 				if(!empty($password)){
 					$post['password'] = $password;
+					
+					$data = [
+						'domain_login_password' => $password,
+					];
+					$this->domain_model->update($domain->id, $data);
 				}
-				$response = call_api_post($url, $post, $headers);
+				$response = call_api_post($url, $post, $headers);				
 			}
 			if($response['status']){
 				$this->session->set_flashdata('success', $response['message']);

@@ -36,6 +36,10 @@ class Company_settings extends MY_Controller {
         );
 		$this->form_validation->set_rules('support_no', 'Support No', 'required|trim');
 		$this->form_validation->set_rules('relationship_manager_no', 'Relationship Manager No', 'required|trim');
+		$this->form_validation->set_rules('bank_name', 'Bank Name', 'required|trim');
+		$this->form_validation->set_rules('account_no', 'Account No', 'required|trim');
+		$this->form_validation->set_rules('ifsc_code', 'IFSC Code', 'required|trim');
+		$this->form_validation->set_rules('branch_name', 'Branch Name', 'required|trim');
 
 		if ($this->form_validation->run() == FALSE) {
 			$data['company'] = $this->company_settings_model->get_all();
@@ -107,6 +111,10 @@ class Company_settings extends MY_Controller {
                 'email'      => $this->input->post('email', true),
                 'support_no'      => $this->input->post('support_no', true),
                 'relationship_manager_no'      => $this->input->post('relationship_manager_no', true),
+                'bank_name'      => $this->input->post('bank_name', true),
+                'account_no'      => $this->input->post('account_no', true),
+                'ifsc_code'      => $this->input->post('ifsc_code', true),
+                'branch_name'      => $this->input->post('branch_name', true),
 				// 'website_url' => $this->input->post('website_url', true),
 				'created_at'  => date('Y-m-d H:i:s')
 			];
