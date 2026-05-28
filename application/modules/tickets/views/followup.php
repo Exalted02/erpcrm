@@ -8,10 +8,10 @@
 		<div class="page-header">
 			<div class="row align-items-center">
 				<div class="col">
-					<h3 class="page-title">Lead Followup</h3>
+					<h3 class="page-title">Ticket Followup</h3>
 					<ul class="breadcrumb">
 						<li class="breadcrumb-item"><a href="<?= base_url('dashboard') ?>">Dashboard</a></li>
-						<li class="breadcrumb-item active">Lead Followup</li>
+						<li class="breadcrumb-item active">Ticket Followup</li>
 					</ul>
 				</div>
 				<div class="col-auto float-end ms-auto">
@@ -26,12 +26,12 @@
 				<div class="card">
 					<div class="card-body">
 					<?php 
-						if(!empty($lead_followup)){
+						if(!empty($ticket_followup)){
 					?>
 						<ul class="timeline">
 						<?php 
 							$i = 0;
-							foreach($lead_followup as $row){
+							foreach($ticket_followup as $row){
 								$class = ($i % 2 == 0) ? '' : 'timeline-inverted';
 						?>
 							<li class="<?= $class ?>">
@@ -39,11 +39,11 @@
 								   <i class="fas fa-user"></i>
 								</div>
 								<div class="timeline-panel">
-									<div class="timeline-heading">
-										<h4 class="timeline-title"><?= $row->followup_remarks ?></h4>
-									</div>
+									<!--<div class="timeline-heading">
+										<h4 class="timeline-title"><?= $row->message ?></h4>
+									</div>-->
 									<div class="timeline-body">
-										<span><?= $row->remark_val ?></span>
+										<span><?= $row->message ?></span>
 									</div>
 									<div class="edit-delete-merge d-flex justify-between mt-2">
 										<small class="text-muted">
@@ -52,8 +52,7 @@
 										<div>
 										<a href="javascript:void(0)" class="text-muted" onclick="editFollowup(
 											<?= $row->id ?>,
-											'<?= htmlspecialchars($row->followup_remarks, ENT_QUOTES) ?>',
-											'<?= htmlspecialchars($row->remark_val, ENT_QUOTES) ?>'
+											'<?= htmlspecialchars($row->message, ENT_QUOTES) ?>'
 										)"><i class="la la-edit me-2"></i>Edit</a>
 										
 										<a href="javascript:void(0)" class="text-muted" onclick="deleteFollowup(<?= $row->id ?>)"><i class="la la-trash-alt me-2"></i>Delete</a>
@@ -85,19 +84,10 @@
 					</div>
 					<div class="modal-body">
 						<input type="hidden" name="id" id="followup_id">
-						<input type="hidden" name="lead_id" value="<?= $lead_id ?>">
-						<div class="form-group">
-							<label>Followup Remark</label>
-							<select name="followup_remarks" id="remarks" class="form-control form-control-sm" required>
-								<option value="">Select Remark</option>
-								<?php foreach($remarks as $r){ ?>
-									<option value="<?= $r->name ?>"><?= $r->name ?></option>
-								<?php } ?>
-							</select>
-						</div>
+						<input type="hidden" name="ticket_id" value="<?= $ticket_id ?>">
 						<div class="form-group mt-2">
-							<label>Remark Value</label>
-							<input type="text" name="remark_val" id="remark_val" class="form-control form-control-sm" placeholder="Enter remark value">
+							<label>Message</label>
+							<input type="text" name="message" id="message" class="form-control form-control-sm" placeholder="Enter message">
 						</div>
 					</div>
 					<div class="modal-footer">

@@ -25,11 +25,11 @@ class Domain_model extends CI_Model {
     {
         return $this->db->where('id',$id)->delete(API_DOMAINS);
     }
-	public function update_status($id,$status)
+	public function update_status($id,$data)
 	{
 		return $this->db
-			->where('id',$id)
-			->update(API_DOMAINS,['status'=>$status]);
+			->where('id', $id)
+			->update(API_DOMAINS, $data);
 	}
 	public function get_last_code($currentYear)
 	{

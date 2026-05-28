@@ -35,11 +35,58 @@ $("#confirm_delete").click(function(){
     });
 
 });
-$(document).on("change",".status-toggle-btn",function(){
+let currentToggle = null;
+
+$(document).on("change", ".status-toggle-btn", function () {
+
     let toggle = $(this);
     let id = toggle.data("id");
 
-    let status = toggle.is(":checked") ? 1 : 0;
+    // CHECKED = ENABLE
+    if (toggle.is(":checked")) {
+
+        updateStatus(id, 1, '', toggle);
+
+    } 
+    // UNCHECKED = DISABLE
+    else {
+
+        // Keep checkbox checked temporarily
+        toggle.prop("checked", true);
+
+        currentToggle = toggle;
+
+        $("#disable_id").val(id);
+        $("#disable_reason").val('');
+        $("#reason_error").addClass("d-none");
+
+        $("#disableReasonModal").modal("show");
+    }
+
+});
+
+
+$("#submitDisableReason").on("click", function () {
+
+    let id = $("#disable_id").val();
+    let reason = $("#disable_reason").val().trim();
+
+    if (reason == '') {
+
+        $("#reason_error").removeClass("d-none");
+        return;
+    }
+
+    $("#reason_error").addClass("d-none");
+
+    updateStatus(id, 0, reason, currentToggle);
+
+    $("#disableReasonModal").modal("hide");
+
+});
+
+
+function updateStatus(id, status, reason, toggle) {
 
     $.ajax({
 
@@ -47,29 +94,28 @@ $(document).on("change",".status-toggle-btn",function(){
         type: "POST",
         data: {
             id: id,
-            status: status
+            status: status,
+            reason: reason
         },
         dataType: "json",
 
-        success:function(response){
+        success: function (response) {
 
-            if(response.status === "success"){
+            if (response.status === "success") {
 
-                toastr.success("Status updated successfully");
+                toggle.prop("checked", status == 1);
 
-            }else{
+                toastr.success(response.message);
 
-                toggle.prop("checked", !status);
+            } else {
 
-                toastr.error("Failed to update status");
+                toastr.error(response.message);
 
             }
 
         },
 
-        error:function(){
-
-            toggle.prop("checked", !status);
+        error: function () {
 
             toastr.error("Server error");
 
@@ -77,5 +123,5 @@ $(document).on("change",".status-toggle-btn",function(){
 
     });
 
-});
+}
 </script>

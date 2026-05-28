@@ -71,3 +71,42 @@ ALTER TABLE `api_domains` ADD `domain_login_password` VARCHAR(255) NULL DEFAULT 
 ALTER TABLE `company_settings` ADD `bank_name` VARCHAR(100) NULL DEFAULT NULL AFTER `relationship_manager_no`, ADD `account_no` VARCHAR(50) NULL DEFAULT NULL AFTER `bank_name`, ADD `ifsc_code` VARCHAR(50) NULL DEFAULT NULL AFTER `account_no`, ADD `branch_name` VARCHAR(100) NULL DEFAULT NULL AFTER `ifsc_code`;
 ALTER TABLE `company_settings` ADD `product_name` VARCHAR(255) NULL DEFAULT NULL AFTER `school_name`;
 
+======== 28-05-2026========
+ALTER TABLE `api_domains` ADD `disable_reason` TEXT NULL DEFAULT NULL AFTER `status`;
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `school_id` int(11) DEFAULT NULL,
+  `ticket_type` tinyint(1) NOT NULL DEFAULT 0,
+  `subject` varchar(255) DEFAULT NULL,
+  `body` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=delete, 1=pending, 2=open, 3=close',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `ticket_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) NOT NULL COMMENT '`tickets` table primary id',
+  `file` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `tickets` CHANGE `ticket_type` `ticket_type` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0=Normal, 1=Priority';
+ALTER TABLE `tickets` CHANGE `school_id` `school_code_id` INT(11) NULL DEFAULT NULL;
+ALTER TABLE `tickets` ADD `school_id` INT(11) NULL DEFAULT NULL AFTER `id`;
+ALTER TABLE `tickets` ADD `school_name` VARCHAR(255) NULL DEFAULT NULL AFTER `school_code_id`;
+
+CREATE TABLE `ticket_followups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ticket_id` int(11) NOT NULL,
+  `user_type` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=Crm, 1=School',
+  `message` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `ticket_followups` CHANGE `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT, CHANGE `ticket_id` `ticket_id` BIGINT(20) NOT NULL;
+

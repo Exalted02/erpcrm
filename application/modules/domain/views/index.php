@@ -94,5 +94,51 @@
 		</div>
 	</div>
 	<!-- /Delete Modal -->
+	<!-- Disable Reason Modal -->
+	<div class="modal fade" id="disableReasonModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<div class="modal-header">
+					<h5 class="modal-title">Disable Domain</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<div class="modal-body">
+
+					<input type="hidden" id="disable_id">
+
+					<div class="mb-3">
+						<label class="form-label">
+							Why disable this domain?
+						</label>
+
+						<textarea 
+							class="form-control" 
+							id="disable_reason"
+							rows="4"
+							placeholder="Enter reason"></textarea>
+
+						<small class="text-danger d-none" id="reason_error">
+							Reason is required
+						</small>
+					</div>
+
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+						Cancel
+					</button>
+
+					<button type="button" class="btn btn-danger" id="submitDisableReason">
+						Submit
+					</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- Disable Reason Modal -->
 </div>
 <!-- /Page Wrapper -->

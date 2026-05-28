@@ -197,13 +197,39 @@ class Domain extends MY_Controller {
 	{
 		$id = $this->input->post('id');
 		$status = $this->input->post('status');
+		$reason = trim($this->input->post('reason'));
+		
+		// Validation
+		if($status == 0 && empty($reason)){
 
-		$update = $this->domain_model->update_status($id,$status);
+			return $this->response->setJSON([
+				'status' => 'error',
+				'message' => 'Reason is required'
+			]);
+
+		}
+		
+		$data = [
+			'status' => $status,
+			'disable_reason' => $reason
+		];
+
+		$update = $this->domain_model->update_status($id,$data);
 
 		if($update){
-			echo json_encode(['status'=>'success']);
+
+			echo json_encode([
+				'status'  => 'success',
+				'message' => 'Status updated successfully'
+			]);
+
 		}else{
-			echo json_encode(['status'=>'error']);
+
+			echo json_encode([
+				'status'  => 'error',
+				'message' => 'Failed to update status'
+			]);
+
 		}
 	}
 	
