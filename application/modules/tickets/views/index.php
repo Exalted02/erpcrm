@@ -39,10 +39,10 @@ $CI->load->model('seller/Seller_model');
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 					<div class="input-block selectnew mb-3">
 						<select class="select form-control form-control-sm" name="ticket_type"> 
-							<option value=" ">Select Type</option>
+							<option value="">Select Type</option>
 							<?php foreach(ticket_type_array() as $t=>$val){ ?>
 							<option value="<?= $t ?>"
-								<?= set_value('ticket_type') == $t ? 'selected' : '' ?>>
+								<?= (string)set_value('ticket_type') === (string)$t ? 'selected' : '' ?>>
 								<?= $val ?>
 							</option>
 							<?php } ?>
