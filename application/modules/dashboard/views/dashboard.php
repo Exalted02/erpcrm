@@ -23,8 +23,8 @@
 					<div class="card-body">
 						<span class="dash-widget-icon"><i class="fa-solid fa-cubes"></i></span>
 						<div class="dash-widget-info">
-							<h3>112</h3>
-							<span>Projects</span>
+							<h3><?= $datas['no_of_leads']; ?></h3>
+							<span>No. of Leads</span>
 						</div>
 					</div>
 				</div>
@@ -32,10 +32,10 @@
 			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 				<div class="card dash-widget">
 					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-solid fa-dollar-sign"></i></span>
+						<span class="dash-widget-icon"><i class="fa-solid fa-school"></i></span>
 						<div class="dash-widget-info">
-							<h3>44</h3>
-							<span>Clients</span>
+							<h3><?= $datas['register_school']; ?></h3>
+							<span>Register School</span>
 						</div>
 					</div>
 				</div>
@@ -43,28 +43,17 @@
 			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
 				<div class="card dash-widget">
 					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-regular fa-gem"></i></span>
+						<span class="dash-widget-icon"><i class="fa-regular fa-x"></i></span>
 						<div class="dash-widget-info">
-							<h3>37</h3>
-							<span>Tasks</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-				<div class="card dash-widget">
-					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-solid fa-user"></i></span>
-						<div class="dash-widget-info">
-							<h3>218</h3>
-							<span>Employees</span>
+							<h3><?= $datas['disable_school']; ?></h3>
+							<span>Disable School</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-md-12">
 				<div class="row">
 					<div class="col-md-6 text-center">
@@ -163,43 +152,31 @@
 					</div>
 				</div>
 			</div>	
-		</div>
+		</div>-->
 		
 		<!-- Statistics Widget -->
 		<div class="row">
 			<div class="col-md-12 col-lg-12 col-xl-4 d-flex">
 				<div class="card flex-fill dash-statistics">
 					<div class="card-body">
-						<h5 class="card-title">Statistics</h5>
+						<h5 class="card-title">School Renew</h5>
 						<div class="stats-list">
 							<div class="stats-info">
-								<p>Today Leave <strong>4 <small>/ 65</small></strong></p>
+								<p>No of School Renew Today <strong>4 <small>/ 65</small></strong></p>
 								<div class="progress">
 									<div class="progress-bar bg-primary w-31" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 							<div class="stats-info">
-								<p>Pending Invoice <strong>15 <small>/ 92</small></strong></p>
+								<p>No of School Renew in Month <strong>15 <small>/ 92</small></strong></p>
 								<div class="progress">
-									<div class="progress-bar bg-warning w-31" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-success w-31" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 							<div class="stats-info">
-								<p>Completed Projects <strong>85 <small>/ 112</small></strong></p>
+								<p>No of School Renew in Year <strong>85 <small>/ 112</small></strong></p>
 								<div class="progress">
-									<div class="progress-bar bg-success w-62" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-							<div class="stats-info">
-								<p>Open Tickets <strong>190 <small>/ 212</small></strong></p>
-								<div class="progress">
-									<div class="progress-bar bg-danger w-62" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-								</div>
-							</div>
-							<div class="stats-info">
-								<p>Closed Tickets <strong>22 <small>/ 212</small></strong></p>
-								<div class="progress">
-									<div class="progress-bar bg-info w-22" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="progress-bar bg-warning w-62" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
 						</div>
@@ -210,81 +187,66 @@
 			<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
 				<div class="card flex-fill">
 					<div class="card-body">
-						<h4 class="card-title">Task Statistics</h4>
+						<h4 class="card-title">Revenue</h4>
 						<div class="statistics">
 							<div class="row">
 								<div class="col-md-6 col-6 text-center">
 									<div class="stats-box mb-4">
-										<p>Total Tasks</p>
-										<h3>385</h3>
+										<p>Total Revenue</p>
+										<h3>100</h3>
 									</div>
 								</div>
 								<div class="col-md-6 col-6 text-center">
 									<div class="stats-box mb-4">
-										<p>Overdue Tasks</p>
-										<h3>19</h3>
+										<p>Received Amt</p>
+										<h3>75</h3>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="progress mb-4">
-							<div class="progress-bar bg-purple w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
-							<div class="progress-bar bg-warning w-22" role="progressbar" aria-valuenow="18" aria-valuemin="0" aria-valuemax="100">22%</div>
-							<div class="progress-bar bg-success w-24" role="progressbar" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100">24%</div>
-							<div class="progress-bar bg-danger w-21" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">21%</div>
-							<div class="progress-bar bg-info w-10" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100">10%</div>
+							<div class="progress-bar bg-success w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+							<div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
 						</div>
 						<div>
-							<p><i class="fa-regular fa-circle-dot text-purple me-2"></i>Completed Tasks <span class="float-end">166</span></p>
-							<p><i class="fa-regular fa-circle-dot text-warning me-2"></i>Inprogress Tasks <span class="float-end">115</span></p>
-							<p><i class="fa-regular fa-circle-dot text-success me-2"></i>On Hold Tasks <span class="float-end">31</span></p>
-							<p><i class="fa-regular fa-circle-dot text-danger me-2"></i>Pending Tasks <span class="float-end">47</span></p>
-							<p class="mb-0"><i class="fa-regular fa-circle-dot text-info me-2"></i>Review Tasks <span class="float-end">5</span></p>
+							<p><i class="fa-regular fa-circle-dot text-purple me-2"></i>Total Revenue <span class="float-end">100</span></p>
+							<p><i class="fa-regular fa-circle-dot text-success me-2"></i>Received Amt <span class="float-end">75</span></p>
+							<p><i class="fa-regular fa-circle-dot text-danger me-2"></i>Pending Revenue <span class="float-end">25</span></p>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>		
+
 			
-			<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
-				<div class="card flex-fill">
+			<div class="col-md-12 col-lg-12 col-xl-4 d-flex">
+				<div class="card flex-fill dash-statistics">
 					<div class="card-body">
-						<h4 class="card-title">Today Absent <span class="badge bg-inverse-danger ms-2">5</span></h4>
-						<div class="leave-info-box">
-							<div class="media d-flex align-items-center">
-								<a href="profile.html" class="avatar"><img src="assets/img/user.jpg" alt="User Image"></a>
-								<div class="media-body flex-grow-1">
-									<div class="text-sm my-0">Martin Lewis</div>
+						<h5 class="card-title">Ticket</h5>
+						<div class="stats-list">
+							<div class="stats-info">
+								<?php
+									$total_tickets = $datas['pending_tickets'] + $datas['open_tickets'] + $datas['close_tickets'];
+									$pending_percentage = round(($datas['pending_tickets']/$total_tickets) * 100);
+									$open_percentage = round(($datas['open_tickets']/$total_tickets) * 100);
+									$close_percentage = round(($datas['close_tickets']/$total_tickets) * 100);
+								?>
+								<p>Ticket Pending <strong><?= $datas['pending_tickets']; ?> <small>/ <?= $total_tickets; ?></small></strong></p>
+								<div class="progress">
+									<div class="progress-bar bg-primary w-<?= $pending_percentage; ?>" role="progressbar" aria-valuenow="<?= $pending_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
-							<div class="row align-items-center mt-3">
-								<div class="col-6">
-									<h6 class="mb-0">4 Sep 2019</h6>
-									<span class="text-sm text-muted">Leave Date</span>
-								</div>
-								<div class="col-6 text-end">
-									<span class="badge bg-inverse-danger">Pending</span>
+							<div class="stats-info">
+								<p>Ticket Open <strong><?= $datas['open_tickets']; ?> <small>/ <?= $total_tickets; ?></small></strong></p>
+								<div class="progress">
+									<div class="progress-bar bg-success w-<?= $open_percentage; ?>" role="progressbar" aria-valuenow="<?= $open_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
-						</div>
-						<div class="leave-info-box">
-							<div class="media d-flex align-items-center">
-								<a href="profile.html" class="avatar"><img src="assets/img/user.jpg" alt="User Image"></a>
-								<div class="media-body flex-grow-1">
-									<div class="text-sm my-0">Martin Lewis</div>
+							<div class="stats-info">
+								<p>Ticket Closed <strong><?= $datas['close_tickets']; ?> <small>/ <?= $total_tickets; ?></small></strong></p>
+								<div class="progress">
+									<div class="progress-bar bg-warning w-<?= $close_percentage; ?>" role="progressbar" aria-valuenow="<?= $close_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
 								</div>
 							</div>
-							<div class="row align-items-center mt-3">
-								<div class="col-6">
-									<h6 class="mb-0">4 Sep 2019</h6>
-									<span class="text-sm text-muted">Leave Date</span>
-								</div>
-								<div class="col-6 text-end">
-									<span class="badge bg-inverse-success">Approved</span>
-								</div>
-							</div>
-						</div>
-						<div class="load-more text-center">
-							<a class="text-dark" href="javascript:void(0);">Load More</a>
 						</div>
 					</div>
 				</div>
@@ -292,7 +254,7 @@
 		</div>
 		<!-- /Statistics Widget -->
 		
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-md-6 d-flex">
 				<div class="card card-table flex-fill">
 					<div class="card-header">
@@ -721,7 +683,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>-->
 	
 	</div>
 	<!-- /Page Content -->

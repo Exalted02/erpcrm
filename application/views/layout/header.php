@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Smarthr - Bootstrap Admin Template">
+        <meta name="description" content="Easy Skool">
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-        <meta name="author" content="Dreamstechnologies - Bootstrap Admin Template">
-        <title>Dashboard - HRMS admin template</title>
+        <meta name="author" content="Easy Skool">
+        <title>Easy Skool</title>
 		
 		<!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
@@ -51,13 +51,13 @@
 			
 				<!-- Logo -->
                 <div class="header-left">
-                    <a href="admin-dashboard.html" class="logo">
+                    <a href="<?php echo base_url('dashboard') ?>" class="logo">
 						<img src="<?php echo base_url(); ?>assets/img/logo2.png" alt="Logo">
 					</a>
-					<a href="admin-dashboard.html" class="logo collapse-logo">
+					<a href="<?php echo base_url('dashboard') ?>" class="logo collapse-logo">
 						<img src="<?php echo base_url(); ?>assets/img/logo2.png" alt="Logo">
 					</a>
-					<a href="admin-dashboard.html" class="logo2">
+					<a href="<?php echo base_url('dashboard') ?>" class="logo2">
 						<img src="<?php echo base_url(); ?>assets/img/logo2.png" width="40" height="40" alt="Logo">
 					</a>
                 </div>
@@ -98,8 +98,6 @@
 				<div class="dropdown mobile-user-menu">
 					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
 					<div class="dropdown-menu dropdown-menu-right">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
 						<a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a>
 					</div>
 				</div>

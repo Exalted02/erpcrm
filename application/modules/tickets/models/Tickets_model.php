@@ -31,4 +31,13 @@ class Tickets_model extends CI_Model {
     {
         return $this->db->where('id',$id)->delete(TICKET_FOLLOWUPS);
     }
+	function get_ticket_count($status = null)
+    {
+		if($status != null){
+			$this->db->where('status', $status);
+		}else{
+			$this->db->where('status !=', 0);
+		}
+        return $this->db->get(TICKETS)->result();
+    }
 }

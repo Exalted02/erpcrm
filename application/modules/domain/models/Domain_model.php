@@ -42,5 +42,9 @@ class Domain_model extends CI_Model {
 			->get()
 			->row();
 	}
+    function get_school_count($status)
+    {
+        return $this->db->where('status', $status)->get(API_DOMAINS)->result();
+    }
 
 }
