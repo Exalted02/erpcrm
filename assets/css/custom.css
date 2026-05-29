@@ -5,3 +5,12 @@
 	font-size: 13px;
     padding: 5px 10px;
 }
+.ticket-purpose{
+	padding: 10px !important;
+}
+.timeline-panel{
+	padding: 10px !important;
+}
+.attached-files{
+	padding: 10px !important;
+}

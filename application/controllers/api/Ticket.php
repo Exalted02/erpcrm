@@ -6,8 +6,7 @@ class Ticket extends MX_Controller  {
     public function __construct() {
         parent::__construct();
         $this->load->model('Api_model');
-        $this->load->model('Country_state_district');
-        $this->load->model('subscription/Subscription_model','subscription_model');
+        $this->load->model('tickets/Tickets_model','tickets_model');
  
         header('Content-Type: application/json');
         header('Access-Control-Allow-Origin: *'); // VERY IMPORTANT
@@ -170,6 +169,8 @@ class Ticket extends MX_Controller  {
 			->where('ticket_id', $id)
 			->get(TICKET_FILES)
 			->result_array();
+				
+		$ticket['ticket_followup'] = $this->tickets_model->get_ticket_followup($id);
 
 		$ticket['files'] = $files;
 
@@ -282,6 +283,43 @@ class Ticket extends MX_Controller  {
 
 		echo json_encode([
 			'status' => true
+		]);
+	}
+	public function save_followup()
+	{
+		$id = $this->input->post('id');
+
+		$data = [
+			'ticket_id' => $this->input->post('ticket_id'),
+			'message'   => $this->input->post('message'),
+			'user_type' => $this->input->post('user_type')
+		];
+		$followup_save = $this->tickets_model->ticket_followup_insert($data, $id);
+		
+		echo json_encode([
+			'status' => 1
+		]);
+	}
+	public function get_followup($id)
+	{
+		$data = $this->db
+			->where('id', $id)
+			->get('ticket_followups')
+			->row_array();
+		
+		echo json_encode([
+			'status' => true,
+			'data' => $data
+		]);
+	}
+	public function delete_followup($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('ticket_followups');
+
+		echo json_encode([
+			'status' => 1,
+			'message' => 'Deleted successfully'
 		]);
 	}
 }

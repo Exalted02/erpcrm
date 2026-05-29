@@ -23,6 +23,92 @@
 		
 		<div class="row">
 			<div class="col-md-12">
+				<div class="ticket-detail-head">
+					<div class="row">
+						<div class="col-xxl-5 col-md-5">
+							<div class="ticket-head-card">
+								<span class="ticket-detail-icon bg-danger-lights"><i class="la la-user"></i></span>
+								<div class="detail-info info-two">
+									<h6>Created By</h6>
+									<span><?= $get_ticket_details->school_name ?></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xxl-3 col-md-3">
+							<div class="ticket-head-card">
+								<span class="ticket-detail-icon bg-warning-lights"><i class="la la-calendar"></i></span>
+								<div class="detail-info info-two">
+									<h6>Created Date</h6>
+									<span><?= !empty($get_ticket_details->created_at) ? date('d/m/Y', strtotime($get_ticket_details->created_at)) : '' ?></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-xxl-2 col-md-2">
+							<div class="ticket-head-card">
+								<span class="ticket-detail-icon"><i class="la la-stop-circle"></i></span>
+								<div class="detail-info">
+									<h6>Status</h6>
+									<?php
+									if ($get_ticket_details->status == 1) {
+										echo '<span class="badge badge-soft-warning">Pending</span>';
+									} elseif ($get_ticket_details->status == 2) {
+										echo '<span class="badge badge-soft-primary">Open</span>';
+									} elseif ($get_ticket_details->status == 3) {
+										echo '<span class="badge badge-soft-success">Close</span>';
+									}
+									?>
+								</div>
+							</div>
+						</div>
+						<div class="col-xxl-2 col-md-2">
+							<div class="ticket-head-card">
+								<span class="ticket-detail-icon bg-purple-lights"><i class="la la-info-circle"></i></span>
+								<div class="detail-info">
+									<h6>Priority</h6>
+									<span><?php echo ticket_type_array()[$get_ticket_details->ticket_type]; ?></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="ticket-purpose">
+					<h4><?= $get_ticket_details->subject ?></h4>
+					<p><?= $get_ticket_details->body ?></p>
+				</div>
+			</div>
+			<?php if(!empty($ticket_files)) { ?>
+			<div class="col-md-12">				
+				<div class="attached-files-info mb-4">
+					<div class="attached-files">
+						<ul>
+						<?php foreach ($ticket_files as $file) { ?>
+								<?php
+								$file_url = base_url('uploads/tickets/' . $file['file']);
+								$ext = strtolower(pathinfo($file['file'], PATHINFO_EXTENSION));
+								$image_ext = ['jpg','jpeg','png','gif','webp'];
+								?>
+							<li>
+								<div class="d-flex align-items-center">
+									<span class="file-icon"><i class="la la-file-pdf"></i></span>
+									<p><?php echo $file_url; ?></p>
+								</div>
+								<div class="file-download">
+								<?php if (in_array($ext, $image_ext)) { ?>
+									<a href="<?php echo $file_url; ?>"><i class="la la-eye"></i>Preview</a>
+								<?php } else { ?>
+									<a href="<?php echo $file_url; ?>"><i class="la la-download"></i>Download</a>
+								<?php } ?>	
+								</div>
+							</li>
+							<?php } ?>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+			<div class="col-md-12">
 				<div class="card">
 					<div class="card-body">
 					<?php 
@@ -30,13 +116,17 @@
 					?>
 						<ul class="timeline">
 						<?php 
-							$i = 0;
+							$is_user = false;
 							foreach($ticket_followup as $row){
-								$class = ($i % 2 == 0) ? '' : 'timeline-inverted';
+								$is_user = ($row->user_type == 1) ? false : true;
 						?>
-							<li class="<?= $class ?>">
+							<li class="<?= $is_user ? 'timeline-inverted' : ''; ?>">
 								<div class="timeline-badge success">
+								<?php if($is_user){ ?>
+									<img src="<?php echo base_url(); ?>assets/img/favicon.png"></i>
+								<?php }else{ ?>
 								   <i class="fas fa-user"></i>
+								<?php } ?>  
 								</div>
 								<div class="timeline-panel">
 									<!--<div class="timeline-heading">
@@ -49,6 +139,7 @@
 										<small class="text-muted">
 										<?php echo isset($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?>
 										</small>
+										<?php if($is_user){ ?>
 										<div>
 										<a href="javascript:void(0)" class="text-muted" onclick="editFollowup(
 											<?= $row->id ?>,
@@ -57,10 +148,11 @@
 										
 										<a href="javascript:void(0)" class="text-muted" onclick="deleteFollowup(<?= $row->id ?>)"><i class="la la-trash-alt me-2"></i>Delete</a>
 										</div>
+										<?php } ?>
 									</div>
 								</div>
 							</li>
-							<?php $i++; } ?>
+							<?php } ?>
 						</ul>
 						<?php 
 						}else{

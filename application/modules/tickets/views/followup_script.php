@@ -6,10 +6,9 @@ function openAddModal() {
 }
 
 // EDIT
-function editFollowup(id, remark, remark_val) {
+function editFollowup(id, message) {
     $('#followup_id').val(id);
-    $('#remarks').val(remark);       // dropdown select
-    $('#remark_val').val(remark_val); // text input
+    $('#message').val(message);       // text input
     $('#followupModal').modal('show');
 }
 
@@ -18,7 +17,7 @@ $('#followupForm').submit(function(e){
     e.preventDefault();
 
     $.ajax({
-        url: "<?= base_url('leads/save_followup') ?>",
+        url: "<?= base_url('tickets/save_followup') ?>",
         type: "POST",
         data: $(this).serialize(),
         dataType: "json",
@@ -35,7 +34,7 @@ $('#followupForm').submit(function(e){
 function deleteFollowup(id){
     if(confirm('Are you sure?')){
         $.ajax({
-            url: "<?= base_url('leads/delete_followup/') ?>" + id,
+            url: "<?= base_url('tickets/delete_followup/') ?>" + id,
             type: "POST",
 			dataType: "json",
             success: function(response){

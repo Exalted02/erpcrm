@@ -39,7 +39,7 @@ $CI->load->model('seller/Seller_model');
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
 					<div class="input-block selectnew mb-3">
 						<select class="select form-control form-control-sm" name="ticket_type"> 
-							<option value="">Select Type</option>
+							<option value=" ">Select Type</option>
 							<?php foreach(ticket_type_array() as $t=>$val){ ?>
 							<option value="<?= $t ?>"
 								<?= set_value('ticket_type') == $t ? 'selected' : '' ?>>
@@ -79,7 +79,7 @@ $CI->load->model('seller/Seller_model');
 								<th>ID</th>
 								<th>Created Date</th>
 								<th>School Code</th>
-								<th>School Name</th>
+								<th style="width: 300px;">School Name</th>
 								<th>Subject</th>
 								<th>Type</th>
                                 <th>Status</th>
@@ -94,14 +94,10 @@ $CI->load->model('seller/Seller_model');
 								<td><?= $row->id ?></td>
 								<td><span style="display: none;"><?= $row->created_at ?></span><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
 								<td><?= $row->school_code_id ?></td>
-								<td><?= $row->school_name ?></td>
+								<td style="width: 300px;"><?= $row->school_name ?></td>
 								<td><?= $row->subject ?></td>
 								<td>
-									<?php
-
-									echo ticket_type_array()[$row->ticket_type];
-
-									?>
+									<?php echo ticket_type_array()[$row->ticket_type]; ?>
 								</td>
 								<td>
 									<?php

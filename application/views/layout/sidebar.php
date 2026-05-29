@@ -50,9 +50,9 @@
 					</ul>
 				</li>
 				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['tickets'],['index']) ?>"><i class="las la-ticket-alt"></i> <span>Ticket Management</span><span class="menu-arrow"></span></a>
-					<ul style="<?php echo is_block(['tickets'],['index']) ?>">
-						<li><a href="<?php echo base_url('tickets') ?>" class="<?php echo is_active(['tickets'],['index']) ?>">All Tickets</a></li> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['tickets'],['index','followup']) ?>"><i class="las la-ticket-alt"></i> <span>Ticket Management</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['tickets'],['index','followup']) ?>">
+						<li><a href="<?php echo base_url('tickets') ?>" class="<?php echo is_active(['tickets'],['index','followup']) ?>">All Tickets</a></li> 
 					</ul>
 				</li>
 				<li class="submenu"> 
