@@ -14,9 +14,6 @@
 						<li class="breadcrumb-item active">Ticket Followup</li>
 					</ul>
 				</div>
-				<div class="col-auto float-end ms-auto">
-					<a href="javascript:void(0);" class="btn btn-primary" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> Add Followup</a>
-				</div>
 			</div>
 		</div>
 		<!-- /Page Header -->
@@ -168,6 +165,9 @@
 						?>
 						<h4 class="text-center">No Followup</h4>
 						<?php } ?>
+						<div class="col-auto float-end ms-auto">
+							<a href="javascript:void(0);" class="btn btn-primary" onclick="openAddModal()"><i class="fa-solid fa-plus"></i> Add Followup</a>
+						</div>
 					</div>
 				</div>
 			</div>
