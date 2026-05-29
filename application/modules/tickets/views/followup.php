@@ -134,6 +134,14 @@
 									</div>-->
 									<div class="timeline-body">
 										<span><?= $row->message ?></span>
+										<?php if(!empty($row->image)) { ?>
+											<div class="mt-2">
+												<a href="<?= base_url('uploads/followups/'.$row->image) ?>" target="_blank">
+													<img src="<?= base_url('uploads/followups/'.$row->image) ?>" 
+														 style="max-width:100px;border-radius:10px;">
+												</a>
+											</div>
+										<?php } ?>
 									</div>
 									<div class="edit-delete-merge d-flex justify-between mt-2">
 										<small class="text-muted">
@@ -141,10 +149,11 @@
 										</small>
 										<?php if($is_user){ ?>
 										<div>
-										<a href="javascript:void(0)" class="text-muted" onclick="editFollowup(
+										<a href="javascript:void(0)" class="text-muted" onclick='editFollowup(
 											<?= $row->id ?>,
-											'<?= htmlspecialchars($row->message, ENT_QUOTES) ?>'
-										)"><i class="la la-edit me-2"></i>Edit</a>
+											<?= json_encode($row->message) ?>,
+											<?= json_encode($row->image) ?>
+										)'><i class="la la-edit me-2"></i>Edit</a>
 										
 										<a href="javascript:void(0)" class="text-muted" onclick="deleteFollowup(<?= $row->id ?>)"><i class="la la-trash-alt me-2"></i>Delete</a>
 										</div>
@@ -169,7 +178,7 @@
 	<div class="modal custom-modal1 fade" id="followupModal" role="dialog">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
-				<form id="followupForm">
+				<form id="followupForm" enctype="multipart/form-data">
 					<div class="modal-header">
 						<h5 class="modal-title">Followup</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
@@ -177,9 +186,18 @@
 					<div class="modal-body">
 						<input type="hidden" name="id" id="followup_id">
 						<input type="hidden" name="ticket_id" value="<?= $ticket_id ?>">
+						<input type="hidden" name="old_image" id="old_image">
 						<div class="form-group mt-2">
 							<label>Message</label>
 							<input type="text" name="message" id="message" class="form-control form-control-sm" placeholder="Enter message">
+						</div>
+						<div class="form-group mt-3">
+							<label>Upload Image</label>
+							<input type="file" name="followup_image" id="followup_image" class="form-control form-control-sm" accept="image/*">
+						</div>
+						<!-- Preview -->
+						<div class="mt-3" id="image_preview_div" style="display:none;">
+							<img id="image_preview" src="" style="max-width:100px;border-radius:10px;">
 						</div>
 					</div>
 					<div class="modal-footer">

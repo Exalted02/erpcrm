@@ -289,13 +289,52 @@ class Ticket extends MX_Controller  {
 	{
 		$id = $this->input->post('id');
 
+		$image = $this->input->post('old_image');
+
+		/* IMAGE UPLOAD */
+		if (!empty($_FILES['followup_image']['name'])) {
+
+			$path = FCPATH . 'uploads/followups/';
+
+			if (!is_dir($path)) {
+				mkdir($path, 0777, true);
+			}
+
+			$config['upload_path']   = $path;
+			$config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+			$config['encrypt_name']  = true;
+
+			$this->load->library('upload');
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('followup_image')) {
+
+				// delete old image
+				if (!empty($image)) {
+
+					$oldPath = $path . $image;
+
+					if (file_exists($oldPath)) {
+						unlink($oldPath);
+					}
+				}
+
+				$uploadData = $this->upload->data();
+
+				$image = $uploadData['file_name'];
+			}
+		}
+
 		$data = [
 			'ticket_id' => $this->input->post('ticket_id'),
 			'message'   => $this->input->post('message'),
-			'user_type' => $this->input->post('user_type')
+			'user_type' => $this->input->post('user_type'),
+			'image'     => $image
 		];
-		$followup_save = $this->tickets_model->ticket_followup_insert($data, $id);
-		
+
+		$followup_save = $this->tickets_model
+			->ticket_followup_insert($data, $id);
+
 		echo json_encode([
 			'status' => 1
 		]);
@@ -304,7 +343,7 @@ class Ticket extends MX_Controller  {
 	{
 		$data = $this->db
 			->where('id', $id)
-			->get('ticket_followups')
+			->get(TICKET_FOLLOWUPS)
 			->row_array();
 		
 		echo json_encode([
@@ -314,8 +353,25 @@ class Ticket extends MX_Controller  {
 	}
 	public function delete_followup($id)
 	{
-		$this->db->where('id', $id);
-		$this->db->delete('ticket_followups');
+		$followup = $this->db
+			->where('id', $id)
+			->get(TICKET_FOLLOWUPS)
+			->row_array();
+
+		if (!empty($followup)) {
+
+			if (!empty($followup['image'])) {
+
+				$path = FCPATH . 'uploads/followups/' . $followup['image'];
+
+				if (file_exists($path)) {
+					unlink($path);
+				}
+			}
+
+			$this->db->where('id', $id);
+			$this->db->delete(TICKET_FOLLOWUPS);
+		}
 
 		echo json_encode([
 			'status' => 1,

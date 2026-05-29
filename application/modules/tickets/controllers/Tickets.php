@@ -64,11 +64,38 @@ class Tickets extends MY_Controller {
 	public function save_followup()
 	{
 		$id = $this->input->post('id');
+		
+		$image = $this->input->post('old_image');
 
+		// Upload Image
+		if (!empty($_FILES['followup_image']['name'])) {
+
+			$config['upload_path']   = './uploads/followups/';
+			$config['allowed_types'] = 'jpg|jpeg|png|gif|webp';
+			$config['encrypt_name']  = true;
+
+			if (!is_dir($config['upload_path'])) {
+				mkdir($config['upload_path'], 0777, true);
+			}
+
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('followup_image')) {
+
+				// delete old image
+				if (!empty($image) && file_exists('./uploads/followups/' . $image)) {
+					unlink('./uploads/followups/' . $image);
+				}
+
+				$uploadData = $this->upload->data();
+				$image = $uploadData['file_name'];
+			}
+		}
 		$data = [
 			'ticket_id' => $this->input->post('ticket_id'),
 			'user_type' => 0,
 			'message' => $this->input->post('message'),
+			'image'     => $image,
 		];
 		
 		$followup_save = $this->tickets_model->ticket_followup_insert($data, $id);
@@ -80,7 +107,50 @@ class Tickets extends MY_Controller {
 	}
 	public function delete_followup($id)
 	{
-		$followup_save = $this->tickets_model->ticket_followup_delete($id);
-		echo json_encode(['status' => 'success']);
+		// Get followup details
+		$followup = $this->db
+			->where('id', $id)
+			->get(TICKET_FOLLOWUPS)
+			->row();
+
+		if (!empty($followup)) {
+
+			// Delete image if exists
+			if (!empty($followup->image)) {
+
+				$image_path = './uploads/followups/' . $followup->image;
+
+				if (file_exists($image_path)) {
+					unlink($image_path);
+				}
+			}
+
+			// Delete database row
+			$delete = $this->db
+				->where('id', $id)
+				->delete(TICKET_FOLLOWUPS);
+
+			if ($delete) {
+
+				echo json_encode([
+					'status' => 'success',
+					'message' => 'Followup deleted successfully.'
+				]);
+
+			} else {
+
+				echo json_encode([
+					'status' => 'error',
+					'message' => 'Delete failed.'
+				]);
+			}
+
+		} else {
+
+			echo json_encode([
+				'status' => 'error',
+				'message' => 'Followup not found.'
+			]);
+		}
 	}
 }
