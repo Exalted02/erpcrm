@@ -160,6 +160,11 @@
 							</li>
 							<?php } ?>
 						</ul>
+						<?php if($get_ticket_details->status == 3){ ?>
+						<div class="alert alert-danger" role="alert">
+							Ticket Closed!
+						</div>
+						<?php } ?>
 						<?php 
 						}else{
 						?>
@@ -190,10 +195,20 @@
 						<div class="form-group mt-2">
 							<label>Message</label>
 							<input type="text" name="message" id="message" class="form-control form-control-sm" placeholder="Enter message">
+							<span id="err_message" class="text-danger"></span>
 						</div>
 						<div class="form-group mt-3">
 							<label>Upload Image</label>
 							<input type="file" name="followup_image" id="followup_image" class="form-control form-control-sm" accept="image/*">
+						</div>
+						<div class="form-group mt-3 ticket_status_row" style="display:none;">
+							<label>Ticket Status</label>
+							<select name="ticket_status" id="ticket_status" class="form-control form-control-sm">
+								<option value="">Select</option>
+								<option value="1">Pending</option>
+								<option value="2">Open</option>
+								<option value="3">Close</option>
+							</select>
 						</div>
 						<!-- Preview -->
 						<div class="mt-3" id="image_preview_div" style="display:none;">

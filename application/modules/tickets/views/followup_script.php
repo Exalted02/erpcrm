@@ -6,6 +6,7 @@ function openAddModal() {
 
     $('#followup_id').val('');
     $('#old_image').val('');
+    $('.ticket_status_row').show();
 
     $('#image_preview_div').hide();
     $('#image_preview').attr('src', '');
@@ -20,6 +21,7 @@ function editFollowup(id, message, image) {
     $('#message').val(message);
 
     $('#old_image').val(image);
+    $('.ticket_status_row').hide();
 
     if(image != '' && image != null){
 
@@ -59,6 +61,12 @@ $('#followup_image').change(function(){
 $('#followupForm').submit(function(e){
 
     e.preventDefault();
+	
+	var message = $('#message').val();
+	if(message == ''){
+		$('#err_message').text('Please enter message');
+		return false;
+	}
 
     let formData = new FormData(this);
 

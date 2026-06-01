@@ -99,6 +99,11 @@ class Tickets extends MY_Controller {
 		];
 		
 		$followup_save = $this->tickets_model->ticket_followup_insert($data, $id);
+		
+		if($this->input->post('ticket_status') &&  $this->input->post('ticket_status') != ''){
+			$update_ticket_status = $this->tickets_model->add_ticket(['id'=>$this->input->post('ticket_id'), 'status'=>$this->input->post('ticket_status')]);
+		}
+		
 		if($followup_save){
 			echo json_encode(['status'=>'success', 'message'=>'Followup successfully.']);
 		}else{
