@@ -72,6 +72,14 @@
 					</ul>
 				</li>
 				<?php } ?>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">
+						<i class="la la-file-invoice"></i> <span>Manage Invoices</span><span class="menu-arrow"></span>
+					</a>
+					<ul style="<?php echo is_block(['invoice'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('invoice') ?>" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">Invoices</a></li>
+					</ul>
+				</li>
 			</ul>
 			
 		</div>

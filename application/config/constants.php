@@ -105,3 +105,4 @@ define('TICKET_FOLLOWUPS', 'ticket_followups');
 define('CONVERT_SCHOOL', 'convert_school');
 define('STATES', 'states');
 define('DISTRICTS', 'districts');
+define('INVOICES', 'invoices');

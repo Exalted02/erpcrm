@@ -111,3 +111,23 @@ CREATE TABLE `ticket_followups` (
 ALTER TABLE `ticket_followups` CHANGE `id` `id` BIGINT(20) NOT NULL AUTO_INCREMENT, CHANGE `ticket_id` `ticket_id` BIGINT(20) NOT NULL;
 ALTER TABLE `ticket_followups` ADD `image` VARCHAR(255) NULL DEFAULT NULL AFTER `message`;
 
+CREATE TABLE `invoices` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `domain_id` int(10) unsigned NOT NULL,
+  `school_id` varchar(20) NOT NULL,
+  `invoice_prefix` varchar(20) NOT NULL DEFAULT 'INV',
+  `invoice_number` varchar(10) NOT NULL DEFAULT '001',
+  `item_description` text NOT NULL,
+  `price_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `discount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `cgst` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Flat CGST amount (computed from cgst_pct)',
+  `cgst_pct` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'CGST rate in percent (e.g. 9 = 9%)',
+  `igst` decimal(10,2) NOT NULL DEFAULT 0.00 COMMENT 'Flat IGST amount (computed from igst_pct)',
+  `igst_pct` decimal(5,2) NOT NULL DEFAULT 0.00 COMMENT 'IGST rate in percent (e.g. 18 = 18%)',
+  `total` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0=unpaid, 1=paid',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci
+
