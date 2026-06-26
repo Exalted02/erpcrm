@@ -33,9 +33,9 @@
 						<tbody>
 							<?php foreach($domains as $row){ ?>
 							<tr>
-								<td><?= $row->code_year.$row->code_number ?></td>
+								<th><?= $row->code_year.$row->code_number ?></th>
 								<td><?= $row->domain_name ?></td>
-								<td><?= $row->name ?></td>
+								<th><?= $row->name ?></th>
 								<?php
 								$state = $this->Country_state_district->get_state_name($row->school_state);
 								?>

@@ -18,9 +18,12 @@ class Domain extends MX_Controller  {
 		$domain = $this->Api_model->get_domain_data($api_key);
 		$state = $this->Country_state_district->get_state_name($domain->school_state);
 		$district = $this->Country_state_district->get_district_name($domain->school_district);
+		$subscriptions = $this->subscription_model->get($domain->plan_id);
 		$domain->school_state = $state->state_name ?? '';
 		$domain->school_district = $district->district_name ?? '';
 		$domain->school_country = 'India';
+		$domain->max_students = $subscriptions->max_students;
+		$domain->add_on_students = $subscriptions->add_on_students;
 		$data['data'] = $domain;
 		echo json_encode($data);
     }
