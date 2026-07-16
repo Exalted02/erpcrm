@@ -1,4 +1,16 @@
 <!-- Page Wrapper -->
+<style>
+.plan-desc {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 5px;
+    max-height: 150px;
+    min-height: 150px;
+    overflow-y: auto;
+	line-height: 1.5em !important;
+}
+</style>
 <div class="page-wrapper">
 
 	<!-- Page Content -->
@@ -23,10 +35,10 @@
 					<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'registration' || empty($active_tab)) ? 'active' : '' ?>" href="#solid-rounded-justified-tab1" data-bs-toggle="tab">Registration Details</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab5" data-bs-toggle="tab">Plan Details</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">School Strengths</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab3" data-bs-toggle="tab">School Income</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab4" data-bs-toggle="tab">School Expense</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab5" data-bs-toggle="tab">Plan Details</a></li>
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'login') ? 'active' : '' ?>" href="#solid-rounded-justified-tab6" data-bs-toggle="tab">Login Details</a></li>
 						</ul>
 						<div class="tab-content">
@@ -175,12 +187,41 @@
 									</div>
 								</form>
 							</div>
+							<div class="tab-pane" id="solid-rounded-justified-tab5">
+							<?php if(isset($plan_details) && !empty($plan_details)){?>
+								<div class="row mb-30 equal-height-cards">
+									<div class="col-md-4 offset-4">
+										<div class="card pricing-box">
+											<div class="card-body d-flex flex-column">
+												<div class="mb-4">
+													<h3><?php echo $plan_details->title; ?></h3>
+													<span class="display-4">₹<?= format_amount($plan_details->price ?? 0) ?></span>
+													<span>/ <?= $plan_details->duration ?? '' ?> Month<?= $plan_details->duration > 1 ? 's' : '' ?></span>
+												</div>
+												<ul>
+													<li><i class="fa-solid fa-check"></i> <b>Student Limit: </b><?= $plan_details->max_students ?? '' ?></li>
+													<?php if(isset($plan_details->add_on_students) && $plan_details->add_on_students > 0){ ?>
+													<li><i class="fa-solid fa-check"></i> <b>Add-On: </b><?= $plan_details->add_on_students ?? ''; ?></li>
+													<?php } ?>
+													<li class="plan-desc"><?= $plan_details->description ?? '' ?></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>								
+							<?php 
+							}else{
+							?>
+								<h4 class="text-center">No Plan Available</h4>
+							<?php
+							} ?>
+							</div>
 							<div class="tab-pane show" id="solid-rounded-justified-tab2">								
 								<div class="row">
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
 											<label class="col-form-label">Session</label>
-											<select class="select form-control-sm school_session" data-type="strengths">
+											<select class="select form-control-sm school_filter" data-type="strengths">
 												<option value="">Please select</option>
 												<?php foreach($school_sessions as $session_Val){ ?>
 													<option value="<?= $session_Val['id'] ?>"><?= $session_Val['session'] ?></option>
@@ -197,12 +238,29 @@
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
 											<label class="col-form-label">Session</label>
-											<select class="select form-control-sm school_session" data-type="income">
+											<select class="select form-control-sm school_filter" data-type="income">
 												<option value="">Please select</option>
 												<?php foreach($school_sessions as $session_Val){ ?>
 													<option value="<?= $session_Val['id'] ?>"><?= $session_Val['session'] ?></option>
 												<?php } ?>
 											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="input-block mb-3">
+											<label class="col-form-label">From Date</label>
+											<div class="cal-icon">
+											<input type="text" class="form-control form-control-sm from_date school_filter datetimepicker" data-type="income">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="input-block mb-3">
+											<label class="col-form-label">To Date</label>
+											<div class="cal-icon">
+											<input type="text" class="form-control form-control-sm to_date school_filter datetimepicker" data-type="income">
+											</div>
 										</div>
 									</div>
 								</div>
@@ -214,7 +272,7 @@
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
 											<label class="col-form-label">Session</label>
-											<select class="select form-control-sm school_session" data-type="expense">
+											<select class="select form-control-sm school_filter" data-type="expense">
 												<option value="">Please select</option>
 												<?php foreach($school_sessions as $session_Val){ ?>
 													<option value="<?= $session_Val['id'] ?>"><?= $session_Val['session'] ?></option>
@@ -222,12 +280,26 @@
 											</select>
 										</div>
 									</div>
+									<div class="col-md-3">
+										<div class="input-block mb-3">
+											<label class="col-form-label">From Date</label>
+											<div class="cal-icon">
+											<input type="text" class="form-control form-control-sm from_date school_filter datetimepicker" data-type="expense">
+											</div>
+										</div>
+									</div>
+
+									<div class="col-md-3">
+										<div class="input-block mb-3">
+											<label class="col-form-label">To Date</label>
+											<div class="cal-icon">
+											<input type="text" class="form-control form-control-sm to_date school_filter datetimepicker" data-type="expense">
+											</div>
+										</div>
+									</div>
 								</div>
 								<div id="expense_html">
 								</div>
-							</div>
-							<div class="tab-pane" id="solid-rounded-justified-tab5">
-								Plan Details
 							</div>
 							<div class="tab-pane <?= ($active_tab == 'login') ? 'show active' : '' ?>" id="solid-rounded-justified-tab6">
 								<form method="post" action="<?= base_url('settings/edit/'.$school['id']) ?>">
@@ -245,6 +317,9 @@
 												<label class="col-form-label"> Password <span class="text-danger">*</span></label>
 												<input type="text" name="login_password" class="form-control form-control-sm" value="<?= $school['domain_login_password'] ?? '' ?>">
 												<span class="text-danger"><?= form_error('login_password') ?></span>
+												<?php if($school['domain_login_password']==null ){ ?>
+												<label class="col-form-label"><small class="text-danger">(Your account is currently using the default password. Please change it for security reasons.)</small></label>
+												<?php } ?>
 											</div>
 										</div>
 									</div>

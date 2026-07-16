@@ -70,6 +70,10 @@ class Settings extends MY_Controller {
 			$data['school_sessions'] = $response['sessions'] ?? [];
 			$data['login_data'] = $response['login_data'] ?? [];
 			$data['school'] = (array) $domain;
+			if(isset($domain) && $domain->plan_id!=null){
+				$data['plan_details'] = $this->subscription_model->get($domain->plan_id);
+				// echo '<pre>';print_r($data['plan_details']);exit;
+			}
 			$data['school_type'] = school_type_array();
 			$data['sellers'] = $this->seller_model->get_all();
 			$data['page'] = 'settings/setting_form';
@@ -162,6 +166,15 @@ class Settings extends MY_Controller {
 	{
 		$form_type = $this->input->post('form_type');
 		$session_id = $this->input->post('session_id');
+		$from_date  = $this->input->post('from_date', true);
+		$to_date    = $this->input->post('to_date', true);
+		if (!empty($from_date)) {
+			$from_date = DateTime::createFromFormat('d-m-Y', $from_date)->format('Y-m-d');
+		}
+
+		if (!empty($to_date)) {
+			$to_date = DateTime::createFromFormat('d-m-Y', $to_date)->format('Y-m-d');
+		}
 		
 		$domain_id = $this->input->post('domain_id');
 		$domain = $this->domain_model->get($domain_id);
@@ -174,7 +187,9 @@ class Settings extends MY_Controller {
 		];
 		$post = [
 			'form_type' => $form_type,
-			'session_id' => $session_id
+			'session_id' => $session_id,
+			'from_date' => $from_date,
+			'to_date' => $to_date,
 		];
 		$response = call_api_post($url, $post, $headers);
 		echo json_encode([

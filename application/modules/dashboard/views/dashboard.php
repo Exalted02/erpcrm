@@ -328,7 +328,7 @@
 									<a href="<?php echo base_url('invoice') ?>">
 										<div class="stats-box mb-4">
 											<p>This Month Revenue</p>
-											<h3><?= format_amount($datas['invoice_monthly_summary']['total_paid_this_month']); ?></h3>
+											<h3><?= format_amount($datas['invoice_monthly_summary']['total_paid_this_month'] ?? 0); ?></h3>
 										</div>
 									</a>
 								</div>

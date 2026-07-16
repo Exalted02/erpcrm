@@ -82,7 +82,7 @@ function fmt_num($val, $zero_as_empty = true) {
 								</div>
 
 								<!-- ── School Dropdown ── -->
-								<div class="col-md-4">
+								<div class="col-md-8">
 									<div class="input-block selectnew mb-3">
 										<label class="col-form-label">School ID <span class="text-danger">*</span></label>
 										<select class="select form-control-sm" name="domain_id" id="domain_id" required>
@@ -92,7 +92,7 @@ function fmt_num($val, $zero_as_empty = true) {
 												data-schoolid="<?= $d->code_year . $d->code_number ?>"
 												data-domain="<?= htmlspecialchars($d->domain_name) ?>"
 												<?= (isset($invoice) && $invoice->domain_id == $d->id) ? 'selected' : '' ?>>
-												<?= $d->code_year . $d->code_number ?>
+												<?= $d->code_year . $d->code_number ?> (Name:<?= $d->name ?>, Code:<?= $d->dise_code ?>, )
 											</option>
 											<?php } ?>
 										</select>

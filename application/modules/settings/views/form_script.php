@@ -185,27 +185,83 @@ $(document).on('change', '#school_state', function () {
 });
 // On session change
 let domain_id = "<?= $school['id'] ?>";
-$(document).on('change', '.school_session', function () {
 
-	let form_type = $(this).data('type');
-	let session_id = $(this).val();
+// Session Change
+$(document).on('change', 'select.school_filter', function () {
+    loadSchoolDetails($(this));
+});
 
-	$.ajax({
+// Datetimepicker Change
+$(document).on('dp.change', '.datetimepicker', function () {
+    loadSchoolDetails($(this));
+});
+
+function loadSchoolDetails($element)
+{
+    let form_type = $element.data('type');
+    let row = $element.closest('.row');
+
+    let session_id = row.find('select.school_filter').val() || '';
+    let from_date  = row.find('.from_date').val() || '';
+    let to_date    = row.find('.to_date').val() || '';
+
+    // Only for Income & Expense tabs (where date fields exist)
+    if (row.find('.from_date').length > 0) {
+
+        // From Date Changed
+        if ($element.hasClass('from_date')) {
+
+            // If To Date is blank, set it equal to From Date
+            if (to_date === '') {
+                row.find('.to_date').val(from_date);
+                to_date = from_date;
+            }
+            // If From Date > To Date
+            else {
+                var from = moment(from_date, "DD-MM-YYYY");
+                var to   = moment(to_date, "DD-MM-YYYY");
+
+                if (from.isAfter(to)) {
+                    row.find('.to_date').val(from_date);
+                    to_date = from_date;
+                }
+            }
+        }
+
+        // To Date Changed
+        if ($element.hasClass('to_date')) {
+
+            if (from_date !== '') {
+
+                var from = moment(from_date, "DD-MM-YYYY");
+                var to   = moment(to_date, "DD-MM-YYYY");
+
+                // Prevent To Date before From Date
+                if (to.isBefore(from)) {
+                    row.find('.to_date').val(from_date);
+                    to_date = from_date;
+                }
+            }
+        }
+    }
+
+    $.ajax({
         url: "<?= base_url('settings/settings/get_school_details') ?>",
         type: "POST",
-		dataType: "json",
+        dataType: "json",
         data: {
             form_type: form_type,
             session_id: session_id,
+            from_date: from_date,
+            to_date: to_date,
             domain_id: domain_id
         },
-        success: function(res){
-            $("#"+form_type+"_html").html(res.html);
+        success: function (res) {
+            $("#" + form_type + "_html").html(res.html);
         },
-        error: function(){
+        error: function () {
             alert("Error loading data");
         }
     });
-
-});
+}
 </script>
