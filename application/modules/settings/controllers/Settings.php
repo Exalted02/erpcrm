@@ -9,6 +9,7 @@ class Settings extends MY_Controller {
         $this->load->model('domain/Domain_model','domain_model');
         $this->load->model('Country_state_district');
         $this->load->model('subscription/Subscription_model','subscription_model');
+		$this->load->model('seller/Seller_model','seller_model');
     }
 
     public function index()
@@ -42,6 +43,10 @@ class Settings extends MY_Controller {
 			$this->form_validation->set_rules('school_city', 'City', 'required|trim');
 			$this->form_validation->set_rules('school_pin_code', 'Pin Code', 'required|trim');
 			$this->form_validation->set_rules('plan_id', 'Plan', 'required|trim');
+			$this->form_validation->set_rules('school_type', 'School Type', 'required|trim');
+			if($this->input->post('school_type')==1){
+				$this->form_validation->set_rules('seller_id', 'Seller', 'required|trim');
+			}
 		}
 		if($form_type == 'login'){
 			$this->form_validation->set_rules('login_id', 'Login ID', 'required|valid_email|trim');
@@ -65,6 +70,8 @@ class Settings extends MY_Controller {
 			$data['school_sessions'] = $response['sessions'] ?? [];
 			$data['login_data'] = $response['login_data'] ?? [];
 			$data['school'] = (array) $domain;
+			$data['school_type'] = school_type_array();
+			$data['sellers'] = $this->seller_model->get_all();
 			$data['page'] = 'settings/setting_form';
 			$data['script'] = 'settings/form_script';
 
@@ -95,6 +102,10 @@ class Settings extends MY_Controller {
 								
 				$response = call_api_post($url, $post, $headers);
 			// echo '<pre>';print_r($headers);die;
+				$seller_id = $this->input->post('seller_id', true);
+				if($this->input->post('school_type')==0){
+					$seller_id = null;
+				}
 				
 				$data = [
 					'name' => $this->input->post('name', true),
@@ -110,6 +121,8 @@ class Settings extends MY_Controller {
 					'school_city'     => $this->input->post('school_city', true),
 					'school_pin_code'     => $this->input->post('school_pin_code', true),
 					'plan_id'     => $this->input->post('plan_id', true),
+					'school_type'     => $this->input->post('school_type', true),
+					'seller_id'     => $seller_id,
 				];
 				$this->domain_model->update($domain->id, $data);
 			}

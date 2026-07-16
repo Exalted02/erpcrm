@@ -17,4 +17,7 @@ class Api_model extends CI_Model {
 	public function get_domain_data($api_key) {
         return $this->db->where('api_key',$api_key)->get(API_DOMAINS)->row();
     }
+	public function get_invoice_list($id) {
+        return $this->db->where('domain_id',$id)->get(INVOICES)->result_array();
+    }
 }

@@ -187,4 +187,98 @@ class Seller extends MY_Controller {
             echo json_encode(['status'=>'error']);
         }
     }
+	public function get_seller_details()
+	{
+		$seller_id = $this->input->post('seller_id');
+		
+		$seller = $this->seller_model->get($seller_id);
+		
+		$experience = '-';
+		if (!empty($seller->working_experience)) {
+			$experience = $seller->working_experience . ' ' .
+				($seller->working_experience == 1 ? 'Year Experience' : 'Years Experience');
+		}
+		$state_name = '-';
+		if(!empty($seller->seller_state)){
+			$state = $this->Country_state_district->get_state_name($seller->seller_state);
+			$state_name = $state->state_name ?? '-';
+		}
+		$district_name = '-';
+		if(!empty($seller->seller_district)){
+			$district = $this->Country_state_district->get_district_name($seller->seller_district);
+			$district_name = $district->district_name ?? '-';
+		}
+		$html = '
+			<div class="card-header">
+				<h4 class="card-title">Seller Information</h4>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-6">
+						<ul class="personal-info">
+							<li>
+								<div class="title">Firm Name</div>
+								<div class="text">' . ($seller->firm_name ?? '-') . '</div>
+							</li>
+							<li>
+								<div class="title">Re-Seller Name</div>
+								<div class="text">' . ($seller->name ?? '-') . '</div>
+							</li>
+							<li>
+								<div class="title">Mobile No.</div>
+								<div class="text"><a href="tel:' . ($seller->mobile_no ?? '') . '">' . ($seller->mobile_no ?? '-') . '</a></div>
+							</li>
+							<li>
+								<div class="title">Alternate No.</div>
+								<div class="text"><a href="tel:' . ($seller->alternate_mobile_no ?? '') . '">' . ($seller->alternate_mobile_no ?? '-') . '</a></div>
+							</li>
+							<li>
+								<div class="title">Email ID</div>
+								<div class="text"><a href="mailto:' . ($seller->email ?? '') . '">' . ($seller->email ?? '-') . '</a></div>
+							</li>
+							<li>
+								<div class="title">GST No.</div>
+								<div class="text">' . ($seller->gst_no ?? '-') . '</div>
+							</li>
+							<li>
+								<div class="title">Working Experience</div>
+								<div class="text">' . $experience . '</div>
+							</li>
+						</ul>
+					</div>	
+					<div class="col-md-6">
+						<ul class="personal-info">
+							<li>
+								<div class="title">Country</div>
+								<div class="text">India</div>
+							</li>
+							<li>
+								<div class="title">State</div>
+								<div class="text">' . $state_name . '</div>
+							</li>
+							<li>
+								<div class="title">District</div>
+								<div class="text">' . $district_name . '</div>
+							</li>
+							<li>
+								<div class="title">City</div>
+								<div class="text">' . ($seller->seller_city ?? '-') . '</div>
+							</li>
+							<li>
+								<div class="title">Pin Code</div>
+								<div class="text">' . ($seller->seller_pin_code ?? '-') . '</div>
+							</li>
+							<li>
+								<div class="title">Seller Full Address</div>
+								<div class="text">' . nl2br($seller->seller_address ?? '-') . '</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>';
+		echo json_encode([
+			'status' => true,
+			'html' => $html,
+		]);
+	}
 }

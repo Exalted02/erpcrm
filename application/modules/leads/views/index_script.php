@@ -136,5 +136,36 @@ $(document).ready(function(){
         }
     ] 
 	});
+	// On state change
+    $('#state').change(function () {
+
+        let state_id = $(this).val();
+
+        loadDistricts(state_id);
+
+    });
+	function loadDistricts(state_id, selected_district = '') {
+        if(state_id != ''){
+            $.ajax({
+				url: "<?= base_url('common/getDistricts') ?>",
+                type: "POST",
+                data: {state_id: state_id},
+
+                success: function (response) {
+
+                    $('#district').html(response);
+
+                    if(selected_district != ''){
+                        $('#district').val(selected_district);
+                    }
+                }
+            });
+        } else {
+
+            $('#district').html(
+                '<option value="">Select District</option>'
+            );
+        }
+    }
 });
 </script>

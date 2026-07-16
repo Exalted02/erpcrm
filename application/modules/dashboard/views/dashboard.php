@@ -19,37 +19,56 @@
 	
 		<div class="row">
 			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-				<div class="card dash-widget">
-					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-solid fa-cubes"></i></span>
-						<div class="dash-widget-info">
-							<h3><?= $datas['no_of_leads']; ?></h3>
-							<span>No. of Leads</span>
+				<a href="<?php echo base_url('subscription') ?>">
+					<div class="card dash-widget">
+						<div class="card-body">
+							<span class="dash-widget-icon"><i class="fa-solid fa-money-bill"></i></span>
+							<div class="dash-widget-info">
+								<h3><?= $datas['no_of_plans']; ?></h3>
+								<span>No. of Plans</span>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-				<div class="card dash-widget">
-					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-solid fa-school"></i></span>
-						<div class="dash-widget-info">
-							<h3><?= $datas['register_school']; ?></h3>
-							<span>Register School</span>
+				<a href="<?php echo base_url('leads') ?>">
+					<div class="card dash-widget">
+						<div class="card-body">
+							<span class="dash-widget-icon"><i class="fa-solid fa-cubes"></i></span>
+							<div class="dash-widget-info">
+								<h3><?= $datas['no_of_leads']; ?></h3>
+								<span>No. of Leads</span>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
 			</div>
 			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-				<div class="card dash-widget">
-					<div class="card-body">
-						<span class="dash-widget-icon"><i class="fa-regular fa-x"></i></span>
-						<div class="dash-widget-info">
-							<h3><?= $datas['disable_school']; ?></h3>
-							<span>Disable School</span>
+				<a href="<?php echo base_url('api-domain') ?>">
+					<div class="card dash-widget">
+						<div class="card-body">
+							<span class="dash-widget-icon"><i class="fa-solid fa-school"></i></span>
+							<div class="dash-widget-info">
+								<h3><?= $datas['register_school']; ?></h3>
+								<span>Register Domain</span>
+							</div>
 						</div>
 					</div>
-				</div>
+				</a>
+			</div>
+			<div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+				<a href="<?php echo base_url('api-domain') ?>">
+					<div class="card dash-widget">
+						<div class="card-body">
+							<span class="dash-widget-icon"><i class="fa-regular fa-x"></i></span>
+							<div class="dash-widget-info">
+								<h3><?= $datas['disable_school']; ?></h3>
+								<span>Disable School</span>
+							</div>
+						</div>
+					</div>
+				</a>
 			</div>
 		</div>
 		
@@ -156,6 +175,102 @@
 		
 		<!-- Statistics Widget -->
 		<div class="row">
+			<div class="col-lg-6 col-md-12">
+				<div class="card flex-fill">
+					<div class="card-body">
+						<div class="statistic-header">
+							<h4>No of Leads</h4>
+							<!--<a href="<?php echo base_url('leads') ?>">
+								All Leads
+							</a>-->
+						</div>
+						<div class="attendance-list">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-primary"><?= $datas['no_of_leads']; ?></h4>
+										<p>Total</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-pink"><?= $datas['get_total_followup_leads']; ?></h4>
+										<p>Total Followup</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-success"><?= $datas['total_converted_leads']; ?></h4>
+										<p>Total Converted</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-purple"><?= $datas['total_cancel_leads']; ?></h4>
+										<p>Total Cancel</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-info"><?= $datas['total_transfer_leads']; ?></h4>
+										<p>Total Transfer</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="view-attendance">
+							<a href="<?php echo base_url('leads') ?>">
+								All Leads
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-12">
+				<div class="card flex-fill">
+					<div class="card-body">
+						<div class="statistic-header">
+							<h4>No of Re-Seller Leads</h4>
+						</div>
+						<div class="attendance-list">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-primary"><?= $datas['no_of_reseller_leads']; ?></h4>
+										<p>Total</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-pink"><?= $datas['get_total_followup_reseller_leads']; ?></h4>
+										<p>Total Followup</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-success"><?= $datas['total_converted_reseller_leads']; ?></h4>
+										<p>Total Converted</p>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="attendance-details">
+										<h4 class="text-purple"><?= $datas['total_cancel_reseller_leads']; ?></h4>
+										<p>Total Cancel</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="view-attendance">
+							<a href="<?php echo base_url('leads') ?>">
+								All Leads
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+
 			<div class="col-md-12 col-lg-12 col-xl-4 d-flex">
 				<div class="card flex-fill dash-statistics">
 					<div class="card-body">
@@ -187,6 +302,86 @@
 			<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
 				<div class="card flex-fill">
 					<div class="card-body">
+						<h4 class="card-title">Invoice Summary</h4>
+
+						<div class="statistics">
+							<div class="row">
+								<div class="col-md-6 col-6 text-center">
+									<a href="<?php echo base_url('invoice') ?>">
+										<div class="stats-box mb-4">
+											<p>Total Invoice</p>
+											<h3><?= format_amount($datas['invoice_summary']['total_invoice_generated']); ?></h3>
+										</div>
+									</a>
+								</div>
+
+								<!--<div class="col-md-6 col-6 text-center">
+									<a href="<?php echo base_url('invoice') ?>">
+										<div class="stats-box mb-4">
+											<p>Paid Amount</p>
+											<h3><?= format_amount($datas['invoice_summary']['total_paid']); ?></h3>
+										</div>
+									</a>
+								</div>-->
+								
+								<div class="col-md-6 col-6 text-center">
+									<a href="<?php echo base_url('invoice') ?>">
+										<div class="stats-box mb-4">
+											<p>This Month Revenue</p>
+											<h3><?= format_amount($datas['invoice_monthly_summary']['total_paid_this_month']); ?></h3>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<?php
+							$total = $datas['invoice_summary']['total_invoice_generated'];
+							$paid = $datas['invoice_summary']['total_paid'];
+							$unpaid = $datas['invoice_summary']['total_unpaid'];
+
+							$paidPercent = ($total > 0) ? round(($paid / $total) * 100) : 0;
+							$unpaidPercent = 100 - $paidPercent;
+						?>
+
+						<div class="progress mb-4">
+							<div class="progress-bar bg-success"
+								 style="width:<?= $paidPercent; ?>%">
+								<?= $paidPercent; ?>%
+							</div>
+							<div class="progress-bar bg-danger"
+								 style="width:<?= $unpaidPercent; ?>%">
+								<?= $unpaidPercent; ?>%
+							</div>
+						</div>
+						<div>
+							<p>
+								<i class="fa-regular fa-circle-dot text-success me-2"></i>
+								Paid Amount
+								<span class="float-end"><?= format_amount($datas['invoice_summary']['total_paid']); ?></span>
+							</p>
+							<p>
+								<i class="fa-regular fa-circle-dot text-danger me-2"></i>
+								Unpaid Amount
+								<span class="float-end"><?= format_amount($datas['invoice_summary']['total_unpaid']); ?></span>
+							</p>
+							<p>
+								<i class="fa-regular fa-circle-dot text-info me-2"></i>
+								Total CGST
+								<span class="float-end"><?= format_amount($datas['invoice_summary']['total_cgst']); ?></span>
+							</p>
+							<p>
+								<i class="fa-regular fa-circle-dot text-warning me-2"></i>
+								Total IGST
+								<span class="float-end"><?= format_amount($datas['invoice_summary']['total_igst']); ?></span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="col-md-12 col-lg-6 col-xl-4 d-flex">
+				<div class="card flex-fill">
+					<div class="card-body">
 						<h4 class="card-title">Revenue</h4>
 						<div class="statistics">
 							<div class="row">
@@ -215,7 +410,7 @@
 						</div>
 					</div>
 				</div>
-			</div>		
+			</div>-->	
 
 			
 			<div class="col-md-12 col-lg-12 col-xl-4 d-flex">

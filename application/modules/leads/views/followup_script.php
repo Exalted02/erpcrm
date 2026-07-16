@@ -32,10 +32,10 @@ $('#followupForm').submit(function(e){
 });
 
 // DELETE
-function deleteFollowup(id){
+function deleteFollowup(id,lead_id){
     if(confirm('Are you sure?')){
         $.ajax({
-            url: "<?= base_url('leads/delete_followup/') ?>" + id,
+            url: "<?= base_url('leads/delete_followup/') ?>" + id+"/"+lead_id,
             type: "POST",
 			dataType: "json",
             success: function(response){

@@ -20,8 +20,9 @@
 					<table class="table table-striped custom-table mb-0 datatable">
 						<thead>
 							<tr>
+								<th>ID</th>
+								<th>Date of Reg.</th>
 								<th>School ID</th>
-								<th>Domain Name</th>
 								<th>School Name</th>
 								<th>State</th>
 								<th>District</th>
@@ -33,9 +34,10 @@
 						<tbody>
 							<?php foreach($domains as $row){ ?>
 							<tr>
-								<th><?= $row->code_year.$row->code_number ?></th>
-								<td><?= $row->domain_name ?></td>
-								<th><?= $row->name ?></th>
+								<td><?= $row->id ?></td>
+								<td><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
+								<td><?= $row->code_year.$row->code_number ?></td>
+								<td><?= $row->name ?></td>
 								<?php
 								$state = $this->Country_state_district->get_state_name($row->school_state);
 								?>

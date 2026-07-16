@@ -92,6 +92,35 @@ $(document).ready(function(){
 	if(old_state != ''){
 		loadDistricts(old_state, old_district);
 	}
+	
+	let school_type = "<?= set_value('school_type', isset($school) ? $school['school_type'] : '') ?>";
+	if(school_type == 1){
+		$('.seller_div').show();
+		
+		let seller_id = "<?= set_value('seller_id', isset($school) ? $school['seller_id'] : '') ?>";
+		if(seller_id!=''){
+			loadSellerDetails(seller_id);
+		}
+	}else{
+		$('.seller_div').hide();
+	}
+});
+
+$(document).on('change', '#school_type', function () {
+	let school_type = $(this).val();
+	if(school_type == 1){
+		$('.seller_div').show();
+	}else{
+		$('.seller_div').hide();
+	}
+});
+$(document).on('change', '#seller_id', function () {
+	let seller_id = $(this).val();
+	if(seller_id!=''){
+		loadSellerDetails(seller_id);
+	}else{
+		$("#seller_info").html('');
+	}
 });
 function loadDistricts(state_id, selected_district = '') {
 	if(state_id != ''){
@@ -117,6 +146,26 @@ function loadDistricts(state_id, selected_district = '') {
 				});
 
 				$('#school_district').trigger('change');
+			}
+		});
+	} else {
+		$('#school_district').html(
+			'<option value="">Please select</option>'
+		);
+	}
+}
+function loadSellerDetails(seller_id) {
+	if(seller_id != ''){
+		$.ajax({
+			url: "<?= base_url('seller/seller/get_seller_details') ?>",
+			type: "POST",
+			dataType: "json",
+			data: {seller_id: seller_id},
+			success: function (response) {
+				$("#seller_info").html(response.html);
+			},
+			error: function(){
+				alert("Error loading data");
 			}
 		});
 	} else {

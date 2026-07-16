@@ -140,6 +140,35 @@
 												<span class="text-danger"><?= form_error('plan_id') ?></span>
 											</div>
 										</div>
+										<div class="col-md-2">
+											<div class="input-block selectnew mb-3">
+												<label class="col-form-label">School Type <span class="text-danger">*</span></label>
+												<select class="select form-control-sm" name="school_type" id="school_type">
+													<option value="">Please select</option>
+													<?php foreach($school_type as $i=>$school_type_val){ ?>
+													<option value="<?= $i ?>" <?= (set_value('school_type', $school['school_type'] ?? '') == $i) ? 'selected' : ''; ?>><?= $school_type_val ?></option>
+													<?php } ?>
+												</select>
+												<span class="text-danger"><?= form_error('school_type') ?></span>
+											</div>
+										</div>
+										<div class="col-md-3 seller_div" style="display:none;">
+											<div class="input-block selectnew mb-3">
+												<label class="col-form-label">Seller <span class="text-danger">*</span></label>
+												<select class="select form-control-sm" name="seller_id" id="seller_id">
+													<option value="">Select Seller</option>
+													<?php foreach($sellers as $sellerVal){ ?>
+													<option value="<?= $sellerVal->id ?>"
+														<?= ($school['seller_id'] ?? '') == $sellerVal->id ? 'selected' : '' ?>>
+														<?= $sellerVal->name ?>
+													</option>
+													<?php } ?>
+												</select>
+												<span class="text-danger"><?= form_error('seller_id') ?></span>
+											</div>
+										</div>
+									</div>
+									<div class="card" id="seller_info">
 									</div>
 									<div class="text-end">
 										<button type="submit" class="btn btn-primary">Update</button>

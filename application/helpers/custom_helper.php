@@ -13,6 +13,15 @@ if (!function_exists('ticket_type_array'))
     }
 }
 
+if (!function_exists('school_type_array')) 
+{
+	function school_type_array(){
+		return $array = [
+			'Direct', 'Re-Seller'
+		];
+    }
+}
+
 if (!function_exists('format_amount')) 
 {
 	function format_amount($amount){

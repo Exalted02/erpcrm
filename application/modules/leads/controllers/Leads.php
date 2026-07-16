@@ -24,12 +24,15 @@ class Leads extends MY_Controller {
     }*/
 	public function index()
 	{
-		$data['getAllDistrict'] = $this->Country_state_district->get_all_district();
+		$data['getAllState'] = $this->Country_state_district->get_all_state();
+		// $data['getAllDistrict'] = $this->Country_state_district->get_all_district();
 		$data['sellers'] = $this->seller_model->get_all();
 
 		$school_name = $this->input->post('school_name');
 		$email       = $this->input->post('email');
+		$state    = $this->input->post('state');
 		$district    = $this->input->post('district');
+		$city_name    = $this->input->post('city_name');
 		$seller      = $this->input->post('seller');
 		$from_date   = $this->input->post('from_date');
 		$to_date     = $this->input->post('to_date');
@@ -48,8 +51,16 @@ class Leads extends MY_Controller {
 			$this->db->like('school_email', $email);
 		}
 
+		if (!empty($state)) {
+			$this->db->where('school_state', $state);
+		}
+
 		if (!empty($district)) {
 			$this->db->where('school_district', $district);
+		}
+
+		if (!empty($city_name)) {
+			$this->db->like('school_city', $city_name);
 		}
 
 		if (!empty($seller)) {
@@ -234,14 +245,32 @@ class Leads extends MY_Controller {
 		
 		$followup_save = $this->leads_model->lead_followup_insert($data, $id);
 		if($followup_save){
+			if($this->input->post('followup_remarks') == 'Converted'){
+				$update = $this->leads_model->update_status($this->input->post('lead_id'), 2);
+			}
+			if($this->input->post('followup_remarks') == 'Cancel'){
+				$update = $this->leads_model->update_status($this->input->post('lead_id'), 3);
+			}
 			echo json_encode(['status'=>'success', 'message'=>'Followup updated successfully.']);
 		}else{
 			echo json_encode(['status'=>'error', 'message'=>'Followup not updated.']);
 		}
 	}
-	public function delete_followup($id)
+	public function delete_followup($id,$lead_id)
 	{
 		$followup_save = $this->leads_model->lead_followup_delete($id);
+		
+		$last_followup = $this->leads_model->get_last_followup($lead_id);
+		$lead_status = 1;
+		if(isset($last_followup) && $last_followup['id'] != ''){
+			if($last_followup['followup_remarks'] == 'Converted'){
+				$lead_status = 2;
+			}else if($last_followup['followup_remarks'] == 'Cancel'){
+				$lead_status = 3;
+			}
+		}
+		$update = $this->leads_model->update_status($lead_id, $lead_status);
+		
 		echo json_encode(['status' => 'success']);
 	}
 

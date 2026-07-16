@@ -56,7 +56,7 @@
 											'<?= htmlspecialchars($row->remark_val, ENT_QUOTES) ?>'
 										)"><i class="la la-edit me-2"></i>Edit</a>
 										
-										<a href="javascript:void(0)" class="text-muted" onclick="deleteFollowup(<?= $row->id ?>)"><i class="la la-trash-alt me-2"></i>Delete</a>
+										<a href="javascript:void(0)" class="text-muted" onclick="deleteFollowup(<?= $row->id ?>,<?= $lead_id ?>)"><i class="la la-trash-alt me-2"></i>Delete</a>
 										</div>
 									</div>
 								</div>

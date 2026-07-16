@@ -29,30 +29,32 @@ $CI->load->model('seller/Seller_model');
 		<form method="POST" action="">
 			<div class="row filter-row1 mb-2">
 
-				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">  
-					<div class="input-block mb-3">
-						<input type="text" name="school_name" placeholder="School Name" class="form-control form-control-sm" value="<?= set_value('school_name') ?>">
-					</div>
-				</div>
-
 				<!--<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 					<div class="input-block mb-3">
 						<input type="text" name="email" placeholder="Email" class="form-control form-control-sm" value="<?= set_value('email') ?>">
 					</div>
 				</div>-->
 
-				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12"> 
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12"> 
 					<div class="input-block selectnew mb-3">
-						<select class="select form-control form-control-sm" name="district"> 
-							<option value="">Select District</option>
-							<?php foreach($getAllDistrict as $districtVal){ ?>
-							<option value="<?= $districtVal->id ?>"
-								<?= set_value('district') == $districtVal->id ? 'selected' : '' ?>>
-								<?= $districtVal->district_name ?>
-							</option>
+						<select class="select form-control form-control-sm" name="state" id="state"> 
+							<option value="">Select State</option>
+							<?php foreach($getAllState as $stateVal){ ?>
+							<option value="<?= $stateVal->id ?>" <?= set_value('state') == $stateVal->id ? 'selected' : '' ?>><?= $stateVal->state_name ?></option>
 							<?php } ?>
-
 						</select>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12"> 
+					<div class="input-block selectnew mb-3">
+						<select class="select form-control form-control-sm" name="district" id="district"> 
+							<option value="">Select District</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
+					<div class="input-block mb-3">
+						<input type="text" name="city_name" placeholder="City" class="form-control form-control-sm" value="<?= set_value('city_name') ?>">
 					</div>
 				</div>
 				<?php if($this->customlib->getLoginSessionData('user_role') == 0){ ?>
@@ -72,6 +74,12 @@ $CI->load->model('seller/Seller_model');
 				</div>
 				<?php } ?>
 				
+				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-4 col-12">  
+					<div class="input-block mb-3">
+						<input type="text" name="school_name" placeholder="School Name" class="form-control form-control-sm" value="<?= set_value('school_name') ?>">
+					</div>
+				</div>
+
 				<div class="col-sm-6 col-md-3 col-lg-3 col-xl-2 col-12">  
 					<div class="input-block mb-3">
 						<div class="cal-icon">

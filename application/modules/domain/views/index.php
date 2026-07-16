@@ -29,8 +29,12 @@
 						<thead>
 							<tr>
 								<th>ID</th>
+								<th>Date of Reg.</th>
 								<th>School ID</th>
-								<th>Domain Name</th>
+								<th>School Name</th>
+								<th>State</th>
+								<th>Dist</th>
+								<th>School Domain Name</th>
 								<th class="text-end">Status</th>
 								<th class="text-end">Action</th>
 							</tr>
@@ -39,7 +43,17 @@
 							<?php foreach($domains as $row){ ?>
 							<tr>
 								<td><?= $row->id ?></td>
+								<td><?= !empty($row->created_at) ? date('d/m/Y', strtotime($row->created_at)) : '' ?></td>
 								<td><?= $row->code_year.$row->code_number ?></td>
+								<td><?= $row->name ?></td>
+								<?php
+								$school_state = $this->Country_state_district->get_state_name($row->school_state);
+								?>
+								<td><?= !empty($school_state) ? $school_state->state_name : '' ?></td>
+								<?php
+								$district = $this->Country_state_district->get_district_name($row->school_district);
+								?>
+								<td><?= !empty($district) ? $district->district_name : '' ?></td>
 								<td><?= $row->domain_name ?></td>
 								<!--<td><?= $row->status ? 'Active':'Inactive' ?></td>-->
 								<td class="text-end">

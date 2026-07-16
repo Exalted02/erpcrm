@@ -98,4 +98,25 @@ class Invoice_model extends CI_Model {
 
         return str_pad($next, 3, '0', STR_PAD_LEFT);
     }
+	public function get_invoice_dashboard()
+	{
+		return $this->db->select("
+			SUM(total) AS total_invoice_generated,
+			SUM(CASE WHEN status = 1 THEN total ELSE 0 END) AS total_paid,
+			SUM(CASE WHEN status = 0 THEN total ELSE 0 END) AS total_unpaid,
+			SUM(cgst) AS total_cgst,
+			SUM(igst) AS total_igst
+		", false)
+		->get(INVOICES)
+		->row_array();
+	}
+	public function get_total_paid_this_month()
+	{
+		return $this->db->select('SUM(total) AS total_paid_this_month', false)
+						->where('status', 1)
+						->where('MONTH(created_at) = MONTH(CURDATE())', null, false)
+						->where('YEAR(created_at) = YEAR(CURDATE())', null, false)
+						->get(INVOICES)
+						->row_array();
+	}
 }
