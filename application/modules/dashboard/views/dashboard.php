@@ -51,7 +51,7 @@
 							<span class="dash-widget-icon"><i class="fa-solid fa-school"></i></span>
 							<div class="dash-widget-info">
 								<h3><?= $datas['register_school']; ?></h3>
-								<span>Register Domain</span>
+								<span>Register School</span>
 							</div>
 						</div>
 					</div>

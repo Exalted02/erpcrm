@@ -35,11 +35,12 @@
 					<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'registration' || empty($active_tab)) ? 'active' : '' ?>" href="#solid-rounded-justified-tab1" data-bs-toggle="tab">Registration Details</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab5" data-bs-toggle="tab">Plan Details</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">School Strengths</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab3" data-bs-toggle="tab">School Income</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab4" data-bs-toggle="tab">School Expense</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">Plan Details</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab3" data-bs-toggle="tab">School Strengths</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab4" data-bs-toggle="tab">School Income</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab5" data-bs-toggle="tab">School Expense</a></li>
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'login') ? 'active' : '' ?>" href="#solid-rounded-justified-tab6" data-bs-toggle="tab">Login Details</a></li>
+							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab7" data-bs-toggle="tab">Services</a></li>
 						</ul>
 						<div class="tab-content">
 							<div class="tab-pane <?= ($active_tab == 'registration' || empty($active_tab)) ? 'show active' : '' ?>" id="solid-rounded-justified-tab1">
@@ -187,7 +188,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="tab-pane" id="solid-rounded-justified-tab5">
+							<div class="tab-pane" id="solid-rounded-justified-tab2">
 							<?php if(isset($plan_details) && !empty($plan_details)){?>
 								<div class="row mb-30 equal-height-cards">
 									<div class="col-md-4 offset-4">
@@ -216,7 +217,7 @@
 							<?php
 							} ?>
 							</div>
-							<div class="tab-pane show" id="solid-rounded-justified-tab2">								
+							<div class="tab-pane show" id="solid-rounded-justified-tab3">								
 								<div class="row">
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
@@ -233,7 +234,7 @@
 								<div id="strengths_html">
 								</div>
 							</div>
-							<div class="tab-pane" id="solid-rounded-justified-tab3">
+							<div class="tab-pane" id="solid-rounded-justified-tab4">
 								<div class="row">
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
@@ -267,7 +268,7 @@
 								<div id="income_html">
 								</div>
 							</div>
-							<div class="tab-pane" id="solid-rounded-justified-tab4">
+							<div class="tab-pane" id="solid-rounded-justified-tab5">
 								<div class="row">
 									<div class="col-md-3" id="session_list">
 										<div class="input-block selectnew mb-3">
@@ -327,6 +328,9 @@
 										<button type="submit" class="btn btn-primary">Update</button>
 									</div>
 								</form>
+							</div>
+							<div class="tab-pane" id="solid-rounded-justified-tab7">							
+								<h4 class="text-center">Coming Soon</h4>							
 							</div>
 						</div>
 					</div>
