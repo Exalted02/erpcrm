@@ -33,7 +33,8 @@
 				<li class="submenu"> 
 					<a href="javascript:void(0)" class="<?php echo is_active(['domain','settings'],['index','create','edit']) ?>"><i class="la la-school"></i> <span>Create Schools</span><span class="menu-arrow"></span></a>
 					<ul style="<?php echo is_block(['domain','settings'],['index','create','edit']) ?>;">
-						<li><a href="<?php echo base_url('api-domain/create') ?>" class="<?php echo is_active(['domain'],['index','create','edit']) ?>">Generate Domain Key</a></li>
+						<li><a href="<?php echo base_url('api-domain') ?>" class="<?php echo is_active(['domain'],['index']) ?>">Domain List and Connect</a></li>
+						<li><a href="<?php echo base_url('api-domain/create') ?>" class="<?php echo is_active(['domain'],['create','edit']) ?>">Generate Domain Key</a></li>
 						<li><a href="<?php echo base_url('settings') ?>" class="<?php echo is_active(['settings'],['index','edit']) ?>">School Registration</a></li> 
 					</ul>
 				</li>
