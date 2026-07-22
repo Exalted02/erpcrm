@@ -62,6 +62,22 @@
 						<li><a href="<?php echo base_url('company_settings') ?>" class="<?php echo is_active(['company_settings'],['index']) ?>">Company Details</a></li> 
 					</ul>
 				</li>
+				<li class="submenu"> 
+					<a href="javascript:void(0)" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">
+						<i class="la la-file-invoice"></i> <span>Manage Invoices</span><span class="menu-arrow"></span>
+					</a>
+					<ul style="<?php echo is_block(['invoice'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('invoice') ?>" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">Invoices</a></li>
+					</ul>
+				</li>
+				<li class="submenu">
+					<a href="javascript:void(0)" class="<?php echo is_active(['manage_alert'],['index']) ?>">
+						<i class="la la-bell"></i> <span>Manage Alert</span><span class="menu-arrow"></span>
+					</a>
+					<ul style="<?php echo is_block(['manage_alert'],['index']) ?>;">
+						<li><a href="<?php echo base_url('manage_alert') ?>" class="<?php echo is_active(['manage_alert'],['index']) ?>">Alerts</a></li>
+					</ul>
+				</li>
 				<?php }else{ ?>
 				
 				<li class="submenu"> 
@@ -73,14 +89,6 @@
 					</ul>
 				</li>
 				<?php } ?>
-				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">
-						<i class="la la-file-invoice"></i> <span>Manage Invoices</span><span class="menu-arrow"></span>
-					</a>
-					<ul style="<?php echo is_block(['invoice'],['index','create','edit']) ?>;">
-						<li><a href="<?php echo base_url('invoice') ?>" class="<?php echo is_active(['invoice'],['index','create','edit']) ?>">Invoices</a></li>
-					</ul>
-				</li>
 			</ul>
 			
 		</div>

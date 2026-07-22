@@ -136,3 +136,15 @@ ALTER TABLE `api_domains` ADD `school_type` INT(11) NULL DEFAULT NULL AFTER `dis
 INSERT INTO `followup_remarks` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES (NULL, 'Converted', '0', NULL, NULL), (NULL, 'Cancel', '0', NULL, NULL);
 ALTER TABLE `leads` CHANGE `status` `status` TINYINT(1) NOT NULL DEFAULT '1' COMMENT '1=Active lead, 2=Lead converted to school, 3=Cancel lead';
 ALTER TABLE `api_domains` ADD `seller_id` INT(11) NULL DEFAULT NULL AFTER `school_type`;
+
+CREATE TABLE `manage_alert` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `payment_reminder` text DEFAULT NULL COMMENT 'Payment reminder message (left side textbox)',
+  `payment_reminder_schools` text DEFAULT NULL COMMENT 'Comma separated api_domains.id selected for payment reminder',
+  `popup_alert` text DEFAULT NULL COMMENT 'Popup alert message (right side textarea)',
+  `popup_alert_schools` text DEFAULT NULL COMMENT 'Comma separated api_domains.id selected for popup alert',
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+

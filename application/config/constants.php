@@ -106,3 +106,4 @@ define('CONVERT_SCHOOL', 'convert_school');
 define('STATES', 'states');
 define('DISTRICTS', 'districts');
 define('INVOICES', 'invoices');
+define('MANAGE_ALERT', 'manage_alert');

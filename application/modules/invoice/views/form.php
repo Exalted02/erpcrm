@@ -92,7 +92,7 @@ function fmt_num($val, $zero_as_empty = true) {
 												data-schoolid="<?= $d->code_year . $d->code_number ?>"
 												data-domain="<?= htmlspecialchars($d->domain_name) ?>"
 												<?= (isset($invoice) && $invoice->domain_id == $d->id) ? 'selected' : '' ?>>
-												<?= $d->code_year . $d->code_number ?> (Name:<?= $d->name ?>, Code:<?= $d->dise_code ?>, )
+												<?= $d->code_year . $d->code_number ?> (<?= $d->name ?>, <?= $d->school_city ?>)
 											</option>
 											<?php } ?>
 										</select>
