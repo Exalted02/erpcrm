@@ -22,6 +22,7 @@ class Alert extends MX_Controller  {
 	 
 		$payment_reminder = null;
 		$popup_alert       = null;
+		$popup_alert_image   = null;
 	 
 		if (!empty($alert)) {
 	 
@@ -37,6 +38,9 @@ class Alert extends MX_Controller  {
 				$popup_ids = explode(',', $alert['popup_alert_schools']);
 				if (in_array($domain->id, $popup_ids)) {
 					$popup_alert = $alert['popup_alert'];
+					if (!empty($alert['popup_alert_image'])) {
+						$popup_alert_image = base_url('uploads/manage_alert/' . $alert['popup_alert_image']);
+					}
 				}
 			}
 		}
@@ -46,6 +50,7 @@ class Alert extends MX_Controller  {
 			'data'   => [
 				'payment_reminder' => $payment_reminder,
 				'popup_alert'      => $popup_alert,
+				'popup_alert_image'  => $popup_alert_image,
 			]
 		]);
 	}
