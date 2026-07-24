@@ -125,6 +125,9 @@ class Settings extends MY_Controller {
 					'school_city'     => $this->input->post('school_city', true),
 					'school_pin_code'     => $this->input->post('school_pin_code', true),
 					'plan_id'     => $this->input->post('plan_id', true),
+					'extra_add_on_students' => $this->input->post('extra_add_on_students') !== '' 
+						? $this->input->post('extra_add_on_students', true) 
+						: null,
 					'school_type'     => $this->input->post('school_type', true),
 					'seller_id'     => $seller_id,
 				];

@@ -148,3 +148,7 @@ CREATE TABLE `manage_alert` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+ALTER TABLE `api_domains` ADD `extra_add_on_students` INT(11) NULL DEFAULT NULL AFTER `plan_id`;
+
+ALTER TABLE `manage_alert` ADD COLUMN `popup_alert_image` VARCHAR(255) NULL DEFAULT NULL COMMENT 'Filename of the popup alert image, stored in uploads/manage_alert/' AFTER `popup_alert`;
+

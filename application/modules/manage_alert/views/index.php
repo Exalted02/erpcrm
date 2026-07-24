@@ -29,7 +29,7 @@
 			<div class="col-sm-12">
 				<div class="card">
 					<div class="card-body">
-						<form method="post" action="<?= base_url('manage_alert') ?>">
+						<form method="post" action="<?= base_url('manage_alert') ?>" enctype="multipart/form-data">
 							<div class="row">
 
 								<!-- Left Side : Payment Reminder -->
@@ -56,6 +56,22 @@
 								<div class="col-md-6">
 									<h5 class="mb-3">Popup Alert</h5>
 
+									<div class="input-block mb-3">
+										<label class="col-form-label">Popup Alert Image</label>
+										<input type="file" name="popup_alert_image" accept="image/*" class="form-control form-control-sm">
+										<small class="text-muted">jpg, jpeg, png, gif, webp — max 2MB</small>
+
+										<?php if (!empty($alert->popup_alert_image)) { ?>
+											<div class="mt-2 d-flex align-items-center" style="gap:10px;">
+												<img src="<?= base_url('uploads/manage_alert/' . $alert->popup_alert_image) ?>" alt="Popup Alert Image" style="max-width:120px; max-height:120px; border:1px solid #ddd; border-radius:4px; padding:2px;">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" name="remove_popup_alert_image" value="1" id="remove_popup_alert_image">
+													<label class="form-check-label" for="remove_popup_alert_image">Remove current image</label>
+												</div>
+											</div>
+										<?php } ?>
+									</div>
+									
 									<div class="input-block mb-3">
 										<label class="col-form-label">Popup Alert</label>
 										<textarea name="popup_alert" placeholder="Popup Alert" class="form-control"><?= isset($alert) && !empty($alert->popup_alert) ? set_value('popup_alert', $alert->popup_alert) : set_value('popup_alert') ?></textarea>

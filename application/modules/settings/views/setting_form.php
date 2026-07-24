@@ -153,6 +153,13 @@
 												<span class="text-danger"><?= form_error('plan_id') ?></span>
 											</div>
 										</div>
+										<div class="col-md-3">
+											<div class="input-block mb-3">
+												<label class="col-form-label">Extra Add-On Students </label>
+												<input type="text" name="extra_add_on_students" class="form-control form-control-sm" value="<?= isset($school) ? $school['extra_add_on_students'] : '' ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+												<span class="text-danger"><?= form_error('extra_add_on_students') ?></span>
+											</div>
+										</div>
 										<div class="col-md-2">
 											<div class="input-block selectnew mb-3">
 												<label class="col-form-label">School Type <span class="text-danger">*</span></label>
