@@ -1,14 +1,173 @@
 <!-- Page Wrapper -->
 <style>
+/* ===== Plan Details (redesigned, full width) ===== */
+.plan-overview-card {
+	background: #fff;
+	border: 1px solid #eef0f4;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+	overflow: hidden;
+	margin-bottom: 24px;
+}
+.plan-overview-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	padding: 24px 28px;
+	background: linear-gradient(135deg, #1b2850 0%, #2f4a8c 100%);
+	color: #fff;
+}
+.plan-name-block .plan-badge {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .5px;
+	text-transform: uppercase;
+	background: rgba(255,255,255,0.18);
+	padding: 4px 10px;
+	border-radius: 20px;
+	margin-bottom: 8px;
+}
+.plan-name-block h3 {
+	margin: 0;
+	color: #fff;
+	font-weight: 700;
+}
+.plan-price-block {
+	text-align: right;
+}
+.plan-price-block .plan-price {
+	font-size: 28px;
+	font-weight: 700;
+	color: #fff;
+}
+.plan-price-block .plan-duration {
+	font-size: 13px;
+	opacity: .85;
+}
+.plan-stats-row {
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: 1px solid #eef0f4;
+}
+.plan-stat-box {
+	flex: 1 1 220px;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 20px 28px;
+	border-right: 1px solid #eef0f4;
+}
+.plan-stat-box:last-child {
+	border-right: none;
+}
+.plan-stat-box i {
+	font-size: 20px;
+	width: 42px;
+	height: 42px;
+	min-width: 42px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	background: #eef2ff;
+	color: #2f4a8c;
+}
+.plan-stat-box .stat-label {
+	display: block;
+	font-size: 12px;
+	color: #8a94a6;
+	margin-bottom: 2px;
+}
+.plan-stat-box .stat-value {
+	display: block;
+	font-size: 16px;
+	font-weight: 600;
+	color: #1b2850;
+}
+.plan-desc-full {
+	padding: 22px 28px;
+}
+.plan-desc-full h6 {
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #1b2850;
+}
 .plan-desc {
     background: #f9f9f9;
-    padding: 12px;
+    padding: 14px 16px;
     border-radius: 6px;
-    margin-bottom: 5px;
-    max-height: 150px;
-    min-height: 150px;
+    margin-bottom: 0;
+    max-height: 180px;
     overflow-y: auto;
-	line-height: 1.5em !important;
+	line-height: 1.6em !important;
+	color: #555;
+}
+
+/* ===== Subscription Period form ===== */
+.subscription-dates-section {
+	background: #fff;
+	border: 1px solid #eef0f4;
+	border-radius: 10px;
+	padding: 22px 28px;
+}
+.subscription-dates-section h5 {
+	font-weight: 600;
+	color: #1b2850;
+	margin-bottom: 4px;
+}
+.subscription-dates-section .section-hint {
+	font-size: 13px;
+	color: #8a94a6;
+	margin-bottom: 18px;
+}
+
+/* ===== Invoice history ===== */
+.invoice-list-section {
+	background: #fff;
+	border: 1px solid #eef0f4;
+	border-radius: 10px;
+	padding: 22px 28px;
+	margin-top: 24px;
+}
+.invoice-list-section h5 {
+	font-weight: 600;
+	color: #1b2850;
+	margin-bottom: 4px;
+}
+.invoice-list-section .section-hint {
+	font-size: 13px;
+	color: #8a94a6;
+	margin-bottom: 18px;
+}
+.invoice-table-wrap {
+	max-height: 360px;
+	overflow-y: auto;
+}
+.invoice-desc-cell {
+	max-width: 220px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+}
+.invoice-status-badge {
+	font-size: 11px;
+	font-weight: 600;
+	padding: 4px 10px;
+	border-radius: 20px;
+	text-transform: uppercase;
+	letter-spacing: .4px;
+}
+.invoice-status-badge.paid {
+	background: #e6f7ed;
+	color: #1e9e5a;
+}
+.invoice-status-badge.unpaid {
+	background: #fdecec;
+	color: #d9534f;
 }
 </style>
 <div class="page-wrapper">
@@ -35,7 +194,7 @@
 					<div class="card-body">
 						<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
 							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'registration' || empty($active_tab)) ? 'active' : '' ?>" href="#solid-rounded-justified-tab1" data-bs-toggle="tab">Registration Details</a></li>
-							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">Plan Details</a></li>
+							<li class="nav-item"><a class="nav-link <?= ($active_tab == 'plan_dates') ? 'active' : '' ?>" href="#solid-rounded-justified-tab2" data-bs-toggle="tab">Plan Details</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab3" data-bs-toggle="tab">School Strengths</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab4" data-bs-toggle="tab">School Income</a></li>
 							<li class="nav-item"><a class="nav-link" href="#solid-rounded-justified-tab5" data-bs-toggle="tab">School Expense</a></li>
@@ -195,34 +354,156 @@
 									</div>
 								</form>
 							</div>
-							<div class="tab-pane" id="solid-rounded-justified-tab2">
+							<div class="tab-pane <?= ($active_tab == 'plan_dates') ? 'show active' : '' ?>" id="solid-rounded-justified-tab2">
 							<?php if(isset($plan_details) && !empty($plan_details)){?>
-								<div class="row mb-30 equal-height-cards">
-									<div class="col-md-4 offset-4">
-										<div class="card pricing-box">
-											<div class="card-body d-flex flex-column">
-												<div class="mb-4">
-													<h3><?php echo $plan_details->title; ?></h3>
-													<span class="display-4">₹<?= format_amount($plan_details->price ?? 0) ?></span>
-													<span>/ <?= $plan_details->duration ?? '' ?> Month<?= $plan_details->duration > 1 ? 's' : '' ?></span>
-												</div>
-												<ul>
-													<li><i class="fa-solid fa-check"></i> <b>Student Limit: </b><?= $plan_details->max_students ?? '' ?></li>
-													<?php if(isset($plan_details->add_on_students) && $plan_details->add_on_students > 0){ ?>
-													<li><i class="fa-solid fa-check"></i> <b>Add-On: </b><?= $plan_details->add_on_students ?? ''; ?></li>
-													<?php } ?>
-													<li class="plan-desc"><?= $plan_details->description ?? '' ?></li>
-												</ul>
+								<div class="plan-overview-card">
+									<div class="plan-overview-header">
+										<div class="plan-name-block">
+											<span class="plan-badge">Current Plan</span>
+											<h3><?= $plan_details->title ?? '' ?></h3>
+										</div>
+										<div class="plan-price-block">
+											<span class="plan-price">₹<?= format_amount($plan_details->price ?? 0) ?></span>
+											<span class="plan-duration d-block">/ <?= $plan_details->duration ?? '' ?> Month<?= ($plan_details->duration ?? 0) > 1 ? 's' : '' ?></span>
+										</div>
+									</div>
+									<div class="plan-stats-row">
+										<div class="plan-stat-box">
+											<i class="fa-solid fa-user-graduate"></i>
+											<div>
+												<span class="stat-label">Student Limit</span>
+												<span class="stat-value"><?= $plan_details->max_students ?? '-' ?></span>
+											</div>
+										</div>
+										<?php if(isset($plan_details->add_on_students) && $plan_details->add_on_students > 0){ ?>
+										<div class="plan-stat-box">
+											<i class="fa-solid fa-user-plus"></i>
+											<div>
+												<span class="stat-label">Add-On Students</span>
+												<span class="stat-value"><?= $plan_details->add_on_students ?></span>
+											</div>
+										</div>
+										<?php } ?>
+										<div class="plan-stat-box">
+											<i class="fa-solid fa-calendar-days"></i>
+											<div>
+												<span class="stat-label">Plan Duration</span>
+												<span class="stat-value"><?= $plan_details->duration ?? '' ?> Month<?= ($plan_details->duration ?? 0) > 1 ? 's' : '' ?></span>
 											</div>
 										</div>
 									</div>
-								</div>								
+									<?php if(!empty($plan_details->description)){ ?>
+									<div class="plan-desc-full">
+										<h6>Plan Description</h6>
+										<div class="plan-desc"><?= $plan_details->description ?></div>
+									</div>
+									<?php } ?>
+								</div>
+								
+								<div class="subscription-dates-section">
+									<h5>Subscription Period</h5>
+									<p class="section-hint">Set or update this school's subscription validity dates.</p>
+									<form method="post" action="<?= base_url('settings/edit/'.$school['id']) ?>">
+										<input type="hidden" name="form_type" value="plan_dates">
+										<div class="row align-items-end">
+											<div class="col-md-3">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Subscription Start Date <span class="text-danger">*</span></label>
+													<div class="cal-icon">
+														<input type="text" name="subscription_start_date" id="subscription_start_date" class="form-control form-control-sm datetimepicker" autocomplete="off" value="<?= !empty($school['subscription_start_date']) && strtotime($school['subscription_start_date']) ? date('d-m-Y', strtotime($school['subscription_start_date'])) : set_value('subscription_start_date') ?>">
+													</div>
+													<span class="text-danger"><?= form_error('subscription_start_date') ?></span>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="input-block mb-3">
+													<label class="col-form-label">Subscription End Date <span class="text-danger">*</span></label>
+													<div class="cal-icon">
+														<input type="text" name="subscription_end_date" id="subscription_end_date" class="form-control form-control-sm datetimepicker" autocomplete="off" value="<?= !empty($school['subscription_end_date']) && strtotime($school['subscription_end_date']) ? date('d-m-Y', strtotime($school['subscription_end_date'])) : set_value('subscription_end_date') ?>">
+													</div>
+													<span class="text-danger"><?= form_error('subscription_end_date') ?></span>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div class="input-block mb-3">
+													<button type="submit" class="btn btn-primary w-100">Submit</button>
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
 							<?php 
 							}else{
 							?>
 								<h4 class="text-center">No Plan Available</h4>
 							<?php
 							} ?>
+
+								<div class="invoice-list-section">
+									<h5>Invoice History</h5>
+									<p class="section-hint">All invoices generated for this school.</p>
+									<div class="table-responsive">
+					<table class="table table-striped custom-table mb-0 datatable">
+						<thead>
+							<tr>
+								<th>Invoice No.</th>
+								<th>Item Description</th>
+								<th>Price</th>
+								<th>Discount</th>
+								<th>CGST</th>
+								<th>IGST</th>
+								<th>Total</th>
+								<th>Date</th>
+								<th class="text-end">Status</th>
+								<!--<th class="text-end">Action</th>-->
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($invoices as $row){ ?>
+							<tr>
+								<td><strong><?= $row->invoice_prefix . '-' . $row->invoice_number ?></strong></td>
+								<td><?= htmlspecialchars($row->item_description) ?></td>
+								<td><?= format_amount($row->price_amount) ?></td>
+								<td><?= format_amount($row->discount) ?></td>
+								<td>
+									<?= format_amount($row->cgst) ?>
+									<?php if(isset($row->cgst_pct) && $row->cgst_pct > 0){ ?>
+										<small class="text-muted">(<?= $row->cgst_pct ?>%)</small>
+									<?php } ?>
+								</td>
+								<td>
+									<?= format_amount($row->igst) ?>
+									<?php if(isset($row->igst_pct) && $row->igst_pct > 0){ ?>
+										<small class="text-muted">(<?= $row->igst_pct ?>%)</small>
+									<?php } ?>
+								</td>
+								<td><strong><?= format_amount($row->total) ?></strong></td>
+								<td><?= date('d/m/Y', strtotime($row->created_at)) ?></td>
+								<td class="text-center">
+									<span class="invoice-status-badge <?= $row->status == 1 ? 'paid' : 'unpaid' ?>"><?= $row->status == 1 ? 'Paid' : 'Unpaid' ?></span>
+								</td>
+								<!--<td class="text-end">
+									<div class="dropdown dropdown-action">
+										<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a class="dropdown-item" href="<?= base_url('invoice/edit/'.$row->id) ?>">
+												<i class="fa-solid fa-pencil m-r-5"></i> Edit
+											</a>
+											<a class="dropdown-item print-invoice-btn" href="javascript:void(0);" data-id="<?= $row->id ?>">
+												<i class="fa-solid fa-print m-r-5"></i> Print Invoice
+											</a>
+											<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_invoice">
+												<i class="fa-regular fa-trash-can m-r-5"></i> Delete
+											</a>
+										</div>
+									</div>
+								</td>-->
+							</tr>
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+								</div>
 							</div>
 							<div class="tab-pane show" id="solid-rounded-justified-tab3">								
 								<div class="row">

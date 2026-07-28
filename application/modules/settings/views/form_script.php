@@ -175,6 +175,35 @@ function loadSellerDetails(seller_id) {
 	}
 }
 
+// Subscription Start/End Date guard
+$(document).on('dp.change', '#subscription_start_date', function () {
+	let start_date = $(this).val();
+	let end_date = $('#subscription_end_date').val();
+
+	if (start_date !== '' && end_date !== '') {
+		let start = moment(start_date, "DD-MM-YYYY");
+		let end = moment(end_date, "DD-MM-YYYY");
+
+		if (start.isAfter(end)) {
+			$('#subscription_end_date').val(start_date);
+		}
+	}
+});
+
+$(document).on('dp.change', '#subscription_end_date', function () {
+	let start_date = $('#subscription_start_date').val();
+	let end_date = $(this).val();
+
+	if (start_date !== '' && end_date !== '') {
+		let start = moment(start_date, "DD-MM-YYYY");
+		let end = moment(end_date, "DD-MM-YYYY");
+
+		if (end.isBefore(start)) {
+			$(this).val(start_date);
+		}
+	}
+});
+
 // On state change
 $(document).on('change', '#school_state', function () {
 
@@ -192,7 +221,7 @@ $(document).on('change', 'select.school_filter', function () {
 });
 
 // Datetimepicker Change
-$(document).on('dp.change', '.datetimepicker', function () {
+$(document).on('dp.change', '.datetimepicker.school_filter', function () {
     loadSchoolDetails($(this));
 });
 

@@ -152,3 +152,8 @@ ALTER TABLE `api_domains` ADD `extra_add_on_students` INT(11) NULL DEFAULT NULL 
 
 ALTER TABLE `manage_alert` ADD COLUMN `popup_alert_image` VARCHAR(255) NULL DEFAULT NULL COMMENT 'Filename of the popup alert image, stored in uploads/manage_alert/' AFTER `popup_alert`;
 
+ALTER TABLE `api_domains` ADD COLUMN `subscription_start_date` DATE DEFAULT NULL AFTER `plan_id`, ADD COLUMN `subscription_end_date` DATE DEFAULT NULL AFTER `subscription_start_date`;
+
+
+
+

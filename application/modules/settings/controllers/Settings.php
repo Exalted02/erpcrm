@@ -10,6 +10,7 @@ class Settings extends MY_Controller {
         $this->load->model('Country_state_district');
         $this->load->model('subscription/Subscription_model','subscription_model');
 		$this->load->model('seller/Seller_model','seller_model');
+		$this->load->model('invoice/Invoice_model', 'invoice_model');
     }
 
     public function index()
@@ -52,6 +53,10 @@ class Settings extends MY_Controller {
 			$this->form_validation->set_rules('login_id', 'Login ID', 'required|valid_email|trim');
 			$this->form_validation->set_rules('login_password', 'Password', 'required|trim');
 		}
+		if($form_type == 'plan_dates'){
+			$this->form_validation->set_rules('subscription_start_date', 'Subscription Start Date', 'required|trim');
+			$this->form_validation->set_rules('subscription_end_date', 'Subscription End Date', 'required|trim');
+		}
 			
 		if ($this->form_validation->run() == FALSE)
 		{			
@@ -63,7 +68,7 @@ class Settings extends MY_Controller {
 			];
 
 			$response = call_api_get($url, $headers);
-			$data['active_tab'] = $form_type;
+			$data['active_tab'] = $form_type ? $form_type : $this->session->flashdata('active_tab');
 			$data['subscriptions'] = $this->subscription_model->get_all_active();
 			$data['getAllState'] = $this->Country_state_district->get_all_state();
 			$data['school_api'] = $response['data'] ?? null;
@@ -76,6 +81,7 @@ class Settings extends MY_Controller {
 			}
 			$data['school_type'] = school_type_array();
 			$data['sellers'] = $this->seller_model->get_all();
+			$data['invoices'] = $this->invoice_model->get_by_domain($domain->id);
 			$data['page'] = 'settings/setting_form';
 			$data['script'] = 'settings/form_script';
 
@@ -156,12 +162,36 @@ class Settings extends MY_Controller {
 				}
 				$response = call_api_post($url, $post, $headers);				
 			}
+			if($form_type == 'plan_dates'){
+
+				$start_date = $this->input->post('subscription_start_date', true);
+				$end_date   = $this->input->post('subscription_end_date', true);
+
+				if(!empty($start_date)){
+					$start_date = DateTime::createFromFormat('d-m-Y', $start_date)->format('Y-m-d');
+				}
+				if(!empty($end_date)){
+					$end_date = DateTime::createFromFormat('d-m-Y', $end_date)->format('Y-m-d');
+				}
+
+				$data = [
+					'subscription_start_date' => $start_date,
+					'subscription_end_date'   => $end_date,
+				];
+				$this->domain_model->update($domain->id, $data);
+
+				$response = [
+					'status'  => true,
+					'message' => 'Subscription period updated successfully.',
+				];
+			}
 			if($response['status']){
 				$this->session->set_flashdata('success', $response['message']);
 				// $this->session->set_flashdata('domain_id', $domain_id);
 			}else{
 				$this->session->set_flashdata('error', $response['message']);
 			}
+			$this->session->set_flashdata('active_tab', $form_type);
 			redirect('settings/edit/'.$id);
 		}
 	}

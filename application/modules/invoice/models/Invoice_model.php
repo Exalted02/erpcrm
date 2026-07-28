@@ -33,6 +33,14 @@ class Invoice_model extends CI_Model {
             ->get()
             ->row();
     }
+	public function get_by_domain($domain_id)
+	{
+		return $this->db
+			->where('domain_id', $domain_id)
+			->order_by('created_at', 'DESC')
+			->get(INVOICES)
+			->result();
+	}
 
     function insert($data)
     {
