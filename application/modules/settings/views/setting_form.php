@@ -468,7 +468,7 @@
 													<th>Total</th>
 													<th>Date</th>
 													<th class="text-end">Status</th>
-													<!--<th class="text-end">Action</th>-->
+													<th class="text-end">Action</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -509,22 +509,22 @@
 													<td class="text-center">
 														<span class="invoice-status-badge <?= $row->status == 1 ? 'paid' : 'unpaid' ?>"><?= $row->status == 1 ? 'Paid' : 'Unpaid' ?></span>
 													</td>
-													<!--<td class="text-end">
+													<td class="text-end">
 														<div class="dropdown dropdown-action">
 															<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
 															<div class="dropdown-menu dropdown-menu-right">
-																<a class="dropdown-item" href="<?= base_url('invoice/edit/'.$row->id) ?>">
-																	<i class="fa-solid fa-pencil m-r-5"></i> Edit
-																</a>
 																<a class="dropdown-item print-invoice-btn" href="javascript:void(0);" data-id="<?= $row->id ?>">
 																	<i class="fa-solid fa-print m-r-5"></i> Print Invoice
 																</a>
+																<!--<a class="dropdown-item" href="<?= base_url('invoice/edit/'.$row->id) ?>">
+																	<i class="fa-solid fa-pencil m-r-5"></i> Edit
+																</a>
 																<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_invoice">
 																	<i class="fa-regular fa-trash-can m-r-5"></i> Delete
-																</a>
+																</a>-->
 															</div>
 														</div>
-													</td>-->
+													</td>
 												</tr>
 												<?php } ?>
 											</tbody>

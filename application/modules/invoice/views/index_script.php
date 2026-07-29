@@ -58,20 +58,6 @@ $(document).on("click", ".print-invoice-btn", function() {
     $.ajax({
         url: "<?= base_url('invoice/print_invoice') ?>/" + id,
         type: "GET",
-        /*success: function(html) {
-            // Remove any previous print frame
-            $("#inv-print-frame").remove();
-
-            // Create a hidden container, inject invoice HTML, print, then remove
-            var $frame = $('<div id="inv-print-frame"></div>').html(html);
-            $("body").append($frame);
-
-            $("body").addClass("inv-printing");
-            window.print();
-            $("body").removeClass("inv-printing");
-
-            $("#inv-print-frame").remove();
-        },*/
 		success: function(html) {
 			$("#inv-print-frame").remove();
 

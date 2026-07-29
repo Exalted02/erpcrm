@@ -1,90 +1,4 @@
 <script>
-
-/*$(document).ready(function(){
-	
-});
-
-$("#domain").change(function(){
-
-    let selected = $(this).find(':selected');
-    let domain_id = selected.val();
-    if(!domain_id) return;
-
-    $.ajax({
-        url: "<?= base_url('settings/settings/get_school_data') ?>",
-        type: "POST",
-		dataType: "json",
-        data: {
-            domain_id: domain_id
-        },
-        success: function(res){
-            $("#school_form_area").html(res.html);
-            $("#session_list").show();
-            $("#school_session").html(res.session_html);
-			$('.select').select2({
-				width: '100%'
-			});
-			
-			setTimeout(function(){
-
-				let old_state = $('#school_state').val();
-
-				let old_district = $('#school_state').data('selected-district');
-
-				if(old_state != ''){
-					loadDistricts(old_state, old_district);
-				}
-
-			}, 300);
-        },
-        error: function(){
-            alert("Error loading data");
-        }
-    });
-
-});
-
-$(document).on('change', '#smalllogoInput', function(){
-	$('.admin-small-logo').show();
-    let input = this;
-    if (input.files && input.files[0]) {
-
-        let reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#smalllogoPreview').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-
-});
-
-$(document).on('change', '#logoinput', function(){
-	$('.admin-logo').show();
-    let input = this;
-    if (input.files && input.files[0]) {
-
-        let reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#logoPreview').attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-
-});*//*
-<?php if($this->session->flashdata('domain_id')){ ?>
-	selecteddomain("<?php echo  $this->session->flashdata('domain_id'); ?>");
-<?php } ?>
-function selecteddomain(id)
-{
-	setTimeout(function(){
-		$('.setting_domain_id').val(id).trigger('change');
-	}, 500);
-}*/
-
 $(document).ready(function(){
 	let old_state = "<?= set_value('school_state', isset($school) ? $school['school_state'] : '') ?>";
 
@@ -293,4 +207,87 @@ function loadSchoolDetails($element)
         }
     });
 }
+
+// ── Print Invoice — fetch content then open print dialog directly ─────────────
+$(document).on("click", ".print-invoice-btn", function() {
+    var id = $(this).data("id");
+
+    $.ajax({
+        url: "<?= base_url('invoice/print_invoice') ?>/" + id,
+        type: "GET",
+		success: function(html) {
+			$("#inv-print-frame").remove();
+
+			var $frame = $('<div id="inv-print-frame"></div>').html(html);
+			$("body").append($frame);
+			$("body").addClass("inv-printing");
+
+			var $imgs = $frame.find("img");
+
+			if ($imgs.length === 0) {
+				printInvoice();
+				return;
+			}
+
+			var loaded = 0;
+
+			$imgs.each(function () {
+				if (this.complete) {
+					loaded++;
+					if (loaded === $imgs.length) {
+						printInvoice();
+					}
+				} else {
+					$(this).one("load error", function () {
+						loaded++;
+						if (loaded === $imgs.length) {
+							printInvoice();
+						}
+					});
+				}
+			});
+
+			function printInvoice() {
+				window.print();
+
+				setTimeout(function () {
+					$("body").removeClass("inv-printing");
+					$("#inv-print-frame").remove();
+				}, 1000);
+			}
+		},
+        error: function() {
+            toastr.error("Failed to load invoice. Please try again.");
+        }
+    });
+});
 </script>
+<style>
+/* Hidden off-screen by default */
+#inv-print-frame {
+    display: none;
+}
+
+/* When printing: show only the invoice frame, hide everything else */
+@media print {
+    body.inv-printing > *:not(#inv-print-frame) {
+        display: none !important;
+    }
+    body.inv-printing #inv-print-frame {
+        display: block !important;
+    }
+    /* Force background colours to print */
+    body.inv-printing * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    body.inv-printing .items-table thead tr {
+        background: #e03c2f !important;
+        color: #fff !important;
+    }
+    body.inv-printing .summary-table tr.total-row td {
+        background: #e03c2f !important;
+        color: #fff !important;
+    }
+}
+</style>
