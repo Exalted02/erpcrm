@@ -455,66 +455,81 @@
 									<h5>Invoice History</h5>
 									<p class="section-hint">All invoices generated for this school.</p>
 									<div class="table-responsive">
-					<table class="table table-striped custom-table mb-0 datatable">
-						<thead>
-							<tr>
-								<th>Invoice No.</th>
-								<th>Item Description</th>
-								<th>Price</th>
-								<th>Discount</th>
-								<th>CGST</th>
-								<th>IGST</th>
-								<th>Total</th>
-								<th>Date</th>
-								<th class="text-end">Status</th>
-								<!--<th class="text-end">Action</th>-->
-							</tr>
-						</thead>
-						<tbody>
-							<?php foreach($invoices as $row){ ?>
-							<tr>
-								<td><strong><?= $row->invoice_prefix . '-' . $row->invoice_number ?></strong></td>
-								<td><?= htmlspecialchars($row->item_description) ?></td>
-								<td><?= format_amount($row->price_amount) ?></td>
-								<td><?= format_amount($row->discount) ?></td>
-								<td>
-									<?= format_amount($row->cgst) ?>
-									<?php if(isset($row->cgst_pct) && $row->cgst_pct > 0){ ?>
-										<small class="text-muted">(<?= $row->cgst_pct ?>%)</small>
-									<?php } ?>
-								</td>
-								<td>
-									<?= format_amount($row->igst) ?>
-									<?php if(isset($row->igst_pct) && $row->igst_pct > 0){ ?>
-										<small class="text-muted">(<?= $row->igst_pct ?>%)</small>
-									<?php } ?>
-								</td>
-								<td><strong><?= format_amount($row->total) ?></strong></td>
-								<td><?= date('d/m/Y', strtotime($row->created_at)) ?></td>
-								<td class="text-center">
-									<span class="invoice-status-badge <?= $row->status == 1 ? 'paid' : 'unpaid' ?>"><?= $row->status == 1 ? 'Paid' : 'Unpaid' ?></span>
-								</td>
-								<!--<td class="text-end">
-									<div class="dropdown dropdown-action">
-										<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
-										<div class="dropdown-menu dropdown-menu-right">
-											<a class="dropdown-item" href="<?= base_url('invoice/edit/'.$row->id) ?>">
-												<i class="fa-solid fa-pencil m-r-5"></i> Edit
-											</a>
-											<a class="dropdown-item print-invoice-btn" href="javascript:void(0);" data-id="<?= $row->id ?>">
-												<i class="fa-solid fa-print m-r-5"></i> Print Invoice
-											</a>
-											<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_invoice">
-												<i class="fa-regular fa-trash-can m-r-5"></i> Delete
-											</a>
-										</div>
+										<table class="table table-striped custom-table mb-0 datatable">
+											<thead>
+												<tr>
+													<th>Invoice No.</th>
+													<!--<th>Item Description</th>-->
+													<th>Subscription Type</th>
+													<th>Price</th>
+													<th>Discount</th>
+													<th>CGST</th>
+													<th>IGST</th>
+													<th>Total</th>
+													<th>Date</th>
+													<th class="text-end">Status</th>
+													<!--<th class="text-end">Action</th>-->
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach($invoices as $row){ ?>
+												<tr>
+													<td><strong><?= $row->invoice_prefix . '-' . $row->invoice_number ?></strong></td>
+													<!--<td><?= htmlspecialchars($row->item_description) ?></td>-->
+													<td>
+														<?php
+															$sub_types = !empty($row->subscription_type) ? explode(',', $row->subscription_type) : [];
+														?>
+														<?php if(in_array('plan', $sub_types)){ ?>
+															<span class="badge bg-primary">Plan</span>
+														<?php } ?>
+														<?php if(in_array('services', $sub_types)){ ?>
+															<span class="badge bg-info">Services</span>
+														<?php } ?>
+														<?php if(empty($sub_types)){ ?>
+															<span class="text-muted">-</span>
+														<?php } ?>
+													</td>
+													<td><?= format_amount($row->price_amount) ?></td>
+													<td><?= format_amount($row->discount) ?></td>
+													<td>
+														<?= format_amount($row->cgst) ?>
+														<?php if(isset($row->cgst_pct) && $row->cgst_pct > 0){ ?>
+															<small class="text-muted">(<?= $row->cgst_pct ?>%)</small>
+														<?php } ?>
+													</td>
+													<td>
+														<?= format_amount($row->igst) ?>
+														<?php if(isset($row->igst_pct) && $row->igst_pct > 0){ ?>
+															<small class="text-muted">(<?= $row->igst_pct ?>%)</small>
+														<?php } ?>
+													</td>
+													<td><strong><?= format_amount($row->total) ?></strong></td>
+													<td><?= date('d/m/Y', strtotime($row->created_at)) ?></td>
+													<td class="text-center">
+														<span class="invoice-status-badge <?= $row->status == 1 ? 'paid' : 'unpaid' ?>"><?= $row->status == 1 ? 'Paid' : 'Unpaid' ?></span>
+													</td>
+													<!--<td class="text-end">
+														<div class="dropdown dropdown-action">
+															<a href="#" class="action-icon dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
+															<div class="dropdown-menu dropdown-menu-right">
+																<a class="dropdown-item" href="<?= base_url('invoice/edit/'.$row->id) ?>">
+																	<i class="fa-solid fa-pencil m-r-5"></i> Edit
+																</a>
+																<a class="dropdown-item print-invoice-btn" href="javascript:void(0);" data-id="<?= $row->id ?>">
+																	<i class="fa-solid fa-print m-r-5"></i> Print Invoice
+																</a>
+																<a class="dropdown-item delete-btn" href="javascript:void(0);" data-id="<?= $row->id ?>" data-bs-toggle="modal" data-bs-target="#delete_invoice">
+																	<i class="fa-regular fa-trash-can m-r-5"></i> Delete
+																</a>
+															</div>
+														</div>
+													</td>-->
+												</tr>
+												<?php } ?>
+											</tbody>
+										</table>
 									</div>
-								</td>-->
-							</tr>
-							<?php } ?>
-						</tbody>
-					</table>
-				</div>
 								</div>
 							</div>
 							<div class="tab-pane show" id="solid-rounded-justified-tab3">								

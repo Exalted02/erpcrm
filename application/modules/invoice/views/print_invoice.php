@@ -116,6 +116,14 @@ if (empty($line_items)) {
 .inv-page .s-value.unpaid { color: #0253CC; background: #ffeaea; padding: 1px 7px; border-radius: 10px; font-size: 12px; font-weight: 700; }
 .inv-page .s-value.paid   { color: #1a7f37; background: #e6f4ea; padding: 1px 7px; border-radius: 10px; font-size: 12px; font-weight: 700; }
 
+/* ── Item Description ── */
+.inv-page .desc-box {
+    background: #f5fbff; border-left: 4px solid #0253CC;
+    padding: 10px 12px; border-radius: 2px; margin-bottom: 14px;
+}
+.inv-page .desc-box .label { font-size: 12px; font-weight: 700; color: #0253CC; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 5px; }
+.inv-page .desc-box .desc-text { color: #444; line-height: 1.6; }
+
 /* ── Items Table ── */
 .inv-page .items-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
 .inv-page .items-table thead tr { background-color: #0253CC !important; color: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -236,6 +244,14 @@ if (empty($line_items)) {
     </div>
   </div>
 
+  <!-- Item Description -->
+  <?php if(!empty($invoice->item_description)){ ?>
+  <div class="desc-box">
+    <div class="label">Item Description</div>
+    <div class="desc-text"><?= nl2br(htmlspecialchars($invoice->item_description)) ?></div>
+  </div>
+  <?php } ?>
+
   <!-- Items Table -->
   <table class="items-table">
     <thead>
@@ -262,13 +278,13 @@ if (empty($line_items)) {
         <td class="right">
           &#8377;<?= format_amount($item['cgst']) ?>
           <?php if($item['cgst_pct'] > 0){ ?>
-          <div class="item-meta">(<?= rtrim(rtrim(number_format($item['cgst_pct'], 2), '0'), '.') ?>%)</div>
+          <div class="item-meta"><?= rtrim(rtrim(number_format($item['cgst_pct'], 2), '0'), '.') ?>%</div>
           <?php } ?>
         </td>
         <td class="right">
           &#8377;<?= format_amount($item['igst']) ?>
           <?php if($item['igst_pct'] > 0){ ?>
-          <div class="item-meta">(<?= rtrim(rtrim(number_format($item['igst_pct'], 2), '0'), '.') ?>%)</div>
+          <div class="item-meta"><?= rtrim(rtrim(number_format($item['igst_pct'], 2), '0'), '.') ?>%</div>
           <?php } ?>
         </td>
         <td class="right">&#8377;<?= format_amount($item['total']) ?></td>
