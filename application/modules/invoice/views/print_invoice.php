@@ -32,6 +32,7 @@ if (!empty($invoice->plan_amount)) {
 		'igst'     => (float) $invoice->plan_igst,
 		'igst_pct' => (float) $invoice->plan_igst_pct,
 		'total'    => (float) $invoice->plan_total,
+		'color'    => '#0253CC',
 	];
 }
 
@@ -48,6 +49,7 @@ if (!empty($invoice->service_items)) {
 				'igst'     => (float) ($item['igst'] ?? 0),
 				'igst_pct' => (float) ($item['igst_pct'] ?? 0),
 				'total'    => (float) ($item['total'] ?? 0),
+				'color'    => '#222',
 			];
 		}
 	}
@@ -64,6 +66,7 @@ if (empty($line_items)) {
 		'igst'     => (float) $invoice->igst,
 		'igst_pct' => $legacy_igst_pct,
 		'total'    => (float) $invoice->price_amount,
+		'color'    => '#222',
 	];
 }
 ?>
@@ -268,9 +271,9 @@ if (empty($line_items)) {
       <?php foreach($line_items as $i => $item){ ?>
       <tr>
         <td>
-          <div class="item-name"><?= htmlspecialchars($item['label']) ?></div>
+          <div class="item-name" style="color:<?= $item['color']; ?>"><?= htmlspecialchars($item['label']) ?></div>
           <?php if($i === 0){ ?>
-          <div class="item-meta">School ID: <?= htmlspecialchars($invoice->school_id) ?> </div>
+          <!--<div class="item-meta">School ID: <?= htmlspecialchars($invoice->school_id) ?> </div>-->
           <?php } ?>
         </td>
         <td class="right">&#8377;<?= format_amount($item['price']) ?></td>
