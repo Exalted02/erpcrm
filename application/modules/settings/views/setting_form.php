@@ -169,6 +169,25 @@
 	background: #fdecec;
 	color: #d9534f;
 }
+
+/* ===== Services section ===== */
+.service-list-section {
+	background: #fff;
+	border: 1px solid #eef0f4;
+	border-radius: 10px;
+	padding: 22px 28px;
+	margin-top: 24px;
+}
+.service-list-section h5 {
+	font-weight: 600;
+	color: #1b2850;
+	margin-bottom: 4px;
+}
+.service-list-section .section-hint {
+	font-size: 13px;
+	color: #8a94a6;
+	margin-bottom: 18px;
+}
 </style>
 <div class="page-wrapper">
 
@@ -450,7 +469,22 @@
 								<h4 class="text-center">No Plan Available</h4>
 							<?php
 							} ?>
-
+								
+								<div class="service-list-section">
+									<h5>Current Services</h5>
+									<p class="section-hint">All selected services listing here.</p>
+									<?php 
+										foreach($services as $serviceVal){
+											$selected_service_ids = !empty($school['service_ids']) ? explode(',', $school['service_ids']) : [];
+											if(in_array($serviceVal->id, $selected_service_ids)){
+									?>
+										<span class="badge badge-md bg-success"><?= $serviceVal->title ?></span>
+									<?php 
+											} 
+										}
+									?>
+								</div>
+								
 								<div class="invoice-list-section">
 									<h5>Invoice History</h5>
 									<p class="section-hint">All invoices generated for this school.</p>
