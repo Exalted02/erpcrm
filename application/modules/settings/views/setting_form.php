@@ -300,7 +300,7 @@
 												<span class="text-danger"><?= form_error('school_pin_code') ?></span>
 											</div>
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-4">
 											<div class="input-block selectnew mb-3">
 												<label class="col-form-label">Choose Plan <span class="text-danger">*</span></label>
 												<select class="select form-control-sm" name="plan_id" id="plan_id">
@@ -317,6 +317,18 @@
 												<label class="col-form-label">Extra Add-On Students </label>
 												<input type="text" name="extra_add_on_students" class="form-control form-control-sm" value="<?= isset($school) ? $school['extra_add_on_students'] : '' ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
 												<span class="text-danger"><?= form_error('extra_add_on_students') ?></span>
+											</div>
+										</div>
+										<?php $selected_service_ids = (!empty($school['service_ids'])) ? explode(',', $school['service_ids']) : []; ?>
+										<div class="col-md-4">
+											<div class="input-block selectnew mb-3">
+												<label class="col-form-label">Choose Services</label>
+												<select class="select form-control-sm" name="service_ids[]" id="service_ids" multiple="multiple" style="width:100%;">
+													<?php foreach($services as $serviceVal){ ?>
+													<option value="<?= $serviceVal->id ?>" <?= in_array($serviceVal->id, $selected_service_ids) ? 'selected' : '' ?>><?= $serviceVal->title ?></option>
+													<?php } ?>
+												</select>
+												<span class="text-danger"><?= form_error('service_ids') ?></span>
 											</div>
 										</div>
 										<div class="col-md-2">

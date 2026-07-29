@@ -69,6 +69,11 @@ $route['subscription/create'] = 'subscription/subscription/create';
 $route['subscription/edit/(:num)'] = 'subscription/subscription/edit/$1';
 $route['subscription/delete/(:num)'] = 'subscription/subscription/delete/$1';
 
+$route['services'] = 'services/services/index';
+$route['services/create'] = 'services/services/create';
+$route['services/edit/(:num)'] = 'services/services/edit/$1';
+$route['services/delete/(:num)'] = 'services/services/delete/$1';
+
 $route['seller'] = 'seller/seller/index';
 $route['seller/create'] = 'seller/seller/create';
 $route['seller/edit/(:num)'] = 'seller/seller/edit/$1';

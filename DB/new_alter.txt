@@ -149,10 +149,25 @@ CREATE TABLE `manage_alert` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 ALTER TABLE `api_domains` ADD `extra_add_on_students` INT(11) NULL DEFAULT NULL AFTER `plan_id`;
-
 ALTER TABLE `manage_alert` ADD COLUMN `popup_alert_image` VARCHAR(255) NULL DEFAULT NULL COMMENT 'Filename of the popup alert image, stored in uploads/manage_alert/' AFTER `popup_alert`;
-
 ALTER TABLE `api_domains` ADD COLUMN `subscription_start_date` DATE DEFAULT NULL AFTER `plan_id`, ADD COLUMN `subscription_end_date` DATE DEFAULT NULL AFTER `subscription_start_date`;
+
+CREATE TABLE `services` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `status` tinyint(4) DEFAULT 1 COMMENT '0=Inactive, 1=Active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `services` ADD PRIMARY KEY (`id`);
+ALTER TABLE `services` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `api_domains` ADD `service_ids` TEXT NULL DEFAULT NULL COMMENT 'Comma separated services.id chosen at registration' AFTER `plan_id`;
+ALTER TABLE `invoices` ADD `subscription_type` VARCHAR(50) NULL DEFAULT NULL COMMENT 'Comma separated: plan,services' AFTER `school_id`, ADD `plan_amount` DECIMAL(10,2) NULL DEFAULT NULL AFTER `subscription_type`, ADD `plan_discount` DECIMAL(10,2) NULL DEFAULT NULL AFTER `plan_amount`, ADD `plan_cgst_pct` DECIMAL(5,2) NULL DEFAULT NULL AFTER `plan_discount`, ADD `plan_cgst` DECIMAL(10,2) NULL DEFAULT NULL AFTER `plan_cgst_pct`, ADD `plan_igst_pct` DECIMAL(5,2) NULL DEFAULT NULL AFTER `plan_cgst`, ADD `plan_igst` DECIMAL(10,2) NULL DEFAULT NULL AFTER `plan_igst_pct`, ADD `plan_total` DECIMAL(10,2) NULL DEFAULT NULL AFTER `plan_igst`, ADD `service_ids` TEXT NULL DEFAULT NULL COMMENT 'Comma separated services.id billed on this invoice' AFTER `plan_total`, ADD `service_items` LONGTEXT NULL DEFAULT NULL COMMENT 'JSON array: [{id,title,amount,discount,cgst_pct,cgst,igst_pct,igst,total}, ...]' AFTER `service_ids`;
+
+
 
 
 

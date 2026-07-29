@@ -17,9 +17,10 @@
 					<a href="<?php echo base_url('dashboard') ?>"><i class="la la-dashcube"></i> <span>Dashboard</span></a>
 				</li>
 				<li class="submenu"> 
-					<a href="javascript:void(0)" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>"><i class="la la-money-check"></i> <span>Manage Subscription</span><span class="menu-arrow"></span></a>
-					<ul style="<?php echo is_block(['subscription'],['index','create','edit']) ?>;">
-						<li><a href="<?php echo base_url('subscription') ?>" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>">All Plans</a></li>
+					<a href="javascript:void(0)" class="<?php echo is_active(['subscription','services'],['index','create','edit']) ?>"><i class="la la-money-check"></i> <span>Manage Subscription</span><span class="menu-arrow"></span></a>
+					<ul style="<?php echo is_block(['subscription','services'],['index','create','edit']) ?>;">
+						<li><a href="<?php echo base_url('subscription') ?>" class="<?php echo is_active(['subscription'],['index','create','edit']) ?>">Plans</a></li>
+						<li><a href="<?php echo base_url('services') ?>" class="<?php echo is_active(['services'],['index','create','edit']) ?>">Services</a></li>
 					</ul>
 				</li>
 				<li class="submenu"> 

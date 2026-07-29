@@ -10,10 +10,62 @@ $full_inv_no    = $invoice->invoice_prefix . '-' . $invoice->invoice_number;
 $status_label   = $invoice->status ? 'PAID' : 'UNPAID';
 $status_class   = $invoice->status ? 'paid' : 'unpaid';
 
-// Back-calculate percentages for display
-// If cgst_pct / igst_pct columns don't exist yet, derive from amounts
-$cgst_pct = isset($invoice->cgst_pct) ? (float)$invoice->cgst_pct : ($subtotal > 0 ? round($invoice->cgst / $subtotal * 100, 2) : 0);
-$igst_pct = isset($invoice->igst_pct) ? (float)$invoice->igst_pct : ($subtotal > 0 ? round($invoice->igst / $subtotal * 100, 2) : 0);
+// Plan and Services can each carry their own CGST/IGST %. Kept for the
+// legacy single-item fallback below (older invoices that predate the
+// Plan/Services split, where only the invoice-level amounts exist).
+$legacy_cgst_pct = $subtotal > 0 ? round(((float) $invoice->cgst / $subtotal) * 100, 2) : 0;
+$legacy_igst_pct = $subtotal > 0 ? round(((float) $invoice->igst / $subtotal) * 100, 2) : 0;
+
+// Build the line-items table: one row for the Plan (if billed) and one
+// row per Service (if billed), each carrying its own CGST/IGST amount + %.
+// Falls back to the single legacy row for older invoices that predate the
+// Plan/Services split.
+$line_items = [];
+
+if (!empty($invoice->plan_amount)) {
+	$line_items[] = [
+		'label'    => 'Plan',
+		'price'    => (float) $invoice->plan_amount,
+		'discount' => (float) $invoice->plan_discount,
+		'cgst'     => (float) $invoice->plan_cgst,
+		'cgst_pct' => (float) $invoice->plan_cgst_pct,
+		'igst'     => (float) $invoice->plan_igst,
+		'igst_pct' => (float) $invoice->plan_igst_pct,
+		'total'    => (float) $invoice->plan_total,
+	];
+}
+
+if (!empty($invoice->service_items)) {
+	$decoded = json_decode($invoice->service_items, true);
+	if (is_array($decoded)) {
+		foreach ($decoded as $item) {
+			$line_items[] = [
+				'label'    => $item['title'] ?? 'Service',
+				'price'    => (float) ($item['amount'] ?? 0),
+				'discount' => (float) ($item['discount'] ?? 0),
+				'cgst'     => (float) ($item['cgst'] ?? 0),
+				'cgst_pct' => (float) ($item['cgst_pct'] ?? 0),
+				'igst'     => (float) ($item['igst'] ?? 0),
+				'igst_pct' => (float) ($item['igst_pct'] ?? 0),
+				'total'    => (float) ($item['total'] ?? 0),
+			];
+		}
+	}
+}
+
+if (empty($line_items)) {
+	// Legacy single-item invoice
+	$line_items[] = [
+		'label'    => $invoice->item_description,
+		'price'    => (float) $invoice->price_amount,
+		'discount' => (float) $invoice->discount,
+		'cgst'     => (float) $invoice->cgst,
+		'cgst_pct' => $legacy_cgst_pct,
+		'igst'     => (float) $invoice->igst,
+		'igst_pct' => $legacy_igst_pct,
+		'total'    => (float) $invoice->price_amount,
+	];
+}
 ?>
 <style>
 @page { margin: 10mm 0; }
@@ -190,48 +242,58 @@ $igst_pct = isset($invoice->igst_pct) ? (float)$invoice->igst_pct : ($subtotal >
       <tr>
         <th style="background-color: #0253CC !important;">Item Description</th>
         <th style="background-color: #0253CC !important;" class="right">Price (INR)</th>
+        <th style="background-color: #0253CC !important;" class="right">Discount</th>
+        <th style="background-color: #0253CC !important;" class="right">CGST</th>
+        <th style="background-color: #0253CC !important;" class="right">IGST</th>
         <th style="background-color: #0253CC !important;" class="right">Total</th>
       </tr>
     </thead>
     <tbody>
+      <?php foreach($line_items as $i => $item){ ?>
       <tr>
         <td>
-          <div class="item-name"><?= htmlspecialchars($invoice->item_description) ?></div>
+          <div class="item-name"><?= htmlspecialchars($item['label']) ?></div>
+          <?php if($i === 0){ ?>
           <div class="item-meta">School ID: <?= htmlspecialchars($invoice->school_id) ?> </div>
+          <?php } ?>
         </td>
-        <td class="right">&#8377;<?= format_amount($invoice->price_amount) ?></td>
-        <td class="right">&#8377;<?= format_amount($invoice->price_amount) ?></td>
+        <td class="right">&#8377;<?= format_amount($item['price']) ?></td>
+        <td class="right">&#8377;<?= format_amount($item['discount']) ?></td>
+        <td class="right">
+          &#8377;<?= format_amount($item['cgst']) ?>
+          <?php if($item['cgst_pct'] > 0){ ?>
+          <div class="item-meta">(<?= rtrim(rtrim(number_format($item['cgst_pct'], 2), '0'), '.') ?>%)</div>
+          <?php } ?>
+        </td>
+        <td class="right">
+          &#8377;<?= format_amount($item['igst']) ?>
+          <?php if($item['igst_pct'] > 0){ ?>
+          <div class="item-meta">(<?= rtrim(rtrim(number_format($item['igst_pct'], 2), '0'), '.') ?>%)</div>
+          <?php } ?>
+        </td>
+        <td class="right">&#8377;<?= format_amount($item['total']) ?></td>
       </tr>
+      <?php } ?>
     </tbody>
   </table>
 
   <!-- Summary -->
   <div class="bottom-row">
     <table class="summary-table">
-      <?php if($invoice->discount > 0){ ?>
+      <tr>
+        <td>Final Amount</td>
+        <td>&#8377;<?= format_amount($invoice->price_amount) ?></td>
+      </tr>
       <tr class="discount-row">
-        <td>Discount</td>
+        <td>Final Discount</td>
         <td>-&#8377;<?= format_amount($invoice->discount) ?></td>
       </tr>
-      <?php } ?>
-      <tr class="subtotal-row">
-        <td>Subtotal</td>
-        <td>&#8377;<?= format_amount($subtotal) ?></td>
-      </tr>
-      <?php if($invoice->cgst > 0){ ?>
       <tr class="tax-row">
-        <td>CGST <?= $cgst_pct > 0 ? '('.$cgst_pct.'%)' : '' ?></td>
-        <td>&#8377;<?= format_amount($invoice->cgst) ?></td>
+        <td>CGST+IGST</td>
+        <td>&#8377;<?= format_amount((float) $invoice->cgst + (float) $invoice->igst) ?></td>
       </tr>
-      <?php } ?>
-      <?php if($invoice->igst > 0){ ?>
-      <tr class="tax-row">
-        <td>IGST <?= $igst_pct > 0 ? '('.$igst_pct.'%)' : '' ?></td>
-        <td>&#8377;<?= format_amount($invoice->igst) ?></td>
-      </tr>
-      <?php } ?>
       <tr class="total-row">
-        <td style="background-color: #0253CC !important;">Total</td>
+        <td style="background-color: #0253CC !important;">Sub Total</td>
         <td style="background-color: #0253CC !important;">&#8377;<?= format_amount($invoice->total) ?></td>
       </tr>
     </table>

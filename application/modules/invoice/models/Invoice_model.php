@@ -68,12 +68,12 @@ class Invoice_model extends CI_Model {
 
     function get_domains()
     {
-        return $this->db->get('api_domains')->result();
+        return $this->db->get(API_DOMAINS)->result();
     }
 
     function get_domain($id)
     {
-        return $this->db->where('id', $id)->get('api_domains')->row();
+        return $this->db->where('id', $id)->get(API_DOMAINS)->row();
     }
 
     // -----------------------------------------------------------------------
@@ -82,7 +82,7 @@ class Invoice_model extends CI_Model {
 
     function get_company_settings()
     {
-        return $this->db->get('company_settings')->row();
+        return $this->db->get(COMPANY_SETTINGS)->row();
     }
 
     // -----------------------------------------------------------------------

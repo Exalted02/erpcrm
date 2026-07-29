@@ -11,6 +11,7 @@ class Settings extends MY_Controller {
         $this->load->model('subscription/Subscription_model','subscription_model');
 		$this->load->model('seller/Seller_model','seller_model');
 		$this->load->model('invoice/Invoice_model', 'invoice_model');
+		$this->load->model('services/Services_model', 'services_model');
     }
 
     public function index()
@@ -70,6 +71,7 @@ class Settings extends MY_Controller {
 			$response = call_api_get($url, $headers);
 			$data['active_tab'] = $form_type ? $form_type : $this->session->flashdata('active_tab');
 			$data['subscriptions'] = $this->subscription_model->get_all_active();
+			$data['services'] = $this->services_model->get_all_active();
 			$data['getAllState'] = $this->Country_state_district->get_all_state();
 			$data['school_api'] = $response['data'] ?? null;
 			$data['school_sessions'] = $response['sessions'] ?? [];
@@ -136,6 +138,7 @@ class Settings extends MY_Controller {
 						: null,
 					'school_type'     => $this->input->post('school_type', true),
 					'seller_id'     => $seller_id,
+					'service_ids'     => implode(',', (array) $this->input->post('service_ids')),
 				];
 				$this->domain_model->update($domain->id, $data);
 			}

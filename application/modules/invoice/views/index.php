@@ -29,7 +29,7 @@
 							<tr>
 								<th>Invoice No.</th>
 								<th>School ID</th>
-								<th>Item Description</th>
+								<th>Subscription Type</th>
 								<th>Price</th>
 								<th>Discount</th>
 								<th>CGST</th>
@@ -45,7 +45,20 @@
 							<tr>
 								<td><strong><?= $row->invoice_prefix . '-' . $row->invoice_number ?></strong></td>
 								<td><?= $row->school_id ?></td>
-								<td><?= htmlspecialchars($row->item_description) ?></td>
+								<td>
+									<?php
+										$sub_types = !empty($row->subscription_type) ? explode(',', $row->subscription_type) : [];
+									?>
+									<?php if(in_array('plan', $sub_types)){ ?>
+										<span class="badge bg-primary">Plan</span>
+									<?php } ?>
+									<?php if(in_array('services', $sub_types)){ ?>
+										<span class="badge bg-info">Services</span>
+									<?php } ?>
+									<?php if(empty($sub_types)){ ?>
+										<span class="text-muted">-</span>
+									<?php } ?>
+								</td>
 								<td><?= format_amount($row->price_amount) ?></td>
 								<td><?= format_amount($row->discount) ?></td>
 								<td>
